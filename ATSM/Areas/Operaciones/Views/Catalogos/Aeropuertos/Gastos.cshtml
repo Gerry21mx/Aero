@@ -1,0 +1,34 @@
+﻿@{
+    
+}
+
+<div class="row justifi-content-around g-1 mt-1">
+	<div class="col-12 col-md-3 col-xl-2">
+		@Campos.SelectAeropuerto(true)
+	</div>
+	<div class="col-12 col-md-3">
+		@Campos.GetInput("Concepto",true,100,"Concepto")
+	</div>
+	<div class="col-12 col-md-3 col-xl-2">
+		@Campos.SelectCapacidad(true)
+	</div>
+	<div class="col-12 col-md-3 col-xl-2">
+		@Campos.GetInput("Dia",true,18,"Dia","dec text-end","number","0",true, false, "$ Dia")
+	</div>
+	<div class="col-12 col-md-3 col-xl-2">
+		@Campos.GetInput("Noche",true,18,"Noche","dec text-end","number","0",true, false, "$ Noche")
+	</div>
+	<div class="col-12 col-md-3 col-xl-2">
+		<div class="input-group input-group-sm">
+			<label class="input-group-text" for="MetodoPago">Metodo de Pago</label>
+			<select class="form-select form-select-sm" id="MetodoPago">
+				<option value="0">...</option>
+				<option value="1">Representante</option>
+				<option value="2">Proveedor</option>
+			</select>
+		</div>
+	</div>
+	<div class="col-12 col-md-3 col-xl-2">
+		<button class="btn btn-sm btn-outline-success">Agregar</button>
+	</div>
+</div>

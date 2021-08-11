@@ -1,0 +1,74 @@
+﻿@{ 
+	ViewBag.Title = "Gastos";
+	AccountType tipo = new AccountType("Pilotos");
+}
+<div class="container-xl mt-0 mt-md-2">
+	<button class="btn btn-sm btn-primary float-end" type="button" data-bs-toggle="offcanvas" data-bs-target="#offTrips" aria-controls="offTrips">Vuelos</button>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-lista-tab" data-bs-toggle="tab" href="#nav-lista" role="tab" aria-controls="nav-lista" aria-selected="true">Vuelo</a>
+            <a class="nav-item nav-link disabled" id="nav-gastos-tab" data-bs-toggle="tab" href="#nav-gastos" role="tab" aria-controls="nav-gastos" aria-selected="false">Gastos</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active pt-3 sz-font-75" id="nav-lista" role="tabpanel" aria-labelledby="nav-lista-tab">
+            @RenderPage("vuelo.cshtml")
+        </div>
+        <div class="tab-pane fade" id="nav-gastos" role="tabpanel" aria-labelledby="nav-gastos-tab">
+            @RenderPage("gasto.cshtml")
+        </div>
+    </div>
+    
+	<div class="table-responsive">
+		<table id="gastos" class="table table-sm table-striped table-hover compact w-100 sz-font-75">
+			<caption>Lista de Gastos del VUelo</caption>
+			<thead class="thead-blue">
+				<tr>
+					<th>APTO</th>
+					<th>Factura</th>
+					<th>Concepto</th>
+					<th>Subtotal</th>
+					<th>Imp. Hosp.</th>
+					<th>IVA</th>
+					<th>Total</th>
+					<th>Moneda</th>
+					<th><i class="fas fa-gas-pump"></i> Litros</th>
+					<th>$ Litro</th>
+					<th>Tipo</th>
+					<th>Saldo</th>
+					<th></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offTrips" aria-labelledby="offTripsLabel">
+	    <div class="offcanvas-header">
+		    <h5 class="offcanvas-title" id="offTripsLabel">Trips Pendientes</h5>
+		    @*<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>*@
+	    </div>
+	    <div class="offcanvas-body">
+		    <table id="tVuelos" class="table table-sm table-striped table-hover table-responsive-lg w-100 compact">
+			    <thead class="thead-dark">
+				    <tr>
+					    <th class="text-center">Trip</th>
+					    <th class="text-center">Fecha</th>
+				    </tr>
+			    </thead>
+		    </table>
+	    </div>
+    </div>
+</div>
+
+<script> const act = @tipo.Id; </script>
+@section Scripts{
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Vuelo.js")
+    @Scripts.Render("~/Areas/Cuentas/cjs/Account.js")
+    @Scripts.Render("~/Areas/Cuentas/cjs/Saldo.js")
+    @Scripts.Render("~/Areas/Cuentas/cjs/Moneda.js")
+    @Scripts.Render("~/Areas/Gastos/cjs/Comprobacion.js")
+    @Scripts.Render("~/Areas/Gastos/cjs/TipoGasto.js")
+    @Scripts.Render("~/Areas/Gastos/cjs/Gasto.js")
+    @Scripts.Render("~/Areas/Gastos/Views/Captura/Piloto/piloto.js")
+}

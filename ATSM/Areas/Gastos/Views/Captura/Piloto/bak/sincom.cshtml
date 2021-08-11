@@ -1,0 +1,30 @@
+﻿<div class="row justify-content-around gx-1">
+	<div class="col-12 col-sm-6 col-md-4 mt-1 mt-md-2">
+		@Campos.GetInput("Concepto",true,200)
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Total",true,12,"","mon text-end","number")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.SelectMonedas(true,"IdMoneda","num")
+	</div>
+	<div class="col-12 col-sm-6 col-md-2 mt-1 mt-md-2">
+		@Campos.SelectSaldos(true,"IdSaldo","num")
+	</div>
+	<div class="col-12 col-sm-6 col-md-2 mt-1 mt-md-2 d-grid">
+		<button name="addg" data-tg="1" class="btn btn-sm btn-success">Agregar</button>
+	</div>
+</div>
+<hr />
+<div class="table-responsive">
+	<table id="t1" class="table table-sm table-striped table-hover compact w-100 sz-font-75">
+		<thead class="thead-blue">
+			<tr>
+				<th>Concepto</th>
+				<th>Monto</th>
+				<th>Moneda</th>
+				<th>Saldo</th>
+			</tr>
+		</thead>
+	</table>
+</div>

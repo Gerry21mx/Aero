@@ -1,0 +1,125 @@
+﻿@using System.Data.SqlClient;
+@{ 
+	ViewBag.Title = "Centro de Informacion y Control de Mantenimiento Aeronautico";
+    var conexion = DataBase.Conexion();
+}
+<div class="container">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-light rounded">
+        <h1>
+            <img src="/img/logoIngenieria.png" alt="Alternate Text" class="img-thumbnail" style="max-height: 50px">
+			<span class="d-none d-md-inline">@ViewBag.Title</span>
+            <span class="d-inline d-md-none">C.I.C.M.A.</span>
+            <a href="javascript:history.back()"><img src="~/img/return-back.svg" alt="Regresar" class="img-fluid img-thumbnail p-1 rounded float-right" style="height:35px;"/></a>
+        </h1>
+    </div>
+	<div class="row justify-content-around">
+        @if (Funciones.VRoles("mCatIngenieria").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Catalogos/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Catalogos</h5>
+						    <img src="~/img/catalog.svg" alt="Catalogos" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngMenores").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/ComponenteMenor/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Componentes Menores</h5>
+						    <img src="~/img/hierarchical-structure-diagram.svg" alt="Componentes Menores" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngMayores").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/ComponenteMayor/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Items Mayores</h5>
+						    <img src="~/img/turbine.svg" alt="Items Mayores" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngItemsMenores").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Items/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Items Menores</h5>
+						    <img src="~/img/installation-symbol.svg" alt="Items Menores" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngTareas").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Tareas/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Tareas</h5>
+						    <img src="~/img/tasks-tick.svg" alt="Tareas" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngPlaneacion").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Planeacion/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Planeacion</h5>
+						    <img src="~/img/planning.svg" alt="Planeacion" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngOperaciones").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Operaciones/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Operaciones</h5>
+						    <img src="~/img/airplane-flight-around-the-planet.svg" alt="Operaciones" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngAlmacen").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Almacen/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Almacén</h5>
+						    <img src="~/img/warehouse.svg" alt="Almacén" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngReportes").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Reportes/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Reportes</h5>
+						    <img src="~/img/report.svg" alt="Reportes" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+	</div>
+</div>

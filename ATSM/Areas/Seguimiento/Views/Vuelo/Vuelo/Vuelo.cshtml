@@ -1,0 +1,60 @@
+﻿@using System.Data.SqlClient
+@{
+    
+}
+<div class="row justify-content-around g-1 mt-0 mt-md-2">
+	<div class="col-6 col-md-3 col-lg-2">
+		@Campos.GetInput("Trip",true,20,"Trip","text-end","number")
+	</div>
+	<div class="col-6 col-md-3 col-lg-2">
+		@Campos.GetInput("Salida",true,10,"Salida","fec text-center","date",DateTime.Now.ToString("yyyy-MM-dd"))
+	</div>
+	<div class="col-6 col-md-3 col-lg-2">
+		@Campos.SelectTipoVuelo(true,"IdTipoVuelo","num","Tipo")
+	</div>
+	<div class="col-6 col-md-3 col-lg-2">
+		@Campos.GetInput("NoVuelo",true,100,"Numero","","number")
+	</div>
+	<div class="col-6 col-md-3 col-lg-2">
+		@Campos.SelectRuta(true, "IdRuta","num",true)
+	</div>
+</div>
+<hr />
+<div class="row justify-content-center mt-0 mt-md-2">
+	<div class="col-12 sz-font-75 mt-1 mt-md-2">
+		<table id="lisTramos" class="table table-sm table-hover table-striped table-responsive-md compact w-100">
+			<caption>Tramos de Ruta</caption>
+			<thead class="thead-dark">
+				<tr>
+					<th class="text-center">Mat</th>
+					<th class="text-center">#</th>
+					<th>Origen</th>
+					<th>Destino</th>
+					<th>Salida</th>
+					<th>Iti Des</th>
+					<th>Plataforma</th>
+					<th>Despegue</th>
+					<th>Llegada</th>
+					<th>Iti Ate</th>
+					<th>Plataforma</th>
+					<th>Aterrizaje</th>
+					<th>Capitan</th>
+					<th>Copiloto</th>
+					<th></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</div>
+<hr />
+<div class="row justify-content-center mt-0 mt-md-2 mb-3">
+	<div class="col-4">
+		@Campos.BtnCle("cleV")
+	</div>
+	<div class="col-4">
+		@Campos.BtnDel("delV","dVuelo")
+	</div>
+	<div class="col-4">
+		@Campos.BtnReg("regV","cVuelo")
+	</div>
+</div>

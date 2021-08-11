@@ -1,0 +1,46 @@
+﻿@{
+    
+}
+<div class="alert alert-dark" role="alert">Definition of the Task <span id="LblTaskId" class="badge badge-dark"></span></div>
+<div class="row justify-content-around mt-0 mt-md-3">
+	<div class="col-6 col-md-4">
+		@Campos.SelectComponentesMayores(true,"IdMayor","","Categoria",false,false,true)
+	</div>
+	<div class="col-6 col-md-4">
+		@Campos.SelectModelo(true)
+	</div>
+	<div class="col-6 col-md-4 col-xl-3">
+		@Campos.GetInput("np",true,0,"Componente Menor","","","",true,false,"NP",null,null,true)
+		<datalist id="listNP"></datalist>
+	</div>
+
+	@*<div class="col-12 col-md-4">
+		@Campos.GetInput("np", true, 50, "", "text-center", "text", "", true, true, "Part Number")
+	</div>
+	<div class="col-12 col-md-4">
+		@Campos.GetInput("descripcion", false, 500, "", "text-left", "text", "", false, false, "Descripcion")
+	</div>
+	<div class="col-12 col-md-1 text-center">
+		<h5><span id="ata" class="badge badge-secondary"></span></h5>
+	</div>
+	<div class="col-12 col-md-3">
+		@Campos.SelectModelo(true)
+	</div>*@
+</div>
+<hr />
+<div class="row justify-content-around mt-0 mt-md-3">
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Repeat", true, 50, "", "text-center", "text", "", true, true, "Repeat")
+	</div>
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Zone", true, 50, "", "text-center", "text", "", true, true, "Zone/Work Area")
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-3">
+	<div class="col-12 col-md-6">
+		@*@Campos.SelectTaskType(true)*@
+	</div>
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Rev", true, 50, "", "text-center", "text", "", true, true, "Rev")
+	</div>
+</div>

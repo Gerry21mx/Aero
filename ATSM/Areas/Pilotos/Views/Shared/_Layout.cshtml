@@ -1,0 +1,37 @@
+﻿@{ 
+	Usuario user = new Usuario(WebSecurity.CurrentUserId);
+	if (!WebSecurity.IsAuthenticated && Context.Request.Path != "/Login") {
+		Response.Redirect("~/Login");
+	}
+}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>@ViewBag.Title - Pilotos</title>
+	@RenderPage("~/Views/Shared/_ScriptsHeader.cshtml")
+   
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="manifest" href="/manifest.json">
+    <!-- Android -->
+    <meta name="theme-color" content="#3498db">
+    <!-- IOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+    @if (WebSecurity.IsAuthenticated) {
+        @RenderPage("~/Areas/Pilotos/Views/Shared/menu.cshtml")
+	}
+    
+    @RenderBody()
+    
+
+	@RenderPage("~/Views/Shared/_Footer.cshtml")
+
+	@RenderPage("~/Views/Shared/_ScriptsFooter.cshtml")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

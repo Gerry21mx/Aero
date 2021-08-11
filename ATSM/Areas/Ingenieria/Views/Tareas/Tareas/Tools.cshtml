@@ -1,0 +1,30 @@
+﻿@{
+    
+}
+<div class="alert alert-dark" role="alert">List of tools required</div>
+<div class="row justify-content-around mt-0 mt-md-3">
+	<div class="col-12 col-md-2">
+		@Campos.GetInput("qty2", true, 0, "", "text-center dec", "text", "", true, true, "QTY")
+	</div>
+	<div class="col-12 col-md-3">
+		@Campos.GetInput("np2", true, 0, "", "text-center", "text", "", true, true, "Part Number")
+	</div>
+	<div class="col-12 col-md-3">
+		<span id="des2" class="font-weight-bolder"></span>
+	</div>
+	<div class="col-12 col-md-3">
+		<button id="add2" class="btn btn-sm btn-block btn-outline-dark"><i class="fas fa-plus-circle"></i> Add</button>
+	</div>
+</div>
+<hr />
+<table id="tab2" class="table table-sm table-striped table-responsive-md w-100 table-bordered table-hover">
+	<thead class="thead-dark">
+		<tr>
+			<th>Quantity</th>
+			<th>Part Number</th>
+			<th>Description</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+</table>

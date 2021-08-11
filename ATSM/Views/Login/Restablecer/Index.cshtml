@@ -1,0 +1,41 @@
+﻿@{
+	ViewBag.title = "Recuperar Contraseña";
+	if (WebSecurity.IsAuthenticated) {
+		Response.Redirect("~/");
+	}
+}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>
+                Restablecer Contraseña
+            </h4>
+			<small class="text-muted">Restablecer la Contraseña de Acceso al Sistema.</small>
+        </div>
+    </div>
+    <hr />
+	@*<div class="row justify-content-around">
+		<div class="col-12 col-md-4 mt-1 mt-md-2">
+			@Campos.GetInput("Nickname", true, 56, "Usuario", "text-center", "text", @Request["usuario"], false, true)
+		</div>
+	</div>*@
+	<div class="row justify-content-around">
+		<div class="col-12 col-md-4 mt-1 mt-md-2">
+			@Campos.GetInput("Password", true, 30, "Nueva Contraseña", "", "password", "", true, true, "Nueva Contraseña")
+		</div>
+	</div>
+	<div class="row justify-content-around">
+		<div class="col-12 col-md-4 mt-1 mt-md-2">
+			@Campos.GetInput("Password2", true, 30, "Confirmar Contraseña", "", "password", "", true, true, "Confirmar Contraseña")
+		</div>
+	</div>
+	<div class="row justify-content-around">
+		<div class="col-12 col-md-2 d-grid g-3">
+			<button id="res" class="btn btn-sm btn-outline-success">Restablecer</button>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Views/Login/Restablecer/appr.js")
+}

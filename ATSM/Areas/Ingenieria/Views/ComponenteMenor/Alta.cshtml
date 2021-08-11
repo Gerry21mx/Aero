@@ -1,0 +1,242 @@
+﻿@{ 
+	ViewBag.Title = "Directivas / Boletines de Servicio";
+}
+<div class="row">
+	@*Generales*@
+	<div class="w-100 text-center">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+			<b class="leyenda">Generales</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+</div>
+<div class="row justify-content-around bg-light g-2">
+	<div class="col-12 col-md-4 d-grid gap-2">
+		<div class="row g-1">
+			<div class="col-12">
+				<div class="input-group input-group-sm">
+					<span class="input-group-text">@(ViewBag.Tipo==3?"Reference":"Part Number")</span>
+					<input type="text" id="Part" class="form-control form-control-sm " placeholder="@(ViewBag.Tipo==3?"Reference":"Part Number")" maxlength="50">
+					@if (ViewBag.Tipo == 2) {
+						<button id="genpn" class="btn btn-sm btn-outline-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar PN"><i class="fas fa-share-square"></i></button>
+					}
+				</div>
+			</div>
+			<div class="col-12">
+				@Campos.SelectFamily(true)
+			</div>
+			<div class="col-12">
+				<div class="input-group input-group-sm mb-3">
+					<span class="input-group-text" id="lblATA">ATA</span>
+					<input id="ATA1" type="number" min="0" max="99" class="form-control text-end num" aria-label="ATA1" aria-describedby="lblATA">
+					<input id="ATA2" type="number" min="0" max="99" class="form-control text-end num" aria-label="ATA2" aria-describedby="lblATA">
+					<input id="ATA3" type="number" min="0" max="99" class="form-control text-end num" aria-label="ATA3" aria-describedby="lblATA">
+				</div>
+			</div>
+			<div class="col-12 @(ViewBag.Tipo!=1?"d-none":"")">
+				@Campos.Switch("Serie",null,null,"Serie")
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-4">
+		@*<label for="Description" class="form-label">Descripcion</label>*@
+		<textarea class="form-control w-100" id="Description" placeholder="Descripcion" rows="3" maxlength="500"></textarea>
+	</div>
+	<div class="col-12 col-md-4">
+		@*<label for="Observaciones" class="form-label">Observaciones</label>*@
+		<textarea class="form-control w-100" id="Observaciones" placeholder="Observaciones" rows="3" maxlength="500"></textarea>
+	</div>
+</div>
+@if(ViewBag.Tipo == 2) {
+<div class="row justify-content-around">
+	<div class="col-12 col-md-6 order-0">
+		<div class="row">
+			@*Directives*@
+			<div class="w-100 text-center">
+				<div style="margin:auto; align-content: center;" class="w-100">
+					<span class="lineal">&nbsp;</span>
+					<b class="leyenda">Directivas</b>
+					<span class="linear">&nbsp;</span>
+				</div>
+			</div>
+		</div>
+		<div class="row g-1 bg-light">
+			<div class="col-12 col-md-6">
+				@Campos.GetInput("Directive",true,200,"Directive","","","",true,false,"Directiva")
+			</div>
+			<div class="col-12 col-md-6">
+				@Campos.GetInput("Amendment",true,50,"Enmienda","","","",true,false,"Enmienda")
+			</div>
+			<div class="col-12 col-md-6">
+				@Campos.GetInput("AD_Date",true,10,"","text-center","date","",true,true,"Efectividad AD")
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-6 order-4 order-md-2">
+		<div class="row">
+			@*Service Bulletin*@
+			<div class="w-100 text-center">
+				<div style="margin:auto; align-content: center;" class="w-100">
+					<span class="lineal">&nbsp;</span>
+					<b class="leyenda">Boletines de Servicio</b>
+					<span class="linear">&nbsp;</span>
+				</div>
+			</div>
+		</div>
+		<div class="row g-1 bg-light">
+			<div class="col-12 col-md-6">
+				@Campos.GetInput("ServiceBulletin",true,200,"Boletines de Servicio","","text","",true,false,"Boletines de Servicio")
+			</div>
+			<div class="col-12 col-md-6">
+				@Campos.GetInput("Review",true,50,"Revision","","","",true,false,"Revision")
+			</div>
+			<div class="col-12 col-md-6">
+				@Campos.GetInput("SB_Date",true,10,"","text-center","date","",true,true,"Efectividad SB")
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-6 order-2 order-md-3 g-1 gx-4">
+		@*<label for="Efectivity" class="form-label">Efectivity</label>*@
+		<textarea class="form-control w-100" id="Efectivity" placeholder="Efectivity" rows="3" maxlength="2000"></textarea>
+	</div>
+	<div class="col-12 col-md-6 order-3 order-md-4 g-1 gx-4">
+		@*<label for="Threshold" class="form-label">Threshold</label>*@
+		<textarea class="form-control w-100" id="Threshold" placeholder="Threshold" rows="3" maxlength="2000"></textarea>
+	</div>
+</div>
+<div class="row justify-content-around">
+	<div class="col-12 col-md-6">
+		<div class="row">
+			@*From*@
+			<div class="w-100 text-center">
+				<div style="margin:auto; align-content: center;" class="w-100">
+					<span class="lineal">&nbsp;</span>
+					<b class="leyenda">Condicion Desde</b>
+					<span class="linear">&nbsp;</span>
+				</div>
+			</div>
+		</div>
+		<div class="row g-1 bg-light">
+			<div class="col-12 col-md-4">
+				@Campos.GetInput("Condition_From_Hours",true,18,"","dec text-end","number","",true,false,"Horas","0")
+			</div>
+			<div class="col-12 col-md-4">
+				@Campos.GetInput("Condition_From_Cycles",true,12,"","num text-end","number","",true,false,"Ciclos","0")
+			</div>
+			<div class="col-12 col-md-4">
+				@Campos.GetInput("Condition_From_Date",true,10,"","text-center","date","",true,false,"Fecha","1903-12-17")
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-6">
+		<div class="row">
+			@*To*@
+			<div class="w-100 text-center">
+				<div style="margin:auto; align-content: center;" class="w-100">
+					<span class="lineal">&nbsp;</span>
+					<b class="leyenda">Condicion Hasta</b>
+					<span class="linear">&nbsp;</span>
+				</div>
+			</div>
+		</div>
+		<div class="row g-1 bg-light">
+			<div class="col-12 col-md-4">
+				@Campos.GetInput("Condition_To_Hours",true,18,"","dec text-end","number","",true,false,"Horas","0")
+			</div>
+			<div class="col-12 col-md-4">
+				@Campos.GetInput("Condition_To_Cycles",true,12,"","num text-end","number","",true,false,"Ciclos","0")
+			</div>
+			<div class="col-12 col-md-4">
+				@Campos.GetInput("Condition_To_Date",true,10,"","text-center","date","",true,false,"Fecha","1903-12-17")
+			</div>
+		</div>
+	</div>
+</div>
+}
+<div class="row justify-content-around">
+	<div class="col-12 col-md-6">
+		<div class="row">
+			@*Modelos*@
+			<div class="w-100 text-center">
+				<div style="margin:auto; align-content: center;" class="w-100">
+					<span class="lineal">&nbsp;</span>
+					<b class="leyenda">Modelos</b>
+					<span class="linear">&nbsp;</span>
+				</div>
+			</div>
+		</div>
+		<div class="row g-1 bg-light">
+			<div class="col-12 col-md-4">
+				@Campos.SelectComponentesMayores(true,"IdComponenteMayor","","Mayor")
+			</div>
+			<div class="col-12 col-md-4">
+				@Campos.SelectModelo(true)
+			</div>
+			<div class="col-12 col-md-3">
+				@Campos.GetInput("Cantidad",true,2,"","num text-end","Cantidad","0",ViewBag.Tipo==1)
+			</div>
+			<div class="col-12 col-md-1">
+				<button id="addMod" class="btn btn-sm btn-success py-0"><i class="fas fa-plus-circle"></i></button>
+			</div>
+		</div>
+		<div class="table-responsive-l mt-1 mt-md-3 sz-font-75">
+			<table id="tMod" class="table table-sm compact table-striped table-bordered">
+				<thead class="bg-primary">
+					<tr>
+						<th>Mayor</th>
+						<th>Modelo</th>
+						<th>Cantidad</th>
+						<th></th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+	<div class="col-12 col-md-6">
+		<div class="row">
+			@*Limites*@
+			<div class="w-100 text-center">
+				<div style="margin:auto; align-content: center;" class="w-100">
+					<span class="lineal">&nbsp;</span>
+					<b class="leyenda">Limites</b>
+					<span class="linear">&nbsp;</span>
+				</div>
+			</div>
+		</div>
+		<div class="row g-1 bg-light" id="contLim">
+			<div class="col-12 col-md-3">
+				@Campos.SelectLimites(true,"IdLimite")
+			</div>
+			<div class="col-12 col-md-8">
+				<div class="row g-0 g-md-2">
+					<div class="col-12 col-md-4">
+						@Campos.GetInput("Horas",true,6,"","num text-end","number")
+					</div>
+					<div class="col-12 col-md-4">
+						@Campos.GetInput("Ciclos",true,6,"","num text-end","number")
+					</div>
+					<div class="col-12 col-md-4">
+						@Campos.GetInput("Dias",true,6,"","num text-end","number")
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-md-1">
+				<button id="addLim" class="btn btn-sm btn-success py-0"><i class="fas fa-plus-circle"></i></button>
+			</div>
+		</div>
+		<div class="table-responsive-lg mt-1 mt-md-3 sz-font-75">
+			<table id="tLim" class="table table-sm compact table-striped table-bordered">
+				<thead class="bg-primary">
+					<tr>
+						<th>Limite</th>
+						<th>Horas</th>
+						<th>Ciclos</th>
+						<th>Dias</th>
+						<th></th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>

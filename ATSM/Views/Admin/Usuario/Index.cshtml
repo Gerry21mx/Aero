@@ -1,0 +1,73 @@
+﻿@{
+	ViewBag.Title = "Usuarios";
+}
+<div class="container">
+        <div class="row">
+            <div class="col">
+                <h4>
+                    Usuarios <small class="text-muted">Alta de Usuarios con Acceso al Sistema.</small>
+					<a href="javascript:history.back()"><img src="~/img/return-back.svg" alt="Regresar" class="img-fluid img-thumbnail p-1 rounded float-right" style="height:35px;"/></a>
+                </h4>
+            </div>
+        </div>
+        <hr />
+        <div class="row justify-content-around">
+            <div class="col-12 col-md-7">
+				<div class="row justify-content-around">
+					<div class="col-12 col-md-4 mt-1 mt-md-2">
+						@Campos.GetInput("Nickname", true, 56, "Usuario")
+					</div>
+					<div class="col-12 col-md-4 mt-1 mt-md-2">
+						@Campos.GetInput("Password", false, 30, "Contraseña", "", "password")
+					</div>
+					<div class="col-12 col-md-4 mt-1 mt-md-2">
+						@Campos.GetInput("Password2", false, 30, "Confirmar Contraseña", "", "password")
+					</div>
+					<div class="col-12 col-md-5 mt-1 mt-md-2">
+						@Campos.GetInput("Nombre", true, 200, "Nombre")
+					</div>
+					<div class="col-12 col-md-5 mt-1 mt-md-2">
+						@Campos.SelectPerfil(true)
+					</div>
+					<div class="col-12 col-md-2 mt-1 mt-md-2">
+						@Campos.Switch()
+					</div>
+					<div class="col-12 col-md-5 mt-1 mt-md-2">
+						@Campos.GetInput("Correo", true, 56, "Correo", "", "email")
+					</div>
+					<div class="col-12 col-md-4 mt-1 mt-md-2">
+						@Campos.GetInput("Telefono", true, 56, "Telefono", "", "tel")
+					</div>
+					<div class="col-12"></div>
+					<div class="col-4 mt-1 mt-md-2">
+						@Campos.BtnCle()
+					</div>
+					<div class="col-4 mt-1 mt-md-2">
+						@Campos.BtnReg("reg","cUsuario")
+					</div>
+					<div class="col-4 mt-1 mt-md-2">
+						@Campos.BtnDel("del","dUsuario")
+					</div>
+				</div>
+            </div>
+            <div class="col-12 col-md-5 sz-fnt-75">
+                <table id="tabla" class="table table-sm compact table-hover table-striped table-bordered w-100">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Nombre</th>
+                            <th>Perfil</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+@section Scripts{
+
+    @Scripts.Render("~/Views/Admin/Usuario/usuario.js")
+}

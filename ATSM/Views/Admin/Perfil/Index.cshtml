@@ -1,0 +1,81 @@
+﻿@{
+	ViewBag.Title = "Perfiles";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h4>
+                Perfil de Usuario <small class="text-muted">Definicion del Rol de cada Perfil de Usuario.</small>
+                <a href="javascript:history.back()"><img src="~/img/return-back.svg" alt="Regresar" class="img-fluid img-thumbnail p-1 rounded float-right" style="height:35px;"/></a>
+            </h4>
+        </div>
+    </div>
+    <hr />
+    <div class="row justify-content-around mb-1 mb-md-3">
+        <div class="col-12 col-md-3 mt-0 mt-md-2">
+            @Campos.GetInput("Nombre", true, 256, "Perfil")
+        </div>
+        <div class="col-12 col-md-4 mt-0 mt-md-2">
+            @Campos.GetInput("Descripcion", true, 500, "Descripcion")
+        </div>
+        <div class="col-12 col-md-3 mt-0 mt-md-2">
+            <div class="input-group input-group-sm">
+			    <div class="input-group-prepend">
+				    <label class="input-group-text" for="Area">Area</label>
+			    </div>
+			    <select class="custom-select custom-select-sm" id="Area">
+                    @foreach(var area in ViewBag.Areas) {
+                        <option value="@area.Area">@area.Area</option>
+			        }
+                </select>
+		    </div>
+        </div>
+        <div class="col-12 col-md-2 mt-0 mt-md-2">
+            @Campos.Switch()
+        </div>
+
+        
+        <div class="col-6 col-md-2 mt-0 mt-md-2">
+            @Campos.Switch("Herencia",null,null,"Herencia")
+        </div>
+        <div class="col-6 col-md-2 mt-0 mt-md-2">
+            @Campos.BtnCle()
+        </div>
+        <div class="col-6 col-md-2 mt-0 mt-md-2">
+            @Campos.BtnReg("reg", "cPerfil")
+        </div>
+        <div class="col-6 col-md-2 mt-0 mt-md-2">
+            @Campos.BtnDel("del", "dPerfil")
+        </div>
+    </div>
+    <div class="row justify-content-around">
+        <div class="col-12 col-md-6 bg-light" style="overflow:scroll; max-height:90% !important;" id="clp">
+			<div id="perfiles"></div>
+        </div>
+        <div class="col-12 col-md-6 sz-fnt-75">
+			<table id="tabla" class="table table-sm compact table-hover table-striped table-bordered w-100">
+				<thead class="thead-dark">
+					<tr>
+						<th>Perfil</th>
+						<th>Descripcion</th>
+						<th>Estado</th>
+						<th>Area</th>
+						<th></th>
+					</tr>
+                </thead>
+				<tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    @*@Styles.Render("~/Content/jstree")*@
+    @*@Scripts.Render("~/bundles/jstree")*@
+
+    @*@Scripts.Render("~/cjs/gen/Rol.js")
+    @Scripts.Render("~/cjs/gen/Perfil.js")*@
+    @Scripts.Render("~/Views/Admin/Perfil/perfil.js")
+}

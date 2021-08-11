@@ -1,0 +1,30 @@
+﻿@{ 
+	ViewBag.Title = "Registro de Artículos";
+	var Categorias = Categoria.GetCategorias();
+	var UnidadesMedida = UnidadMedida.GetUnidadMedidas();
+}
+<div class="container">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3 id="tit">@ViewBag.Title</h3></div>
+	<div class="container-xl bg-light p-2">
+        <ul class="nav nav-tabs" id="articulos" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="alta-tab" data-bs-toggle="tab" data-bs-target="#alta" type="button" role="tab" aria-controls="alta" aria-selected="true">Alta</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lista-tab" data-bs-toggle="tab" data-bs-target="#lista" type="button" role="tab" aria-controls="lista" aria-selected="false">Lista</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="articulosContent">
+            <div class="tab-pane fade show active" id="alta" role="tabpanel" aria-labelledby="alta-tab">
+                @RenderPage("~/Areas/Ingenieria/Views/Almacen/Articulos/Registro/Alta.cshtml")
+            </div>
+            <div class="tab-pane fade" id="lista" role="tabpanel" aria-labelledby="lista-tab">
+                @RenderPage("~/Areas/Ingenieria/Views/Almacen/Articulos/Registro/Lista.cshtml")
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Almacen/Articulo.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/Almacen/Articulos/Registro/appr.js")
+}

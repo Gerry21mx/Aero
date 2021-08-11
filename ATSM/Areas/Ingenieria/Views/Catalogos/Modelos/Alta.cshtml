@@ -1,0 +1,70 @@
+﻿@using System.Data.SqlClient
+@{
+	var limites = Limites.GetLimites();
+}
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-12 col-md-8 mt-1 mt-md-2">
+		@Campos.GetInput("Nombre",true,100,"Nombre")
+	</div>
+	<div class="col-12 col-md-4 align-self-center">
+		@Campos.Switch()
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-12 mt-1 mt-md-2">
+		@Campos.GetInput("Fabricante",true,100,"Fabricante")
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-12 mt-1 mt-md-2">
+		@Campos.SelectCapacidad(true)
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-12 mt-1 mt-md-2">
+		@Campos.SelectComponentesMayores(true)
+	</div>
+</div>
+<div class="row" id="limitLabel">
+	@*Limites*@
+	<div class="w-100 text-center sz-font-75">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+			<b class="leyenda">Limites</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+</div>
+@foreach(var limite in limites) {
+<div class="row justify-content-center g-1 sz-font-75 d-none" data-tipo="Limite" data-idlimite="@limite.Id">
+	<div class="col-12 col-md-11 mt-1 mt-md-2 fw-bold">
+		<div class="alert alert-dark shadow-sm py-0 my-0 text-center sz-font-75">
+			<span class="float-start">@Campos.Switch($"LimAct_{limite.Id}","Activo","Inactivo")</span>
+			@limite.Definicion
+		</div>
+	</div>
+	<div class="col-4">
+		@Campos.GetInput($"Horas",true,6,"","num text-end","number","0",true,false,"Horas")
+	</div>
+	<div class="col-4">
+		@Campos.GetInput($"Ciclos",true,6,"","num text-end","number","0",true,false,"Ciclos")
+	</div>
+	<div class="col-4">
+		@Campos.GetInput($"Dias",true,6,"","num text-end","number","0",true,false,"Dias")
+	</div>
+</div>
+}
+
+<hr />
+<div class="row justify-content-center mt-0 mt-md-2">
+	<div class="col-4">
+		@Campos.BtnCle()
+	</div>
+	<div class="col-4">
+		@Campos.BtnDel("del","dModelo")
+	</div>
+	<div class="col-4">
+		@Campos.BtnReg("reg","cModelo")
+	</div>
+</div>
+<hr />

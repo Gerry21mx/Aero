@@ -1,0 +1,17 @@
+﻿@{
+	ViewBag.Title = "Aeronaves";
+}
+
+<div class="container mt-0 mt-md-2">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>@ViewBag.Title</h3></div>
+
+    @RenderPage("~/Areas/Ingenieria/Views/Catalogos/Aircraft/Alta.cshtml")
+    
+    @RenderPage("~/Areas/Ingenieria/Views/Catalogos/Aircraft/List.cshtml")
+
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Aircraft.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/Catalogos/Aircraft/appr.js")
+}

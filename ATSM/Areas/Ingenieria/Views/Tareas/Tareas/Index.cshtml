@@ -1,0 +1,63 @@
+﻿@{ 
+	ViewBag.Title = "Definicion de Tareas";
+}
+<div class="container">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3 id="tit">Instalacion de @ViewBag.Title</h3></div>
+
+    <ul class="nav nav-tabs" id="Tareas" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="Definicion-tab" data-bs-toggle="tab" data-bs-target="#Definicion" type="button" role="tab" aria-controls="Definicion" aria-selected="true">Definicion</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="Material-tab" data-bs-toggle="tab" data-bs-target="#Material" type="button" role="tab" aria-controls="Material" aria-selected="false">Material</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="Tools-tab" data-bs-toggle="tab" data-bs-target="#Tools" type="button" role="tab" aria-controls="Tools" aria-selected="false">Tools</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="Instructions-tab" data-bs-toggle="tab" data-bs-target="#Instructions" type="button" role="tab" aria-controls="Instructions" aria-selected="false">Instructions</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="References-tab" data-bs-toggle="tab" data-bs-target="#References" type="button" role="tab" aria-controls="References" aria-selected="false">References</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="Images-tab" data-bs-toggle="tab" data-bs-target="#Images" type="button" role="tab" aria-controls="Images" aria-selected="false">Images</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="Definicion" role="tabpanel" aria-labelledby="Definicion-tab">
+            @RenderPage("~/Areas/Ingenieria/Views/Tareas/Tareas/Definicion.cshtml")
+        </div>
+        <div class="tab-pane fade" id="Material" role="tabpanel" aria-labelledby="Material-tab">
+            @RenderPage("~/Areas/Ingenieria/Views/Tareas/Tareas/Material.cshtml")
+        </div>
+        <div class="tab-pane fade" id="Tools" role="tabpanel" aria-labelledby="Tools-tab">
+            @RenderPage("~/Areas/Ingenieria/Views/Tareas/Tareas/Tools.cshtml")
+        </div>
+        <div class="tab-pane fade" id="Instructions" role="tabpanel" aria-labelledby="Instructions-tab">
+            @RenderPage("~/Areas/Ingenieria/Views/Tareas/Tareas/Instructions.cshtml")
+        </div>
+        <div class="tab-pane fade" id="References" role="tabpanel" aria-labelledby="References-tab">
+            @RenderPage("~/Areas/Ingenieria/Views/Tareas/Tareas/References.cshtml")
+        </div>
+        <div class="tab-pane fade" id="Images" role="tabpanel" aria-labelledby="Images-tab">
+            @RenderPage("~/Areas/Ingenieria/Views/Tareas/Tareas/Images.cshtml")
+        </div>
+    </div>
+
+	
+	<div class="row justify-content-around">
+		<hr />
+		<div class="col-4 col-md-2">@Campos.BtnCle()</div>
+		<div class="col-4 col-md-2">@Campos.BtnDel("del","dTarea")</div>
+		<div class="col-4 col-md-2">@Campos.BtnReg("reg","cTarea")</div>
+	</div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMenor.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ItemMayor.js")
+    @Scripts.Render("~/Scripts/ckeditor/ckeditor.js")
+    @Scripts.Render("~/Scripts/ckeditor/config.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Tarea.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/Tareas/Tareas/appr.js")
+}

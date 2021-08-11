@@ -1,0 +1,66 @@
+﻿@{
+	//		FORMATO DE SLICITUD JSON
+	//{
+	//	id: 'MensajeModal',
+	//	size: 'bootstraap sizes',
+	//	close_button: true,
+	//	title: {
+	//		id: 'mensajeModalTitle',
+	//		content: 'Titulo',
+	//		css: 'Clases CSS',
+	//		icon: 'font-awesome-icon'
+	//	},
+	//	body: {
+	//		id: 'mensajeModalBody',
+	//		content: '',
+	//		css: ''
+	//	},
+	//	footer: {
+	//		id: 'mensajeModalFooter',
+	//		content: '',
+	//		css: '',
+	//		buttons: [
+	//			{
+	//				id: '',
+	//				icon: '',
+	//				content: '',
+	//				css: '',
+	//				callback: '',
+	//				column_width: 1 - 12,
+	//				dismiss_modal: false
+	//			}
+	//		]
+	//	}
+	//}
+	Layout = null;
+}
+
+<div class="modal fade" id="@ViewBag.id" tabindex="-1" role="dialog" aria-labelledby="MensajeModalTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered @ViewBag.size" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title @ViewBag.title.css" id="@ViewBag.title.id">@(string.IsNullOrEmpty(ViewBag.title.icon)?"":$"<i class=\"{ViewBag.title.icon}\"></i>") &nbsp; @MvcHtmlString.Create(ViewBag.title.content)</h5>
+				@if (ViewBag.close_button) {
+					<button type="button" class="close btn-outline-dark" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				}
+			</div>
+			<div class="modal-body @ViewBag.body.css" id="@ViewBag.body.id">@MvcHtmlString.Create(ViewBag.body.content)</div>
+			<div class="modal-footer @ViewBag.footer.css" id="@ViewBag.footer.id">
+				@if (!string.IsNullOrEmpty(ViewBag.footer.content)) {
+					<div class="row">@MvcHtmlString.Create(ViewBag.footer.content)</div>
+				}
+				@if (ViewBag.footer.buttons!=null) {
+					<div class="row">
+						@foreach(var btn in ViewBag.footer.buttons) {
+							<div class="col-@btn.column_width">
+								<button type="button" class="btn @btn.css" @(btn.dismiss_modal?"data-dismiss=\"modal\"":"") @(string.IsNullOrEmpty(btn.callback)?"":$"onclick=\"{btn.callback}()\"")>
+									@(string.IsNullOrEmpty(btn.icon)?"":$"<i class=\"{btn.icon}\"></i>") &nbsp; @btn.content
+								</button>
+							</div>
+						}
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>

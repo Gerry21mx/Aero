@@ -1,0 +1,35 @@
+﻿@{ 
+	ViewBag.Title = "Vinculación de Componentes Menores";
+}
+
+<div class="container">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3 id="tit">@ViewBag.Title</h3></div>
+
+	<div class="row justify-content-around g-1">
+		<div class="col-6 col-md-4 col-xl-3">
+			@Campos.GetInput("IdComponenteMenor",true,0,"Part Number","","","",true,false,"Componente",null,null,true)
+		</div>
+		<div class="col-6 col-md-4">
+			<span id="desCom" class="fw-bold"></span>
+		</div>
+    </div>
+	<div class="row justify-content-center mt-1 mt-md-2">
+		<div class="col-12 col-md-8 sz-font-725">
+			<table id="tVinculados" class="table table-sm table-striped">
+				<thead class="table-dark">
+					<tr>
+						<th>Part Number</th>
+						<th>Description</th>
+						<th>Vinculado</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMenor.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMenorVinculado.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/ComponenteMenor/Vinculacion/appr.js")
+}

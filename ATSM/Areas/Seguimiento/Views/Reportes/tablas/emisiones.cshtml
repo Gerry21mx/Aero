@@ -1,0 +1,196 @@
+﻿@using System;
+@using ATSM;
+@using System.Data.SqlClient;
+@{
+	Layout = null;
+	var f1=Request["f1"];
+	var f2=Request["f2"];
+	var tio=Request["t"];
+	Double[] totales = new Double[17] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	var cnn1 = Database.Open("DATA");
+	var cnn2=Database.Open("BD_ASTRIP");
+	var traMod=cnn1.Query($@"SELECT DISTINCT IdOrigen, IdDestino, 
+    (SELECT IATA FROM Aeropuerto WHERE IdAeropuerto=IdOrigen) AS Origen,
+    (SELECT IATA FROM Aeropuerto WHERE IdAeropuerto=IdDestino) AS Destino, 
+    (SELECT Capacidad FROM BD_MTTO.dbo.ModeloAeronave WHERE IdModelo = (SELECT IdModelo FROM BD_MTTO.dbo.Aeronave WHERE IdAeronave = VueloTramo.IdAeronave)) AS capacidad, 
+    (SELECT IIF(Pais='MX',1,0) FROM Aeropuerto WHERE Aeropuerto.IdAeropuerto = VueloTramo.IdOrigen)+(SELECT IIF(Pais='MX',1,0) FROM Aeropuerto WHERE Aeropuerto.IdAeropuerto = VueloTramo.IdDestino) AS nain 
+        FROM VueloTramo 
+            WHERE Salida BETWEEN '{f1}' AND '{f2}' AND IdOrigen IS NOT NULL AND IdDestino IS NOT NULL 
+                ORDER BY nain,capacidad,IdOrigen,IdDestino");
+
+	var conR=0;
+}
+
+<table class="table table-sm table-hover table-bordered table-responsive-lg w-100 compact">
+    <thead class="thead-dark">
+        <tr>
+            <th>Aeródromo de Despegue</th>
+            <th>Aeródromo de Aterrizaje</th>
+            <th>Tipo de operación (n=nacional, i=internacional)</th>
+            <th>Tipo de aeronave (Código de identificación OACI)</th>
+            <th>Motor</th>
+            <th>Distancia [Km]</th>
+            <th>Tiempo de vuelo</th>
+            <th>Número de frecuencias</th>
+            <th>Número total de pasajeros</th>
+            <th>Masa total de los pasajeros y equipaje facturado [t]</th>
+            <th>Peso total de carga y correo [t]</th>
+            <th>Pasajeros x Distancia [Km*pasajero]</th>
+            <th>Masa total de los pasajeros y equipaje facturado x Distancia [t*Km]</th>
+            <th>Peso total de carga y correo x Distancia [t*Km]</th>
+            <th>Total de toneladas kilómetro por par de aeródromos [t*Km]</th>
+            <th>Jet queroseno (Jet A1 o Jet A) 3.15</th>
+            <th>Jet gasolina (Jet B) / La gasolina de aviación (AvGas) 3,10</th>
+            <th>Combustible alternativo</th>
+            <th>Jet queroseno (Jet A1 o Jet A) 3.15</th>
+            <th>Jet gasolina (Jet B) / La gasolina de aviación (AvGas) 3,10</th>
+            <th>Combustible alternativo</th>
+            <th>TOTAL [t CO2]</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var tra in traMod){
+			if(tio=="2" && tra.nain!=2){
+				continue;
+			}
+			if(tio=="1" && tra.nain==2){
+				continue;
+			}
+			conR++;
+			Double tvl=0;
+			var nf=0;
+			var ntp=0;
+			var pee=0;
+			var pec=0;
+			var cCar=0;
+			var cap=string.IsNullOrEmpty(tra.capacidad)?"METRO":tra.capacidad;
+			var dkm=cnn2.QueryValue($"SELECT (mil * 1.852) AS km FROM rutvue WHERE ori='{tra.Origen}' AND des='{tra.Destino}'");
+			string con = $@"SELECT *,
+    (SELECT TOP 1 Trip FROM Vuelo WHERE IdVuelo=IdVuelo) AS Trip,
+    (SELECT Matricula FROM BD_MTTO.dbo.Aeronave WHERE Aeronave.IdAeronave = VueloTramo.IdAeronave) AS Matricula,
+    (SELECT TOP 1 IATA FROM Aeropuerto WHERE IdAeropuerto=IdOrigen) AS Origen,
+    (SELECT TOP 1 IATA FROM Aeropuerto WHERE IdAeropuerto=IdDestino) AS Destino, 
+    (SELECT TOP 1 Modelo FROM BD_MTTO.dbo.ModeloAeronave WHERE IdModelo=(SELECT IdModelo FROM BD_MTTO.dbo.Aeronave WHERE Aeronave.IdAeronave = VueloTramo.IdAeronave)) AS modelo,
+    (SELECT TOP 1 Capacidad FROM BD_MTTO.dbo.ModeloAeronave WHERE IdModelo = (SELECT IdModelo FROM BD_MTTO.dbo.Aeronave WHERE IdAeronave = VueloTramo.IdAeronave)) AS capacidad 
+        FROM VueloTramo 
+            WHERE Salida BETWEEN '{f1}' AND '{f2}' AND (SELECT TOP 1 Capacidad FROM BD_MTTO.dbo.ModeloAeronave WHERE IdModelo = (SELECT  TOP 1 IdModelo FROM BD_MTTO.dbo.Aeronave WHERE IdAeronave = VueloTramo.IdAeronave)) = '{cap}' AND IdOrigen='{tra.IdOrigen}' AND IdDestino='{tra.IdDestino}' 
+                ORDER BY modelo,Salida";
+			var vtc=cnn1.Query(con);
+            <tr class="d-none bg-warning text-center" id="des_@conR">
+                <td colspan="22" class="text-center">
+                    <table class="table table-sm table-striped table-hover table-bordered compact">
+                        <thead class="bg-primary">
+                            <tr>
+                                <th>TRIP</th>
+                                <th>AVION</th>
+                                <th>PIERNA</th>
+                                <th>ORIGEN</th>
+                                <th>DESTINO</th>
+                                <th>DESPEGUE</th>
+                                <th>ATERRIZAJE</th>
+                                <th>TIEMPO</th>
+                                <th>COMBUTIBLE</th>
+                                <th>PESO CARGA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var v in vtc){
+                                nf++;
+                                pee+=(v.PesoEquipaje==null?0:v.PesoEquipaje);
+                                pec+=(v.PesoCarga==null?0:v.PesoCarga);
+                                ntp+=(v.SOB==null?0:v.SOB);
+                                cCar+=(v.CombustibleCargado==null?0:v.CombustibleCargado);
+                                DateTime des=DateTime.Today;
+                                DateTime ate=DateTime.Today;
+                                if(v.Salida!=null){
+                                    des = Funciones.Str2Fec( v.Salida.ToString("dd/MM/yyyy") + " " + v.Despegue );
+                                }
+                                if(v.Llegada!=null){
+                                    ate = Funciones.Str2Fec( v.Llegada.ToString("dd/MM/yyyy") + " " + v.Aterrizaje );
+                                }
+                                TimeSpan tv=ate-des;
+                                tvl+=tv.TotalMinutes;
+                            
+                                <tr>
+                                    <td>@v.Trip</td>
+                                    <td>@v.Matricula</td>
+                                    <td>@v.Pierna</td>
+                                    <td>@v.Origen</td>
+                                    <td>@v.Destino</td>
+                                    <td>@v.Despegue</td>
+                                    <td>@v.Aterrizaje</td>
+                                    <td>@tv</td>
+                                    <td>@v.CombustibleCargado</td>
+                                    <td>@v.PesoCarga</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+                TimeSpan tiempo=new TimeSpan(0, Int32.Parse(tvl.ToString()) ,0);
+                totales[0] += System.Convert.ToDouble(dkm==null?0:dkm);
+                totales[1] += tiempo.TotalMinutes;
+                totales[2] += nf;
+                totales[3] += ntp;
+                totales[4] += ((ntp*70)+(ntp*10));
+                totales[5] += pec;
+                totales[6] += (ntp* System.Convert.ToDouble(dkm==null?0:dkm) );
+                totales[7] += (((ntp*70)+(ntp*10))* System.Convert.ToDouble(dkm==null?0:dkm) );
+                totales[8] += (pec* System.Convert.ToDouble(dkm==null?0:dkm) );
+                totales[9] += (((ntp*70)+(ntp*10))* System.Convert.ToDouble(dkm==null?0:dkm) );
+                totales[10] += cCar;
+                totales[13] += (cCar*3.15);
+                totales[16] += (cCar*3.15);
+
+            <tr id="res_@conR">
+                <td>@tra.Origen</td>
+                <td>@tra.Destino</td>
+                <td>@((tra.nain==2)?"N":"I")</td>
+                <td>@cap</td>
+                <td>Motor</td>
+                <td @((dkm<=0 || dkm==null)?"style=background-color:red;":"")>@(dkm==null?0:dkm)</td>
+                <td @(tiempo.TotalMinutes<0?"style=background-color:red;":"")>@tiempo</td>
+                <td>@nf</td>
+                <td>@ntp</td>
+                <td>@((ntp*70)+(ntp*10))</td>
+                <td>@pec</td>
+                <td>@(ntp*dkm)</td>
+                <td>@(((ntp*70)+(ntp*10))*dkm)</td>
+                <td>@(pec*dkm)</td>
+                <td>@( (((ntp*70)+(ntp*10))*dkm) + ( (pec*dkm)==null?0:(pec*dkm)) )</td>
+                <td>@cCar</td>
+                <td>0.0</td>
+                <td>0.0</td>
+                <td>@(cCar*3.15)</td>
+                <td>0.0</td>
+                <td>0.0</td>
+                <td>@(cCar*3.15)</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="bg-secondary">
+                    
+            <tr id="res_@conR">
+                <td colspan="5">Totales de todos los vuelos nacioanles</td>
+
+                <td>@totales[0].ToString("###,###,###.####")</td>
+                <td>@( new TimeSpan(0, Convert.ToInt32(totales[1]) ,0) )</td>
+                <td>@totales[2].ToString("###,###,###,###.####")</td>
+                <td>@totales[3].ToString("###,###,###,###.####")</td>
+                <td>@totales[4].ToString("###,###,###,###.####")</td>
+                <td>@totales[5].ToString("###,###,###,###.####")</td>
+                <td>@totales[6].ToString("###,###,###,###.####")</td>
+                <td>@totales[7].ToString("###,###,###,###.####")</td>
+                <td>@totales[8].ToString("###,###,###,###.####")</td>
+                <td>@totales[9].ToString("###,###,###,###.####")</td>
+                <td>@totales[10].ToString("###,###,###,###.####")</td>
+                <td>0.0</td>
+                <td>0.0</td>
+                <td>@totales[13]</td>
+                <td>0.0</td>
+                <td>0.0</td>
+                <td>@totales[16]</td>
+            </tr>
+    </tfoot>
+</table>

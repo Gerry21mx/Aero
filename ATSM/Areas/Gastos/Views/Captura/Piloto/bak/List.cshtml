@@ -1,0 +1,161 @@
+﻿@using ATSM.Cuentas;
+@{ 
+	var saldos = Saldo.GetSaldos();
+	var divisas = Moneda.GetMonedas();
+}
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offTrips" aria-labelledby="offTripsLabel">
+	<div class="offcanvas-header">
+		<h5 class="offcanvas-title" id="offTripsLabel">Trips Pendientes</h5>
+		@*<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>*@
+	</div>
+	<div class="offcanvas-body">
+		<table id="tVuelos" class="table table-sm table-striped table-hover table-responsive-lg w-100 compact">
+			<thead class="thead-dark">
+				<tr>
+					<th class="text-center">Trip</th>
+					<th class="text-center">Fecha</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</div>
+
+<div class="card mt-0 mt-md-2" id="cardVueloS">
+	<div class="card-body bg-light">
+		<div class="card-text" id="flgInfo">
+			<div class="row justify-content-around">
+				<div class="col-12 col-sm-4 col-lg-2">
+					<b>Trip</b> <span id="txtTrip" class="text-primary"></span>
+				</div>
+				<div class="col-12 col-sm-4 col-md-3">
+					<b>Fecha</b> <span id="txtFecha" class="text-primary"></span>
+				</div>
+				<div class="col-12 col-sm-4 col-md-3">
+					<b>Matricula</b> <span id="txtMatricula" class="text-primary"></span>
+				</div>
+				<div class="col-12 col-sm-4">
+					<b>Capitan</b> <span id="txtCapitan" class="text-primary text-capitalize"></span>
+				</div>
+				<div class="col-12 col-sm-4">
+					<b>Copiloto</b> <span id="txtCopiloto" class="text-primary text-capitalize"></span>
+				</div>
+				<div class="col-12 col-sm-4">
+					<b>Ruta</b> <span id="txtRuta" class="text-primary"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<hr />
+<div class="row justify-content-around">
+	<div class="col-12 mt-1 mt-md-2">
+		<table class="table table-sm table-striped table-bordered table-responsive-lg w-100">
+            <thead class="thead table-success text-center">
+                <tr>
+                    <th rowspan="2" class="align-middle">RESUMEN DE GASTOS</th>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						<th colspan="@divisas.Count">@sal.Nombre</th>
+					}
+                </tr>
+                <tr>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<th>@mon.Codigo</th>
+						}
+					}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sin Comprobante</td>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<td id="s_@(sal.Id)_@(mon.Id)"></td>
+						}
+					}
+                </tr>
+                <tr>
+                    <td>Operacion de Vuelo</td>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<td id="s_@(sal.Id)_@(mon.Id)"></td>
+						}
+					}
+                </tr>
+                <tr>
+                    <td>Viaticos</td>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<td id="s_@(sal.Id)_@(mon.Id)"></td>
+						}
+					}
+                </tr>
+            </tbody>
+            <tfoot class="bg-dark text-white">
+                <tr>
+                    <td rowspan="2">TOTALES</td>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<th id="t_@(sal.Id)_@(mon.Id)"></th>
+						}
+					}
+                </tr>
+            </tfoot>
+        </table>
+	</div>
+	<div class="col-12 mt-1 mt-md-2">
+		<table class="table table-sm table-striped table-bordered table-responsive-lg w-100">
+            <thead class="thead table-danger text-center">
+                <tr>
+                    <th rowspan="2" class="align-middle">Resumen de Combustibles</th>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible != true) { continue; }
+						<th colspan="@(divisas.Count+1)">@sal.Nombre</th>
+					}
+                </tr>
+                <tr>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible != true) { continue; }
+						<th>Litros</th>
+						foreach(var mon in divisas) {
+							<th>@mon.Codigo</th>
+						}
+					}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Combustible</td>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible != true) { continue; }
+						<td id="l_@(sal.Id)"></td>
+						foreach(var mon in divisas) {
+							<td id="s_@(sal.Id)_@(mon.Id)"></td>
+						}
+					}
+                </tr>
+            </tbody>
+            <tfoot class="bg-dark text-white">
+                <tr>
+                    <td rowspan="2">TOTALES</td>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible != true) { continue; }
+						foreach(var mon in divisas) {
+							<th id="t_@(sal.Id)_@(mon.Id)"></th>
+						}
+					}
+                </tr>
+            </tfoot>
+        </table>
+	</div>
+	<div class="col-12 col-md-6 mt-1 mt-md-2">
+		<textarea id="Observaciones" rows="3" class="form-control form-control-sm w-100" placeholder="Observaciones" style="resize:none;"></textarea>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row justify-content-between pt-1 pt-md-2 g-1">
+	<div class="col-6">
+        @Campos.GetInput("Fecha",true,10,"","fec text-center", "date")
+    </div>
+	<div class="col-4">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Tipo" id="Tipo" value="Llamada">
+            <label class="form-check-label" for="flexRadioDefault1">LLamada</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Tipo" value="Visita" checked>
+            <label class="form-check-label" for="flexRadioDefault2">Visita</label>
+        </div>
+    </div>
+</div>
+<div class="row pt-1 pt-md-2 g-1">
+	<div class="col-12">
+		<textarea id="Comentarios" maxlength="500" cols="6" rows="3" class="form-control form-control-sm w-100" placeholder="Comentarios"></textarea>
+    </div>
+</div>
+<div class="row justify-content-center pt-1 pt-md-2 g-1">
+    <div class="col-4">
+        @Campos.BtnCle("cleAct")
+    </div>
+    <div class="col-4">
+        @Campos.BtnDel("delAct", "dContactCli", false)
+    </div>
+    <div class="col-4">
+        @Campos.BtnReg("regAct", "cContactCli", false)
+    </div>
+</div>
+<hr />
+<div class="pt-2 pt-md-3 sz-font-725">
+	<table id="tActividad" class="table table-sm table-condensed compact table-hover table-striped w-100 table-responsive">
+		<thead class="table-dark">
+			<tr>
+				<th>Fecha</th>
+				<th>Actividad</th>
+				<th>Comentarios</th>
+			</tr>
+        </thead>
+    </table>
+</div>

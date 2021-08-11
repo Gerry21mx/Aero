@@ -1,0 +1,54 @@
+﻿@model ATSM.Seguimiento.Aeropuerto
+    @{ 
+		Layout = null;
+    }
+
+<div class="modal" tabindex="-1" role="dialog" id="imAeropuerto">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Aeropuerto <span class="text-primary">@Html.DisplayFor(model => model.Nombre)</span></h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <b>ICAO: </b> <span class="text-primary">@Html.DisplayFor(model => model.ICAO)</span>
+              </div>
+			  <div class="col-6">
+				  <b>IATA: </b> <span class="text-primary">@Html.DisplayFor(model => model.IATA)</span>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <b>Pais: </b> <span class="text-primary">@Html.DisplayFor(model => model.Pais)</span>
+              </div>
+			  <div class="col-6">
+				  <b>Estado: </b> <span class="text-primary">@Html.DisplayFor(model => model.Estado)</span>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <b>Abre: </b> <span class="text-primary">@Html.DisplayFor(model => model.Abre)</span>
+              </div>
+			  <div class="col-6">
+				  <b>Cierra: </b> <span class="text-primary">@Html.DisplayFor(model => model.Cierra)</span>
+              </div>
+          </div>
+		  <div class="row justify-content-start">
+			  <div class="col-6 col-md-4">
+				  <b>latitud: </b> <span class="text-primary">@Html.DisplayFor(model => model.Latitud)</span>
+              </div>
+			  <div class="col-6 col-md-4">
+				  <b>Longitud: </b> <span class="text-primary">@Html.DisplayFor(model => model.Longitud)</span>
+              </div>
+			  <div class="col-6 col-md-4">
+				  <b>Elevacion: </b> <span class="text-primary">@Html.DisplayFor(model => model.Elevacion)</span>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

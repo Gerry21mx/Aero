@@ -1,0 +1,77 @@
+﻿@using System.Data.SqlClient
+@{
+    
+}
+<div class="row mt-0 mt-md-2">
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2 order-0">
+		@Campos.GetInput("Codigo",true,10,"Codigo","text-center")
+	</div>
+	<div class="col-12 col-md-3 mt-1 mt-md-2 order-3 order-md-2">
+		@Campos.GetInput("Descripcion",false,100,"Descripcion")
+	</div>
+	<div class="col-6 col-md-3 mt-1 mt-md-2 order-4 order-md-3">
+		@Campos.SelectTipoVuelo()
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2 order-5 order-md-4">
+		@Campos.GetInput("NoVuelo",true,100,"No. Vuelo","num text-end")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 align-self-center order-1 order-md-5">
+		@Campos.Switch()
+	</div>
+</div>
+<div class="row justify-content-center mt-0 mt-md-4">
+	<div class="col-12 col-md-8">
+		<div class="shadow-sm p-1 mb-2 bg-light rounded font-weight-bold text-center">Tramos</div>
+	</div>
+</div>
+<div class="row justify-content-center mt-0 mt-md-2" id="cTramo">
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2 align-self-start">
+		@Campos.SelectAeropuerto(false,"IdOrigen","num","Origen", true)
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.SelectAeropuerto(false,"IdDestino","num","Destino", true)
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("ItinerarioSalida",true,0,"Salida","text-center","time")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("ItinerarioLlegada",true,0,"Llegada","text-center","time")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+	@Campos.GetInput("pNoVuelo",true,100,"No. Vuelo","num text-end")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		<button id="addTra" class="btn btn-sm btn-block btn-success"><i class="fas fa-route"></i></button>
+	</div>
+</div>
+<hr />
+<div class="row justify-content-center mt-0 mt-md-2">
+	<div class="col-12 col-md-10 sz-font-75">
+		<table id="lisTramos" class="table table-sm table-hover table-striped table-responsive-md compact w-100">
+			<caption>Tramos de Ruta</caption>
+			<thead class="thead-dark">
+				<tr>
+					<th class="text-center">#</th>
+					<th>Origen</th>
+					<th>Destino</th>
+					<th>Salida</th>
+					<th>Llegada</th>
+					<th>No. Vuelo</th>
+					<th></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</div>
+<hr />
+<div class="row justify-content-center mt-0 mt-md-2">
+	<div class="col-4">
+		@Campos.BtnCle()
+	</div>
+	<div class="col-4">
+		@Campos.BtnDel("del","dDemora")
+	</div>
+	<div class="col-4">
+		@Campos.BtnReg("reg","cDemora")
+	</div>
+</div>

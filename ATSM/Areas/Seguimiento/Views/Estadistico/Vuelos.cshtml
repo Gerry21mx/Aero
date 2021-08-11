@@ -1,0 +1,81 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Grafica de Vuelos</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/plugins")
+    @Scripts.Render("~/bundles/base")
+	@Scripts.Render("https://www.gstatic.com/charts/loader.js")
+	@Scripts.Render("~/Areas/Seguimiento/cjs/Vuelo.js")
+
+</head>
+<body>
+<script type="text/javascript">
+	$(() =>{
+		google.charts.load('current', { 'packages': ['corechart'] });
+		google.charts.setOnLoadCallback(gVuelos);
+		$('#vMes').height($(window).height() - 75);
+	});
+	function gVuelos() {
+		var filtro = {
+			idaeronave: @ViewBag.idaeronave,
+			desde: '@ViewBag.desde',
+			hasta: '@ViewBag.hasta',
+			idcapacidad: @ViewBag.idcapacidad,
+			tipo_reporte: false,
+		}
+		Vuelo.reporte(filtro).then((data) => {
+			var vm = [['Mes', 'Vuelos', { role: 'style' }, { role: 'annotation' }]];
+			data.Data.forEach((vlo, idx) => {
+				let fec = moment(vlo.Salida);
+				let m = fec.format('MMMM');
+				let ind = vm.findIndex(e => e[0] === m);
+				if (ind > -1) {
+					vm[ind][1]++;
+					vm[ind][3] = `${vm[ind][1]}`;
+				} else {
+					vm.push([m, 1, `color: ${gColor()}`, '1']);
+				}
+			});
+			var data = google.visualization.arrayToDataTable(vm);
+			var view = new google.visualization.DataView(data);
+			view.setColumns([0, 1,
+				{
+					calc: "stringify",
+					sourceColumn: 1,
+					type: "string",
+					role: "annotation"
+				},
+				2]);
+			var options = {
+				title: 'Vuelos Por Mes',
+				is3D: true,
+				bar: { groupWidth: "85%" },
+				legend: { position: "none" }
+			};
+			chartVuelos = new google.visualization.ColumnChart(document.getElementById('vMes'));
+			chartVuelos.draw(view, options);
+		});
+	}
+	function gColor() {
+		var simbolos, color;
+		simbolos = "0123456789ABCDEF";
+		color = "#";
+		for (var i = 0; i < 6; i++) {
+			color = color + simbolos[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+</script>
+
+<div id="vMes" style="width:100%; height:100%;"></div>
+</body>
+</html>

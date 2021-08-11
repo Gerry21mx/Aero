@@ -1,0 +1,41 @@
+﻿@{
+    
+}
+<div class="alert alert-dark" role="alert">List of instructions for the task</div>
+<div class="row justify-content-around mt-0 mt-md-3">
+	<div class="col-3 col-md-2">
+		@Campos.GetInput("No", true, 3, "", "text-right num", "text", "", true, true, "No.")
+	</div>
+	<div class="col-9 col-md-4">
+		@Campos.GetInput("tit", true, 200, "", "", "text", "", true, true, "Title")
+	</div>
+	<div class="col-12 col-md-2">
+		@Campos.Switch("tec", null, null, "Technical")
+	</div>
+	<div class="col-12 col-md-2">
+		@Campos.Switch("ins", null, null, "Inspector")
+	</div>
+	<div class="col-12 col-md-2">
+		<button id="addI" class="btn btn-sm btn-block btn-outline-dark"><i class="fas fa-plus-circle"></i> Add</button>
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-3">
+	<div class="col-12">
+		<textarea name="ckeIns" id="ckeIns"></textarea>
+	</div>
+</div>
+<hr />
+<div class="row">
+	<div class="col-12">
+		<table id="tab3" class="table table-sm compact table-responsive-md table-bordered rounded w-100">
+			<thead class="thead-dark">
+				<tr>
+					<th>No</th>
+					<th>Instruccion</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="instCont"></tbody>
+		</table>
+	</div>
+</div>

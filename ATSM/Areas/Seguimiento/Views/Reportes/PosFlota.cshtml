@@ -1,0 +1,58 @@
+﻿@{ 
+	ViewBag.Title = "Posicionamiento de Flota";
+	var aviones = Aeronave.GetAeronaves();
+}
+<div class="container pt-3">
+	<div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>Posicionamiento de Flota</h3></div>
+
+	<table class="table table-sm table-responsive-md table-striped table-bordered table-hover w-100">
+		<thead class="thead-dark">
+			<tr class="text-center">
+				<th class="align-middle">Matricula</th>
+				<th>Destino (Posicion)</th>
+				<th class="align-middle">Llegada</th>
+				<th>Combustible Remanente</th>
+				<th class="align-middle">Modelo</th>
+				<th class="align-middle">Trip</th>
+				<th class="align-middle">Comandante</th>
+				<th class="align-middle">P. Oficial</th>
+				<th class="align-middle">Origen</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var avi in aviones)
+			{
+				if (!avi.Estado) {
+					continue;
+				}
+				avi.GetModelo();
+				var cnn = Database.Open("DATA");
+				var ultimo = cnn.QuerySingle($@"SELECT TOP 1 *, dbo.Date_Time2DateTime2(Llegada,Aterrizaje,0) AS FHA, 
+	(SELECT Trip FROM Vuelo WHERE IdVuelo = VueloTramo.IdVuelo) AS Trip, 
+	(SELECT IATA FROM Aeropuerto WHERE IdAeropuerto = IdOrigen) AS Origen, 
+	(SELECT IATA FROM Aeropuerto WHERE IdAeropuerto = IdDestino) AS Destino, 
+	(SELECT Nombre_Personal+' '+Apellidos_Personal FROM GTSM.dbo.Table_Usuarioss WHERE id_Personal=VueloTramo.IdCapitan) AS NOP,
+	(SELECT Nombre_Personal+' '+Apellidos_Personal FROM GTSM.dbo.Table_Usuarioss WHERE id_Personal=VueloTramo.IdCopiloto) AS NOC 
+	FROM VueloTramo
+			WHERE Llegada IS NOT NULL AND IdAeronave = {avi.IdAeronave}
+				ORDER BY dbo.Date_Time2DateTime2(Llegada,Aterrizaje,0) DESC");
+				cnn.Close();
+			<tr @(ultimo == null?"class=bg-danger":"")>
+				<td class="bg-info text-center font-weight-bold align-middle">@avi.Matricula</td>
+				<td class="bg-info text-center font-weight-bold align-middle">@(ultimo != null ? ultimo.Destino : "")</td>
+				<td class="bg-info text-center font-weight-bold">@(ultimo != null ? ultimo.FHA : "")</td>
+				<td class="bg-info text-end font-weight-bold align-middle num">@(ultimo != null ? ultimo.CombustibleRemanente : "")</td>
+				<td class=" align-middle">@avi.Modelo.Modelo</td>
+				<td nowrap class=" align-middle">@(ultimo != null ? ultimo.Trip + "-" + ultimo.Pierna: "")</td>
+				<td>@(ultimo != null ? ultimo.NOP : "")</td>
+				<td>@(ultimo != null ? ultimo.NOC : "")</td>
+				<td class="text-center align-middle">@(ultimo != null ? ultimo.Origen : "")</td>
+			</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Seguimiento/Views/Reportes/posflota.js")
+}

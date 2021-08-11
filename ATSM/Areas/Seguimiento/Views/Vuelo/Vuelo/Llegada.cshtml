@@ -1,0 +1,99 @@
+﻿@{
+    
+}
+<div class="row justify-content-around">
+	<div class="col-12 col-md-10">
+		<div class="card mt-0 mt-md-2" id="cardVueloL">
+			<div class="card-body bg-light" >
+				<div class="card-text">
+					<div class="row justify-content-around">
+						<div class="col-6 col-md-3">
+							Trip <span id="txtTrip" class="text-primary"></span>
+						</div>
+						<div class="col-6 col-md-4">
+							Pierna <span id="txtPierna" class="text-primary"></span>
+						</div>
+						<div class="col-12 col-md-5 text-center">
+							Salida <span id="txtFecha" class="text-primary"></span>
+						</div>
+					</div>
+					<div class="row justify-content-around">
+						<div class="col-6 col-md-3">
+							Matricula: <span id="txtMatricula" class="text-primary"></span>
+						</div>
+						<div class="col-12 col-md-3">
+							Empresa: <span id="txtEmpresa" class="text-primary"></span>
+						</div>
+						<div class="col-6 col-md-3">
+							Origen: <span id="txtOrigen" class="text-primary"></span>
+						</div>
+						<div class="col-6 col-md-3">
+							Codigo: <span id="txtCodigo" class="text-primary"></span>
+						</div>
+						<div class="col-6 col-md-3">
+							Tipo: <span id="txtTipo" class="text-primary"></span>
+						</div>
+						<div class="col-6 col-md-3">
+							Numero: <span id="txtNo" class="text-primary"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-10">
+		<h3 class="text-muted"><small>Vuelo</small></h3><hr class="p-0 m-0" />
+	</div>
+</div>
+<div class="row justify-content-around">
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		<div class="input-group input-group-sm">
+			<span class="input-group-text">Destino</span>
+			<input type="text" id="Destino" maxlength="3" list="listApto" class="form-control form-control-sm text-center"/>
+		</div>
+	</div>
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("CombustibleRemanente",true,12,"","text-end num","text","",true,false,"<i class='fas fa-gas-pump'></i>&nbsp;Remanente")
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-10">
+		<h3 class="text-muted"><small>Llegada</small></h3><hr  class="p-0 m-0"/>
+	</div>
+</div>
+<div class="row justify-content-around">
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("Llegada",true,10,"","text-end fec","date","",true,false,"<i class='fas fa-calendar-alt'></i>")
+	</div>
+<div class="w-100 mt-0 mt-md-2 d-sm-block d-md-none"></div>
+	<div class="col-6 col-md-4 mt-1 mt-md-2">
+		@Campos.GetInput("Aterrizaje",true,5,"","text-end","time","",true,false,"<i class='fas fa-plane-arrival'></i>&nbsp;Aterrizaje","00:00","23:59")
+	</div>
+	<div class="col-6 col-md-4 mt-1 mt-md-2">
+		@Campos.GetInput("LlegadaPlataforma",true,5,"","text-end","time","",true,false,"<i class='fas fa-plane'></i>&nbsp;Plataforma","00:00","23:59")
+	</div>
+</div>
+
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-10">
+		<h3 class="text-muted"><small>Observaciones</small></h3><hr  class="p-0 m-0"/>
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-12 col-md-9">
+		<div class="form-group">
+			<textarea class="form-control form-control-sm" id="ObservacionesLlegada" placeholder="Observaciones Llegada" rows="3" style="resize:none;min-width: 100%;"></textarea>
+		</div>
+	</div>
+</div>
+<hr />
+<div class="row justify-content-center mt-0 mt-md-2 mb-3">
+	<div class="col-4">
+		@Campos.BtnCle("cleL")
+	</div>
+	<div class="col-4">
+		@Campos.BtnReg("regL","cVuelo")
+	</div>
+</div>

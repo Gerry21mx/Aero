@@ -1,0 +1,45 @@
+﻿@using System.Data.SqlClient
+@{
+    
+}
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-6 mt-1 mt-md-2">
+		@Campos.GetInput("Codigo",true,10,"Codigo")
+	</div>
+	<div class="col-6 align-self-center">
+		@Campos.Switch()
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-12 mt-1 mt-md-2">
+		<div class="input-group input-group-sm">
+			<div class="input-group-prepend">
+				<label class="input-group-text" for="Clasificacion">Clasificacion</label>
+			</div>
+			<select id="Clasificacion" class="custom-select custom-select-sm">
+				<option value="" selected>...</option>
+				@foreach(var cla in ViewBag.Clasificacion) {
+					<option value="@cla.Clasificacion">@cla.Clasificacion</option>
+				}
+			</select>
+		</div>
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-12 mt-1 mt-md-2">
+		@Campos.GetInput("Descripcion",true,100,"Descripcion")
+	</div>
+</div>
+<hr />
+<div class="row justify-content-center mt-0 mt-md-2">
+	<div class="col-4">
+		@Campos.BtnCle()
+	</div>
+	<div class="col-4">
+		@Campos.BtnDel("del","dDemora")
+	</div>
+	<div class="col-4">
+		@Campos.BtnReg("reg","cDemora")
+	</div>
+</div>
+<hr />

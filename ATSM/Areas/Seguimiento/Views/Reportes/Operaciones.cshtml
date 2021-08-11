@@ -1,0 +1,108 @@
+﻿@{ 
+	ViewBag.Title = "Reporte de Operaciones";
+	var x = ModeloAeronave.GetModeloAeronaves();
+}
+
+<div class="container pt-3">
+	<div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>Reporte de Operaciones</h3></div>
+    <div class="row justify-content-around">
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.GetInput("Trip", true, 12)
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectAircraft(true,"IdAeronave","num")
+		</div>
+
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.GetInput("Desde",true,10,"","text-end fec","date","",true,false,"<i class='fas fa-calendar-alt'></i>")
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.GetInput("Hasta",true,10,"","text-end fec","date","",true,false,"<i class='fas fa-calendar-alt'></i>")
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectAeropuerto(true, "IdOrigen", "num", "Origen")
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectAeropuerto(true, "IdDestino", "num", "Destino")
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectTipoVuelo(false,"IdTipoVuelo","num","Tipo de Vuelo")
+		</div>
+		<div class="col-6 col-md-3 mt-1 mt-md-2">
+			@Campos.SelectDemora(false,"IdDemora","num","Demora")
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectRuta(false,"IdRuta","num",false,"Ruta")
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectCapacidad(false,"IdCapacidad","num","Capacidad")
+		</div>
+		<div class="col-4 col-md-2 mt-1 mt-md-2 text-center">
+			<div class="btn-group btn-group-sm" role="group" aria-label="Reporte">
+				<button type="button" class="btn btn-sm btn-primary" id="res">Resumen</button>
+				<button type="button" class="btn btn-sm btn-success" id="des">Desglose</button>
+			</div>
+		</div>
+	</div>
+</div>
+<hr />
+<div class="row">
+	<div class="col sz-font-8 ml-2 mr-2">
+		<table id="tRepo" class="table table-sm table-hover table-striped table-bordered table-responsive-lg compact w-100">
+			<thead class="thead thead-dark">
+				<tr>
+					<th>MAT</th>
+					<th>Trip</th>
+					<th>Pierna</th>
+					<th>ORI</th>
+					<th>DES</th>
+					<th>Salida</th>
+					<th>Llegada</th>
+					<th>Calzo</th>
+					<th>Vuelo</th>
+					<th>PZS Carga</th>
+					<th>Peso Carga</th>
+					<th><i class="fas fa-gas-pump"></i> Cargado (LTS)</th>
+					<th><i class="fas fa-gas-pump"></i> Rampa (LBS)</th>
+					<th><i class="fas fa-gas-pump"></i> Remanente (LBS)</th>
+					<th><i class="fas fa-gas-pump"></i> Gastado (LBS)</th>
+					<th>Capitan</th>
+					<th>Ruta</th>
+					<th>Tipo</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+			<tfoot class="bg-secondary">
+				<tr>
+					<th colspan="7" class="text-end" style="text-align: right !important;">Subtotales de Pagina</th>
+					<th style="text-align: right !important;"></th>
+					<th style="text-align: right !important;"></th>
+					<th style="text-align: right !important;"></th>
+					<th style="text-align: right !important;"></th>
+					<th style="text-align: right !important;"></th>
+					<th style="text-align: right !important;"></th>
+					<th style="text-align: right !important;"></th>
+					<th style="text-align: right !important;"></th>
+					<th colspan="3"></th>
+				</tr>
+				<tr class="text-end">
+					<th colspan="7">Totales</th>
+					<th id="tCz"></th>
+					<th id="tVl"></th>
+					<th id="tPzc"></th>
+					<th id="tPsc"></th>
+					<th id="tCc"></th>
+					<th id="tCra"></th>
+					<th id="tCre"></th>
+					<th id="tCga"></th>
+					<th colspan="3"></th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/cjs/vue/vuelo.js")
+    @Scripts.Render("~/Areas/Seguimiento/Views/Reportes/operaciones.js")
+}

@@ -1,0 +1,22 @@
+﻿@{
+	ViewBag.Title = "Familias";
+}
+
+<div class="container mt-0 mt-md-2">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>Familias</h3></div>
+
+    <div class="row justify-content-around">
+	    <div class="col-12 col-md-4">
+            @RenderPage("~/Areas/Ingenieria/Views/Catalogos/Familias/Alta.cshtml")
+        </div>
+	    <div class="col-12 col-md-8 sz-font-75">
+            @RenderPage("~/Areas/Ingenieria/Views/Catalogos/Familias/List.cshtml")
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Family.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/Catalogos/Familias/aplication.js")
+}

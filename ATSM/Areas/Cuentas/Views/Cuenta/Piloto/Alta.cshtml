@@ -1,0 +1,62 @@
+﻿<div class="row justify-content-around">
+	<div class="w-100 text-center">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+				<b class="leyenda">Cuenta</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+	<div class="col-12 col-sm-6 col-md-3 mt-1 mt-md-2">
+		@Campos.SelectCrews(true,"IdCrew","num","Piloto",false,false,1)
+	</div>
+	<div class="col-12 col-sm-6 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("Banco",true,50)
+	</div>
+	<div class="col-12 col-sm-6 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("Cuenta",true,30)
+	</div>
+	<div class="col-12 col-sm-6 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("CLABE",true,30)
+	</div>
+	<div class="col-12 col-sm-6 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("AMEX",true,30)
+	</div>
+	<div class="col-12 col-sm-6 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("Celular",true,30)
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 mt-1 mt-md-2">
+		@Campos.GetInput("Correo",true,100,"mail@dominio.com","","email","",true,false,"*@")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.Switch()
+	</div>
+	@*DIVISOR*@
+	<div class="w-100 text-center">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+				<b class="leyenda">Acceso</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 mt-1 mt-md-2">
+		@Campos.GetInput("Nickname", true, 56, "Usuario","text-center")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 mt-1 mt-md-2">
+		@Campos.GetInput("Password", false, 30, "Contraseña", "", "password","text-center")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 mt-1 mt-md-2">
+		@Campos.GetInput("Password2", false, 30, "Confirmar Contraseña", "", "password","text-center")
+	</div>
+</div>
+<hr />
+<div class="row justify-content-around">
+	<div class="col-12 col-sm-6 col-md-3 mt-1 mt-md-2">
+		@Campos.BtnCle()
+	</div>
+	<div class="col-12 col-sm-6 col-md-3 mt-1 mt-md-2">
+		@Campos.BtnReg("reg","cCtaPiloto")
+	</div>
+	<div class="col-12 col-sm-6 col-md-3 mt-1 mt-md-2">
+		@Campos.BtnDel("del","dCtaPiloto")
+	</div>
+</div>

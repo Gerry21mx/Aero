@@ -1,0 +1,46 @@
+﻿@{ 
+	ViewBag.Title = "Items";
+}
+<div class="container">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-light rounded"><h1>@ViewBag.Title</h1></div>
+	<div class="row justify-content-around">
+        @if (Funciones.VRoles("mIngItemsComponentes").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="Componente" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Componente</h5>
+						    <img src="~/img/battery.svg" alt="Componente" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngItemsDirectivas").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="ADSB" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">AD's/SB's</h5>
+						    <img src="~/img/rosette-law.svg" alt="AD's/SB's" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngItemsServicios").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="Servicio" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Servicio</h5>
+						    <img src="~/img/list.svg" alt="Servicio" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+	</div>
+</div>
+
+

@@ -1,0 +1,87 @@
+﻿@model ATSM.Ingenieria.ComponenteMayor
+@{ 
+	var familias = Family.GetFamilys();
+}
+<div class="row justify-content-around">
+	@*<div class="col-12 col-md-6">
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title" id="tCap">Capacidad</h5>
+				<h6 class="card-subtitle mb-2 text-muted" id="tMod">Modelo</h6>
+				<p class="card-text"></p>
+				<a href="#" class="card-link">Card link</a>
+				<a href="#" class="card-link">Another link</a>
+			</div>
+		</div>
+	</div>*@
+	<div class="col-12">
+		<div id="Arbol" class="py-3 px-3">
+			<ul>
+				@foreach(var cap in Model.Capacidades) {
+					if (cap.Capacidad == null) {
+						cap.SetCapacidad();
+					}
+					cap.Capacidad.GetModelos();
+					
+					<li id="n_@cap.IdCapacidad" data-idcapacidad="@cap.IdCapacidad" data-idmodelo="0" data-idtipo="0" data-idfamilia="0" data-iditemmenor="0">@cap.Capacidad.Nombre
+						<ul>
+							@foreach(var mod in cap.Capacidad.Modelos) {
+								if (mod.IdComponenteMayor != Model.Id) {
+									continue;
+								}
+								List<ComponenteMenor> menores = ComponenteMenor.GetComponentes(Model.Id, mod.Id);
+								<li id="n_@(cap.IdCapacidad)_@(mod.Id)" data-idcapacidad="@cap.IdCapacidad" data-idmodelo="@mod.Id" data-idtipo="0" data-idfamilia="0" data-iditemmenor="0">@mod.Nombre
+									<ul>
+										@for(int i=1; i<=3; i++) {
+											TipoMenor tipo = new TipoMenor(i);
+											<li id="n_@(cap.IdCapacidad)_@(mod.Id)_@(tipo.Id)" data-idcapacidad="@cap.IdCapacidad" data-idmodelo="@mod.Id" data-idtipo="@i" data-idfamilia="0" data-iditemmenor="0">@tipo.Nombre
+												<ul>
+													@foreach(var fam in familias) {
+														if (i == 1 && fam.TM01 != true) {
+															continue;
+														}
+														if (i == 2 && fam.TM02 != true) {
+															continue;
+														}
+														if (i == 3 && fam.TM03 != true) {
+															continue;
+														}
+														<li id="n_@(cap.IdCapacidad)_@(mod.Id)_@(tipo.Id)_@(fam.Id)" data-idcapacidad="@cap.IdCapacidad" data-idmodelo="@mod.Id" data-idtipo="@i" idfamilia="@fam.Id" data-iditemmenor="0">@fam.Nombre
+															<ul>
+																@foreach(var componente in menores) {
+																	if (componente.IdFamily != fam.Id) { continue;}
+																	var hijos = ComponenteMenor.GetVinculados(componente.Id);
+																	if(componente.NoPadres>0) { continue; }
+																	<li id="n_@(cap.IdCapacidad)_@(mod.Id)_@(tipo.Id)_@(componente.Id)" data-idcapacidad="@cap.IdCapacidad" data-idmodelo="@mod.Id" data-idtipo="@i" data-idfamilia="@fam.Id" data-iditemmenor="@componente.Id">
+																		<span>
+																			<b>@componente.Part</b> <small>@(componente.Description.Length>75?componente.Description.Substring(0,70)+"...": componente.Description)</small>
+																		</span>
+																		@if (hijos.Count > 0) {
+																			<ul>
+																				@foreach(var hijo in hijos) {
+																					<li id="n_@(cap.IdCapacidad)_@(mod.Id)_@(tipo.Id)_@(componente.Id)_@(hijo.Id)" data-idcapacidad="@cap.IdCapacidad" data-idmodelo="@mod.Id" data-idtipo="@i" data-idfamilia="@fam.Id" data-iditemmenor="@hijo.Id">
+																						<span>
+																							<b>@hijo.Part</b> <small>@(hijo.Description.Length>75?hijo.Description.Substring(0,70)+"...": hijo.Description)</small>
+																						</span>
+																					</li>
+																				}
+																			</ul>
+																		}
+																	</li>
+																}
+															</ul>
+														</li>
+													}
+												</ul>
+											</li>
+										}
+									</ul>
+								</li>
+							}
+						</ul>
+					</li>
+				}
+			</ul>
+		</div>
+	</div>
+</div>

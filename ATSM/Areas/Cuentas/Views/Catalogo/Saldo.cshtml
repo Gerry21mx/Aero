@@ -1,0 +1,51 @@
+﻿@{ 
+	ViewBag.Title = "Saldos";
+}
+<div class="container mt-0 mt-md-2">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>Saldos</h3></div>
+	<div class="row mt-3">
+		<div class="col-12 col-md-6">
+			<div class="row justify-content-around">
+				<div class="col-5 mt-1 mt-md-2">
+					@Campos.GetInput("Codigo",true,10,"Codigo")
+				</div>
+				<div class="col-7 mt-1 mt-md-2">
+					@Campos.GetInput("Nombre",true,50,"Nombre")
+				</div>
+				<div class="col-6 mt-1 mt-md-2">
+					@Campos.Switch("Combustible",null,null,"Combustible")
+				</div>
+			</div>
+			<hr />
+			<div class="row justify-content-around">
+				<div class="col-4 mt-1 mt-md-2">
+					@Campos.BtnCle()
+				</div>
+				<div class="col-4 mt-1 mt-md-2">
+					@Campos.BtnReg("reg","aSaldo")
+				</div>
+				<div class="col-4 mt-1 mt-md-2">
+					@Campos.BtnDel("del","dSaldo")
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-md-6 sz-font-75">
+			<table id="tabla" class="table table-sm table-striped table-hover table-responsive-lg compact">
+				<thead class="thead-blue">
+					<tr>
+						<th>Id</th>
+						<th>Codigo</th>
+						<th>Nombre</th>
+						<th>Combustible</th>
+						<th></th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Cuentas/cjs/Saldo.js")
+    @Scripts.Render("~/Areas/Cuentas/Views/Catalogo/saldo.js")
+}

@@ -1,0 +1,76 @@
+﻿@model ATSM.Ingenieria.ComponenteMenor
+@{ 
+	Layout = null;
+	//Model.SetFamilia();
+}
+
+<div class="modal fade" tabindex="-1" id="icMenor">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h6 class="modal-title">
+			NP <span class="text-primary">@Html.DisplayFor(model => model.Part)</span><br />
+			<small>
+				<span class="text-muted">@Html.DisplayFor(model => model.Description)</span>
+			</small>
+		</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <b>Family: </b> <span class="text-primary">@Html.DisplayFor(model => model.Familia.Nombre)</span>
+              </div>
+			  <div class="col-6">
+				  <b>ATA: </b> <span class="text-primary">@(Model.ATA1.ToString().PadLeft(2,'0'))-@(Model.ATA2.ToString().PadLeft(2,'0'))-@(Model.ATA3.ToString().PadLeft(2,'0'))</span>
+              </div>
+          </div>
+		  
+		  <div class="table-responsive sz-font-7 mt-3">
+			  <table id="tLim" class="table table-sm compact table-striped table-bordered">
+				<thead class="bg-primary">
+					<tr>
+						<th>Limite</th>
+						<th>Horas</th>
+						<th>Ciclos</th>
+						<th>Dias</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach(var limit in Model.Limites) {
+						<tr>
+							<th>@limit.Limit.Codigo</th>
+							<th>@limit.Horas</th>
+							<th>@limit.Ciclos</th>
+							<th>@limit.Dias</th>
+						</tr>
+					}
+				</tbody>
+			</table>
+          </div>
+		  
+		  <div class="table-responsive sz-font-7 mt-0">
+              <table id="tMod" class="table table-sm compact table-striped table-bordered">
+				<thead class="bg-primary">
+					<tr>
+						<th>Mayor</th>
+						<th>Modelo</th>
+						<th>Cantidad</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach(var modelo in Model.Modelos) {
+						modelo.SetMayor();
+						<tr>
+							<th>@modelo.Mayor.Descripcion</th>
+							<th>@modelo.Modelo.Nombre</th>
+							<th>@modelo.Cantidad</th>
+						</tr>
+					}
+				</tbody>
+			</table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

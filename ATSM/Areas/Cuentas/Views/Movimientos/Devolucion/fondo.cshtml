@@ -1,0 +1,89 @@
+﻿@using ATSM.Cuentas;
+<div class="row justify-content-around">
+	<div class="col-12">
+		<div class="card mt-0 mt-md-2" id="cardVueloS">
+			<div class="card-body bg-light">
+				<div class="card-text">
+					<div class="row justify-content-around">
+						<div class="col-6 col-md-3 order-1 order-md-1">
+							<label class="d-block font-weight-bold">Beneficiario</label>
+							<span id="Nombre" class=" text-capitalize"></span>
+						</div>
+						<div class="col-6 col-md-1 order-1 order-md-1">
+							<label class="d-block font-weight-bold">STN</label> <span id="Estacion" class=""></span>
+						</div>
+						<div class="col-6 col-md-1 order-1 order-md-1">
+							<label class="d-block font-weight-bold">Tipo</label> <span id="TipoNombre" class=""></span>
+						</div>
+						<div class="col-6 col-md-4 col-lg-2 order-1 order-md-1">
+							<label class="d-block font-weight-bold">Banco</label> <span id="Banco" class=""></span>
+						</div>
+						<div class="col-6 col-md-4 col-lg-2 order-1 order-md-1">
+							<label class="d-block font-weight-bold">Cuenta</label> <span id="Cuenta" class=""></span>
+						</div>
+						<div class="col-6 col-md-4 col-lg-2 order-1 order-md-1">
+							<label class="d-block font-weight-bold">CLABE</label> <span id="CLABE" class=""></span>
+						</div>
+						<div class="col-6 col-md-3 order-1 order-md-1">
+							<label class="d-block font-weight-bold">AMEX</label> <span id="AMEX" class=""></span>
+						</div>
+						<div class="col-6 col-md-3 order-1 order-md-1">
+							<label class="d-block font-weight-bold">Celular</label> <span id="Celular" class=""></span>
+						</div>
+						<div class="col-6 col-md-3 order-1 order-md-1">
+							<label class="d-block font-weight-bold">Correo</label> <span id="Correo" class=""></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-12 col-md-8">
+		<div class="row justify-content-around">
+			<div class="col-6 col-md-4 mt-1 mt-md-2">
+				@Campos.GetInput("Fecha", true, 10, "", "text-center", "date", DateTime.Now.ToString("yyyy-MM-dd"))
+			</div>
+			<div class="col-6 col-md-3 mt-1 mt-md-2">
+				@Campos.SelectSaldos(true, "IdSaldo", "num")
+			</div>
+			<div class="col-6 col-md-4 col-lg-2 pl-0 pr-0 mt-1 mt-md-2">
+				@Campos.GetInput("Monto", true, 18, "", "text-end mon","","",true,true,"$")
+			</div>
+			<div class="col-6 col-md-3 mt-1 mt-md-2">
+				@Campos.SelectMonedas(true, "IdMoneda", "num")
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-4">
+		<div class="row justify-content-around">
+			<div class="col-12 mt-1 mt-md-2">
+				<textarea id="Observaciones" placeholder="Observaciones" class="form-control" rows="2" maxlength="500" style="resize: none;"></textarea>
+			</div>
+		</div>
+	</div>
+</div>
+<hr />
+<div class="row justify-content-around">
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		@Campos.BtnCle("clef")
+	</div>
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		@Campos.BtnReg("regf","cDeposito")
+	</div>
+</div>
+<hr />
+<table id="tfon" class="table table-sm table-hover table-striped table-responsive-lg w-100 compact">
+	<thead class="thead-dark">
+		<tr>
+			<th>Fecha</th>
+			<th>Saldo</th>
+			<th>Monto</th>
+			<th>Moneda</th>
+			<th>Observaciones</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+</table>

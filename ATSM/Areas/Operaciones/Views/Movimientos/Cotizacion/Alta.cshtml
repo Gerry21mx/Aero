@@ -1,0 +1,62 @@
+﻿@using System.Data.SqlClient
+@{
+    
+}
+<div class="row justify-content-around mt-1 mt-md-2">
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Cliente",true,4)
+	</div>
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Fecha",true,10,"","fec text-center","date")
+	</div>
+</div>
+<div class="row justify-content-around mt-1 mt-md-2">
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Origen",true,4)
+	</div>
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Destino",true,4)
+	</div>
+</div>
+<div class="row justify-content-around mt-1 mt-md-2">
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Bultos",true,20)
+	</div>
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Medidas",true,50,"")
+	</div>
+</div>
+<div class="row justify-content-around mt-1 mt-md-2">
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Peso",true,20)
+	</div>
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Hazmat",true,50,"")
+	</div>
+</div>
+<div class="row justify-content-around mt-1 mt-md-2">
+	<div class="col-12 col-md-6">
+		@Campos.GetInput("Servicio",true,20)
+	</div>
+	<div class="col-12 col-md-6">
+		@Campos.Switch("Despaletizable",null,null,"Despaletizable")
+	</div>
+</div>
+<div class="row justify-content-around mt-1 mt-md-2">
+	<div class="col-12">
+		@Campos.GetInput("Descripcion",true,200,"Descripcion")
+	</div>
+</div>
+<hr />
+<div class="row justify-content-center mt-1 mt-md-2">
+	<div class="col-4">
+		@Campos.BtnCle()
+	</div>
+	<div class="col-4">
+		@Campos.BtnDel("del","dCotizacion")
+	</div>
+	<div class="col-4">
+		@Campos.BtnReg("reg","cCotizacion")
+	</div>
+</div>
+<hr />

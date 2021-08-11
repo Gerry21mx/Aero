@@ -1,0 +1,246 @@
+﻿@model ATSM.Ingenieria.ComponenteMayor
+@{
+	
+}
+<script>const COMAY = @Model.Id;</script>
+<div class="row justify-content-around mt-0 mt-md-2">
+	@*Generales*@
+	<div class="w-100 text-center sz-font-75" data-bs-toggle="tooltip" data-bs-placement="top" title="Datos Generales de @Model.Descripcion">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+			<b class="leyenda">Generales</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+	<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2 @(Model.Id==1?"order-0":"order-4")">
+		@Campos.SelectAircraft(true)
+	</div>
+	@if (Model.Id != 1) {
+		<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2 @(Model.Id==1?"order-1":"order-0")">
+			<div class="input-group input-group-sm">
+				<label class="input-group-text" for="IdEstadoMayor">Estado</label>
+				<select class="form-select num" id="IdEstadoMayor">
+					<option selected="" value="0" data-nombre="">...</option>
+					<option selected="" value="1" data-nombre="Instalado">Instalado</option>
+					<option selected="" value="2" data-nombre="Inoperativo">Inoperativo</option>
+					<option selected="" value="3" data-nombre="Stock">Stock</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2 order-4">
+			@Campos.SelectPosition(true)
+		</div>
+	}
+	<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2 order-2">
+		@Campos.SelectModelo(true)
+	</div>
+	<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2 order-3">
+		@Campos.GetInput("Serie",true,50)
+	</div>
+	<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2 order-5">
+		@Campos.GetInput("Capacity",true,50)
+	</div>
+</div>
+
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-6">
+		<div class="row">
+			@*Tiempos*@
+			<div class="w-100 text-center sz-font-75" data-bs-toggle="tooltip" data-bs-placement="top" title="Tiempos de @Model.Descripcion">
+				<div style="margin:auto; align-content: center;" class="w-100">
+					<span class="lineal">&nbsp;</span>
+					<b class="leyenda">Tiempos de Item Mayor</b>
+					<span class="linear">&nbsp;</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-4 mt-1 mt-md-2">
+				@Campos.GetInput("TSN", true, 6, "", "dec text-end", "number", "0")
+			</div>
+			<div class="col-4 mt-1 mt-md-2">
+				@Campos.GetInput("CSN", true, 6, "", "num text-end", "number", "0")
+			</div>
+			<div class="col-4 mt-1 mt-md-2">
+				@Campos.GetInput("Anio", true, 4, "", "num text-end", "number", "0")
+			</div>
+		</div>
+	</div>
+
+@if (Model.Id != 1) {
+	<div class="w-100"></div>
+	<div class="col-6">
+		<div class="row">
+			@*Tiempos del Componente a la Instalacon*@
+			<div class="w-100 text-center sz-font-75" data-bs-toggle="tooltip" data-bs-placement="top" title="Tiempos que tiene @Model.Descripcion al Instalar">
+				<div style="margin:auto; align-content: center;" class="w-100">
+					<span class="lineal">&nbsp;</span>
+					<b class="leyenda"><i class="far fa-clock"></i> Componente Inst.</b>
+					<span class="linear">&nbsp;</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-4 mt-1 mt-md-2">
+				@Campos.GetInput("TSN_Componente_Instalacion",true,6,"","dec text-end","number","0",true,false,"TSN")
+			</div>
+			<div class="col-4 mt-1 mt-md-2">
+				@Campos.GetInput("CSN_Componente_Instalacion",true,6,"","num text-end","number","0",true,false,"CSN")
+			</div>
+			<div class="col-4 mt-1 mt-md-2">
+				@Campos.GetInput("Fecha_Componente_Instalacion",true,10,"","text-center","date","",true,false,"Fecha")
+			</div>
+		</div>
+	</div>
+}
+	<div class="col-6">
+		<div class="row">
+			@*Tiempos de la Aeronave a la Instalacon*@
+			<div class="w-100 text-center sz-font-75" data-bs-toggle="tooltip" data-bs-placement="top" title="Tiempos que tiene la Aeronave al Instalar">
+				<div style="margin:auto; align-content: center;" class="w-100">
+					<span class="lineal">&nbsp;</span>
+					<b class="leyenda"><i class="far fa-clock"></i> Aeronave Inst.</b>
+					<span class="linear">&nbsp;</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-4 mt-1 mt-md-2">
+				@Campos.GetInput("TSN_Airframe_Instalacion", true, 6, "", "dec text-end", "number", "0", true, false, "TSN")
+			</div>
+			<div class="col-4 mt-1 mt-md-2">
+				@Campos.GetInput("CSN_Airframe_Instalacion", true, 6, "", "num text-end", "number", "0", true, false, "CSN")
+			</div>
+			<div class="col-4 mt-1 mt-md-2">
+				@Campos.GetInput("Fecha_Airframe_Instalacion", true, 10, "", "text-center", "date", "", true, false, "Fecha")
+			</div>
+		</div>
+	</div>
+</div>
+
+@if (Model.Id != 1) {
+<div class="row justify-content-around mt-0 mt-md-2 g-2">
+	@*Limites*@
+	<div class="w-100 text-center sz-font-75">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+			<b class="leyenda">Tiempos de Limites</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+	@foreach(var limite in Model.Limites) {
+		<div class="col-12 col-md-6 mt-1 mt-md-2 d-none" data-tipo="Tiempos" data-idlimite="@limite.Id">
+			<div class="row justify-content-center">
+				<div class="col-12 col-md-10">
+					<div class="alert alert-warning py-0 text-center sz-font-75">
+						@limite.Definicion 
+						<span class="float-end">@Campos.Switch($"LimInd_{limite.Id}",null,null,"Limites Individuales")</span>
+					</div>
+				</div>
+			</div>
+			<div class="row alert alert-danger py-0 text-center sz-font-725 g-1 my-0 d-none" data-tiempo="0" data-limit="individuales">
+				<div class="col-2 mt-1 mt-md-2">
+					Limites Ind.
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"HrsInd_{limite.Id}",true,6,"Horas","dec text-end","number","0",true,false,"Horas")
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"CicInd_{limite.Id}",true,6,"Ciclos","num text-end","number","0",true,false,"Ciclos")
+				</div>
+				<div class="col-4 mt-1">
+					@Campos.GetInput($"DiaInd_{limite.Id}",true,9,"Dias","num text-end","number","0",true,false,"Dias")
+				</div>
+			</div>
+			<div class="row alert alert-primary py-0 text-center sz-font-725 g-1 my-0" data-tiempo="0">
+				<div class="col-2 mt-1 mt-md-2">
+					Ultimo Cump.
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"HrsLst_{limite.Id}",true,6,"Horas","dec text-end","number","0",true,false,"Horas")
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"CicLst_{limite.Id}",true,6,"Ciclos","num text-end","number","0",true,false,"Ciclos")
+				</div>
+				<div class="col-4 mt-1">
+					@Campos.GetInput($"DiaLst_{limite.Id}",true,10,"Fecha","text-center","date","",true,false,"Fecha")
+				</div>
+			</div>
+			<div class="row alert alert-success py-0 text-center sz-font-725 g-1 my-0" data-tiempo="1">
+				<div class="col-2 mt-1 mt-md-2">
+					Tiempo Trans.
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"HrsElp_{limite.Id}",true,6,"Horas","dec text-end","number","0",true,false,"Horas")
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"CicElp_{limite.Id}",true,6,"Ciclos","num text-end","number","0",true,false,"Ciclos")
+				</div>
+				<div class="col-4 mt-1">
+					@Campos.GetInput($"DiaElp_{limite.Id}",true,9,"Dias","num text-end","number","0",true,false,"Dias")
+				</div>
+			</div>
+			<div class="row alert alert-info py-0 text-center sz-font-725 g-1 my-0" data-tiempo="0">
+				<div class="col-2 mt-1 mt-md-2">
+					Siguiente
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"HrsNxt_{limite.Id}",true,6,"Horas","dec text-end","number","0",false,false,"Horas")
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"CicNxt_{limite.Id}",true,6,"Ciclos","num text-end","number","0",false,false,"Ciclos")
+				</div>
+				<div class="col-4 mt-1">
+					@Campos.GetInput($"DiaNxt_{limite.Id}",true,10,"Fecha","text-center","date","",false,false,"Fecha")
+				</div>
+			</div>
+			<div class="row alert alert-warning py-0 text-center sz-font-725 g-1 my-0" data-tiempo="1">
+				<div class="col-2 mt-1 mt-md-2">
+					Remanentes
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"HrsRem_{limite.Id}",true,6,"Horas","dec text-end","number","0",false,false,"Horas")
+				</div>
+				<div class="col-3 mt-1">
+					@Campos.GetInput($"CicRem_{limite.Id}",true,6,"Ciclos","num text-end","number","0",false,false,"Ciclos")
+				</div>
+				<div class="col-4 mt-1">
+					@Campos.GetInput($"DiaRem_{limite.Id}",true,9,"Dias","num text-end","number","0",false,false,"Dias")
+				</div>
+			</div>
+		</div>
+	}
+</div>
+}
+<hr />
+<div class="row justify-content-center mt-0 mt-md-2">
+	<div class="col-4 col-md-3 col-xl-2">
+		@Campos.BtnCle()
+	</div>
+	<div class="col-4 col-md-3 col-xl-2">
+		@Campos.BtnDel("del","dItemMayor")
+	</div>
+	<div class="col-4 col-md-3 col-xl-2">
+		@Campos.BtnReg("reg","cItemMayor")
+	</div>
+</div>
+
+<hr />
+<div class="table-responsive">
+	<table id="tabla" class="table table-sm table-hover table-striped compact w-100">
+		<thead class="bg-dark text-white">
+			<tr>
+				<th>#</th>
+				<th>Estado</th>
+				<th>Modelo</th>
+				<th>Serie</th>
+				<th>Avion</th>
+				<th>Posicion</th>
+				<th>Capacity</th>
+				<th>TSN</th>
+				<th>CSN</th>
+				<th></th>
+			</tr>
+		</thead>
+	</table>
+</div>

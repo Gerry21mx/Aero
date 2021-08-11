@@ -1,0 +1,41 @@
+﻿@using System.Data.SqlClient;
+@{ 
+	ViewBag.Title = "Centro de Informacion y Control de Operaciones";
+    //var conexion = DataBase.Conexion();
+}
+<div class="container">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-light rounded">
+        <h1>
+            <img src="/img/businessman-resources-graphic.svg" alt="CICO" class="img-thumbnail" style="max-height: 50px">
+			<span class="d-none d-md-inline">@ViewBag.Title</span>
+            <span class="d-inline d-md-none">C.I.C.O.</span>
+            <a href="javascript:history.back()"><img src="~/img/return-back.svg" alt="Regresar" class="img-fluid img-thumbnail p-1 rounded float-right" style="height:35px;"/></a>
+        </h1>
+    </div>
+	<div class="row justify-content-around">
+        @if (Funciones.VRoles("mCatOperaciones").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Operaciones/Catalogos/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Catalogos</h5>
+						    <img src="~/img/catalog.svg" alt="Catalogos" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mMovOperaciones").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Operaciones/Movimientos/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Movimientos</h5>
+						    <img src="~/img/logistics-international-service-by-airplane.svg" alt="Movimientos" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+	</div>
+</div>

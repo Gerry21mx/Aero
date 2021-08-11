@@ -1,0 +1,33 @@
+﻿@{ 
+	ViewBag.Title = "Estadistico Aeronave";
+}
+
+<div class="container">
+	<div class="row justify-content-around">
+		<div class="col-6 col-md-3 mt-1 mt-md-2">
+			@Campos.GetInput("Desde",true,10,"","fec","date")
+		</div>
+		<div class="col-6 col-md-3 mt-1 mt-md-2">
+			@Campos.GetInput("Hasta",true,10,"","fec","date")
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectAircraft(true,"IdAeronave","num")
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectCapacidad(true,"IdCapacidad")
+		</div>
+	</div>
+	<div class="row justify-content-around">
+		<div class="col-12 col-md-6 mt-1 mt-md-4">
+			<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+				<button id="vls" type="button" class="btn btn-sm btn-primary">Vuelos</button>
+				<button id="hrs" type="button" class="btn btn-sm btn-success">Horas</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Seguimiento/Views/Estadistico/estadistico.js") 
+}

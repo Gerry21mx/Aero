@@ -1,0 +1,35 @@
+﻿@using System.Data.SqlClient;
+@using ATSM;
+
+@{
+	WebSecurity.InitializeDatabaseConnection("DATA", "Usuario", "IdUsuario", "Nickname", true);
+	SqlCommand comando = new SqlCommand("SELECT COUNT(*) AS NU FROM Usuario", DataBase.Conexion());
+	var res = DataBase.Query(comando);
+	if (res.Row.NU == 0) {
+		DataBase.Execute(new SqlCommand("ALTER TABLE Usuario ADD Nombre nchar(100)", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE Usuario ADD IdPerfil int", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE Usuario ADD IdEmpresa int NULL", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE Usuario ADD Correo nchar(100)", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE Usuario ADD Telefono nchar(10) NULL", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE Usuario ADD Activo bit", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE Usuario ADD IP nchar(20) NULL", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE Usuario ADD LastLog datetime2(7) NULL", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE Usuario ADD Sistema nchar(50)", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE webpages_Roles ADD Descripcion nchar(100)", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE webpages_Roles ADD Padre int", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE webpages_Roles ADD Icon nchar(50)", DataBase.Conexion()));
+		DataBase.Execute(new SqlCommand("ALTER TABLE webpages_Roles ADD Orden int", DataBase.Conexion()));
+		Usuario user = new Usuario(1);
+		if (!user.Valid) {
+			user.Nickname = "root";
+			user.Nombre = "root";
+			user.Password = "toor";
+			user.Correo = "javierickmr@gmail.com";
+			user.Telefono = "8441864873";
+			user.IdPerfil = 0;
+			user.Activo = true;
+			user.Sistema = "Seguimiento";
+			user.Save();
+		}
+	}
+}

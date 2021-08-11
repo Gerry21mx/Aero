@@ -1,0 +1,92 @@
+﻿@{ 
+	ViewBag.Title = "Catalogos";
+}
+<div class="container">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-light rounded"><h1>Catalogos</h1></div>
+	<div class="row justify-content-around">
+        @if (Funciones.VRoles("mIngCatFamilias").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="Familias" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Familias</h5>
+						    <img src="~/img/earth-grid-and-airplane.svg" alt="Familias" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngCatPosiciones").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="Posiciones" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Posiciones</h5>
+						    <img src="~/img/airplane-plane.svg" alt="Posiciones" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngCatAeronaves").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="Aeronaves" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Aeronaves</h5>
+						    <img src="~/img/airplane-black-shape-ascending-rotated-to-right.svg" alt="Aeronaves" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngCatModelos").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="Modelos" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Modelos</h5>
+						    <img src="~/img/airplane-silhouette-in-rotation.svg" alt="Modelos" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngCatCapacidades").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="Capacidades" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Capacidades</h5>
+						    <img src="~/img/airport-traffic-triangular-signal-of-an-airplane.svg" alt="Capacidades" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngCatLimites").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="Limites" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Limites</h5>
+						    <img src="~/img/time-check-symbol.svg" alt="Limites" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngCatComponenteMayor").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="ComponenteMayor" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Componentes Mayores</h5>
+						    <img src="~/img/turbine.svg" alt="Componentes Mayores" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+	</div>
+</div>

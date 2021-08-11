@@ -1,0 +1,38 @@
+﻿@{
+	ViewBag.Title = "Resumen Aeronave";
+	ViewBag.Dash = true;
+	ViewBag.mayores = ComponenteMayor.GetComponentesMayores();
+	ViewBag.familias = Family.GetFamilys();
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        @RenderPage("~/Areas/Ingenieria/Views/Reportes/ResumenAeronave/sidebar.cshtml")
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        @RenderPage("~/Areas/Ingenieria/Views/Reportes/ResumenAeronave/wrapper.cshtml")
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Aircraft.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Family.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMayor.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ItemMenor.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/Reportes/ResumenAeronave/appr.js")
+}

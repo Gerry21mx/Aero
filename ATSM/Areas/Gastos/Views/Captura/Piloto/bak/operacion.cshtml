@@ -1,0 +1,60 @@
+﻿<div class="row justify-content-around gx-1">
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		<div class="input-group input-group-sm w-100">
+			<label class="input-group-text" for="IdAeropuerto">Aeropuerto</label>
+			<select class="form-select" id="IdAeropuerto"></select>
+		</div>
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Factura",true,30)
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 mt-1 mt-md-2">
+		@Campos.GetInput("Concepto",true,200)
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.SelectMonedas(true,"IdMoneda","num")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.SelectSaldos(true,"IdSaldo","num")
+	</div>
+
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Subtotal",true,18,"","mon","number")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("P_IVA",true,5,"","dec", "number","",true,false,"% IVA")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("IVA",true,12,"","mon", "number", "", false)
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Total",true,12,"","mon text-end", "number", "", false)
+	</div>
+
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.Switch("sFactura2",null,null,"Factura/Comprobante")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.Switch("sXML2",null,null,"XML")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-grid">
+		<button name="addg" data-tg="2" class="btn btn-sm btn-success">Agregar</button>
+	</div>
+</div>
+<hr />
+<div class="table-responsive">
+	<table id="t2" class="table table-sm table-striped table-hover compact w-100 sz-font-75">
+		<thead class="thead-blue">
+			<tr>
+				<th>APTO</th>
+				<th>Factura</th>
+				<th>Concepto</th>
+				<th>Moneda</th>
+				<th>Saldo</th>
+				<th>Subtotal</th>
+				<th>IVA</th>
+				<th>Total</th>
+			</tr>
+		</thead>
+	</table>
+</div>

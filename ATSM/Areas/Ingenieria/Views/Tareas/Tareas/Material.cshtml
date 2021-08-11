@@ -1,0 +1,33 @@
+﻿@{
+    
+}
+<div class="alert alert-dark" role="alert">List of Material required</div>
+<div class="row justify-content-around mt-0 mt-md-3">
+	<div class="col-12 col-md-2">
+		@Campos.GetInput("qty1", true, 0, "", "text-center dec", "text", "", true, true, "QTY")
+	</div>
+	<div class="col-12 col-md-3">
+		@Campos.GetInput("np1", true, 0, "", "text-center", "text", "", true, true, "Part Number")
+	</div>
+	<div class="col-12 col-md-3">
+		<span id="des1" class="text-muted"></span>
+	</div>
+	<div class="col-12 col-md-2">
+		@Campos.Switch("MAR",null,null,"As Required")
+	</div>
+	<div class="col-12 col-md-2">
+		<button id="add1" class="btn btn-sm btn-block btn-outline-dark"><i class="fas fa-plus-circle"></i> Add</button>
+	</div>
+</div>
+<hr />
+<table id="tab1" class="table table-sm table-striped table-responsive-md w-100 table-bordered table-hover">
+	<thead class="thead-dark">
+		<tr>
+			<th>Quantity</th>
+			<th>Part Number</th>
+			<th>Description</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+</table>

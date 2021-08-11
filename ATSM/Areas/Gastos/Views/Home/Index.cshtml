@@ -1,0 +1,32 @@
+﻿@{ 
+	ViewBag.Title = "Gastos";
+}
+<div class="container">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-light rounded">
+        <h1>
+            @ViewBag.Title <a href="javascript:history.back()"><img src="~/img/return-back.svg" alt="Regresar" class="img-fluid img-thumbnail p-1 rounded float-right" style="height:35px;"/></a>
+        </h1>
+    </div>
+	<div class="row justify-content-around">
+		<div class="col-6 col-md-3 mt-2">
+			<a href="~/Gastos/Captura/" class="text-decoration-none">
+			    <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-body">Captura</h5>
+						<img src="~/img/tracking-receipt.svg" alt="Captura" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                    </div>
+                </div>
+            </a>
+        </div>
+		<div class="col-6 col-md-3 mt-2">
+			<a href="~/Gastos/Balance/" class="text-decoration-none">
+			    <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-body">Balance</h5>
+						<img src="~/img/calculator-accounting-graph-data.svg" alt="Balance" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                    </div>
+                </div>
+            </a>
+        </div>
+	</div>
+</div>

@@ -1,0 +1,81 @@
+﻿@using System.Data.SqlClient
+@{
+	var limites = Limites.GetLimites();
+}
+<div class="row justify-content-around g-1">
+	<div class="col-12 col-md-6">
+		<div class="row justify-content-around g-1">
+			<div class="col-6 col-md-4">
+				@Campos.SelectComponentesMayores(true, "IdComponente", "", "C. Mayor")
+			</div>
+			<div class="col-6 col-md-4">
+				@Campos.SelectModelo(true)
+			</div>
+			<div class="col-6 col-md-4">
+				@Campos.GetInput("ATA1", true, 2, "ATA", "num text-end", "number", "0", true, false, "ATA", "0", "99")
+			</div>
+			<div class="col-6 col-md-4">
+				@Campos.SelectPosition(true)
+			</div>
+			<div class="col-6 col-md-4">
+				@Campos.Switch()
+			</div>
+			<div class="col-12">
+				@Campos.GetInput("Descripcion", true, 200)
+			</div>
+		</div>
+		<hr />
+		<div class="row justify-content-center mt-0 mt-md-2">
+			<div class="col-4 col-md-3">
+				@Campos.BtnCle()
+			</div>
+			<div class="col-4 col-md-3">
+				@Campos.BtnDel("del", "dPIC")
+			</div>
+			<div class="col-4 col-md-3">
+				@Campos.BtnReg("reg", "cPIC")
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-6">
+		<div class="row justify-content-center">
+			<div class="col-10">
+				@Campos.GetInput("IdMenor",true,0,"Componente Menor","","","",true,false,"C. Menor")
+				<datalist id="listIdMenor"></datalist>
+			</div>
+			<div class="col-1">
+				<button id="addCom" class="btn btn-sm py-0 btn-primary"><i class="fas fa-plus"></i></button>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-10 col-xl-8 table-responsive sz-font-75 mt-1 mt-md-2">
+				<table id="tComponentes" class="table table-sm compact w-100">
+					<thead class="bg-success">
+						<tr>
+							<th>NP</th>
+							<th>Description</th>
+							<th></th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="table-responsive">
+		<table id="tabla" class="table table-sm table-hovered table-striped compact">
+			<thead class="bg-primary">
+				<tr>
+					<th>Mayor</th>
+					<th>Modelo</th>
+					<th>ATA</th>
+					<th>Posicion</th>
+					<th>Consecutivo</th>
+					<th>Descripcion</th>
+					<th>Estado</th>
+					<th></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</div>

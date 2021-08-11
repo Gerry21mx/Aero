@@ -1,0 +1,66 @@
+﻿@{
+	ViewBag.Title = "Reporte Componentes Menores";
+}
+<div class="container">
+	<div class="row mt-1 mt-md-2">
+		<div class="col-6 col-md-2">
+			@Campos.SelectComponentesMayores(true,"IdComponenteMayor","num","Mayor")
+		</div>
+		<div class="col-6 col-md-2">
+			<div class="input-group input-group-sm">
+				<label class="input-group-text" for="Tipo">Tipo</label>
+				<select class="form-select num num" id="Tipo">
+					<option selected="" value="0">...</option>
+					<option value="1">Componentes</option>
+					<option value="2">Ad's / SB's</option>
+					<option value="3">Servicios</option>
+				</select> 
+			</div>
+		</div>
+		<div class="col-6 col-md-2">
+			@Campos.SelectFamily(true)
+		</div>
+		<div class="col-6 col-md-2">
+			@Campos.SelectModelo(true)
+		</div>
+		<div class="col-6 col-md-2">
+			@Campos.GetInput("ATA1",true,0,"ATA","text-end num","number", "",true,false,"ATA")
+		</div>
+		<div class="col-6 col-md-1">
+			<button id="repo" class="btn btn-sm btn-outline-success">Consultar</button>
+		</div>
+	</div>
+	<hr />
+</div>
+<div class="table-responsive">
+		<table id="reporte" class="table table-sm table-hover table-striped table-bordered compact">
+			<thead class="table-success">
+				<tr>
+					<th colspan="5" class="text-center">Componentes</th>
+					<th colspan="4" class="text-center">Directivas</th>
+					<th colspan="4" class="text-center">Boletines</th>
+				</tr>
+				<tr>
+					<th>Tipo</th>
+					<th>Parte</th>
+					<th>Descripcion</th>
+					<th>Familia</th>
+					<th>ATA</th>
+					<th>AD</th>
+					<th>Enmienda</th>
+					<th>Fecha Efe</th>
+					<th>Efectividad</th>
+					<th>SB</th>
+					<th>Rev</th>
+					<th>Fecha Efe</th>
+					<th>Threshold</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMenor.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMayor.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/Reportes/ComponentesMenores/appr.js")
+}

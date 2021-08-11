@@ -1,0 +1,26 @@
+﻿@{ 
+	ViewBag.Title = "Componentes";
+	ViewBag.Tipo = 1;
+}
+<div class="container">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3 id="tit">Instalacion de @ViewBag.Title</h3></div>
+	
+	@RenderPage("~/Areas/Ingenieria/Views/Items/Alta.cshtml")
+
+	
+	<div class="row justify-content-around">
+		<hr />
+		<div class="col-4 col-md-2">@Campos.BtnCle()</div>
+		<div class="col-4 col-md-2">@Campos.BtnDel("del","dItemMenor")</div>
+		<div class="col-4 col-md-2">@Campos.BtnReg("reg","cItemMenor")</div>
+	</div>
+</div>
+<script>const TCOM = @ViewBag.Tipo;</script>
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMenor.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ItemMayor.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ItemMenor.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/PIC.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Tiempos.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/Items/appr.js")
+}

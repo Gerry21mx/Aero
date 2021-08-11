@@ -1,0 +1,65 @@
+﻿<div class="row justify-content-around pt-1 pt-md-2">
+    <div class="col-12 col-md-4">
+        @Campos.GetInput("Part", true, 50, "Parte")
+    </div>
+    <div class="col-12 col-md-4">
+        @Campos.GetInput("Description", true, 500)
+    </div>
+    <div class="col-6 col-md-2">
+        @Campos.Switch()
+    </div>
+    <div class="col-6 col-md-2">
+        <span id="sFoto" class="btn btn-sm btn-outline-success"><i class="fas fa-camera"></i></span>
+        <input type="file" accept="image/jpeg" id="foto" class="d-none" />
+    </div>
+</div>
+<div class="row justify-content-around pt-1 pt-md-2">
+    <div class="col-12 col-md-4">
+        @Campos.SelectCategoria(true)
+    </div>
+    <div class="col-12 col-md-4">
+        @Campos.SelectUnidadMedida(true)
+    </div>
+    <div class="col-12 col-md-4">
+        @Campos.GetInput("Equivalencia_Unitaria", true, 12, "Equivalencia Unitaria", "dec text-end", "number")
+    </div>
+</div>
+<div class="row justify-content-around pt-1 pt-md-2">
+    <div class="col-6 col-md-2">
+        @Campos.Switch("Seriado", null,null,"Seriado")
+    </div>
+    <div class="col-6 col-md-2">
+        @Campos.Switch("Caducidad", null,null,"Caducidad")
+    </div>
+    <div class="col-6 col-md-2">
+        @Campos.Switch("Calibracion", null,null,"Calibracion")
+    </div>
+    <div class="col-6 col-md-2">
+        @Campos.Switch("StandBy", null,null,"StandBy")
+    </div>
+</div>
+<div class="row justify-content-around pt-1 pt-md-2">
+    <div class="col-6 col-md-2">
+        @Campos.GetInput("Minimo", true, 18, "Minimo", "dec text-right", "number","0",true,false,"", "0")
+    </div>
+    <div class="col-6 col-md-2">
+        @Campos.GetInput("Maximo", true, 18, "Maximo", "dec text-right", "number","0",true,false,"", "0")
+    </div>
+    <div class="col-6 col-md-2">
+        @Campos.GetInput("Reorden", true, 18, "Reorden", "dec text-right", "number","0",true,false,"", "0")
+    </div>
+    <div class="col-6 col-md-2">
+        @Campos.GetInput("Costo", true, 18, "Costo", "text-right", "number","0",true,false,"", "0")
+    </div>
+</div>
+<div class="row justify-content-around pt-2 pt-md-3">
+    <div class="col-4">
+        @Campos.BtnCle()
+    </div>
+    <div class="col-4">
+        @Campos.BtnDel("del", "dArticulo")
+    </div>
+    <div class="col-4">
+        @Campos.BtnReg("reg", "cArticulo")
+    </div>
+</div>

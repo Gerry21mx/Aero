@@ -1,0 +1,42 @@
+﻿@{
+    
+}
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2">
+		@Campos.GetInput("Matricula",true,6,"Matricula")
+	</div>
+	<div class="col-6 col-md-3 col-xl-3 mt-1 mt-md-2">
+		@Campos.SelectEmpresa(true)
+	</div>
+	<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2">
+		@Campos.GetInput("PesoMaximo",true,9,"","num text-end","number","0",true,false,"Peso Maximo")
+	</div>
+	<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2">
+		@Campos.GetInput("JumpSeat",true,2,"","num text-end","number","0",true,false,"Jump Seat")
+	</div>
+	<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2">
+		@Campos.GetInput("Anio",true,4,"","num text-end","number","0",true,false,"Año","1950",(DateTime.Today.Year+1).ToString())
+	</div>
+	<div class="col-6 col-md-3 col-xl-2 mt-1 mt-md-2">
+		@Campos.GetInput("Pasajeros",true,3,"","num text-end","number","0")
+	</div>
+	<div class="col-6 col-md-4 col-xl-3 mt-1 mt-md-2">
+		@Campos.GetInput("Seguro",true,50)
+	</div>
+	<div class="col-6 col-md-2 col-xl-1 align-self-center">
+		@Campos.Switch("Estado","Activo","Inactivo")
+	</div>
+</div>
+
+<div class="row justify-content-center mt-1 mt-md-4">
+	<div class="col-4 col-md-3 col-xl-2">
+		@Campos.BtnCle()
+	</div>
+	<div class="col-4 col-md-3 col-xl-2">
+		@Campos.BtnDel("del","dAircraft")
+	</div>
+	<div class="col-4 col-md-3 col-xl-2">
+		@Campos.BtnReg("reg","cAircraft")
+	</div>
+</div>
+<hr />

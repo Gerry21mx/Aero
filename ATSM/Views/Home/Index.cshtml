@@ -1,0 +1,101 @@
+﻿@using System.Data.SqlClient;
+@{
+	ViewBag.Title = "Seguimiento de Vuelo";
+    
+}
+<div class="container">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-warning rounded">
+        <h1>Aeronaves TSM <a href="#" id="logout" class="float-end"><img src="~/img/log-out.svg" alt="Regresar" class="img-fluid img-thumbnail p-1 rounded" style="height:35px;"/></a></h1>
+    </div>
+	<div class="row justify-content-around">
+        @if (Funciones.VRoles("OperacionesSys").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Operaciones" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Operaciones</h5>
+						    <img src="~/img/businessman-resources-graphic.svg" alt="Operaciones" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("SeguimientoSys").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Seguimiento" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Seguimiento</h5>
+						    <img src="~/img/flight-tracking.svg" alt="Seguimiento" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("IngenieriaSys").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">CICMA</h5>
+						    <img src="~/img/engineering.svg" alt="Ingenieria" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("CuentasSys").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Cuentas" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Cuentas</h5>
+						    <img src="~/img/check.svg" alt="Cuentas" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+        @if (Funciones.VRoles("GastosSys").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Gastos" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Gastos</h5>
+						    <img src="~/img/money.svg" alt="Gastos" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+	<div class="w-100"></div>
+        @if (Funciones.VRoles("Administrador").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="Admin/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Administrador</h5>
+						    <img src="~/img/user_org.svg" alt="Administrador" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("UserAccount").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="Config/" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Configuracion</h5>
+						    <img src="~/img/user_proces.svg" alt="Configuracion" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+	</div>
+</div>
+
+@section Scripts{
+    
+}

@@ -1,0 +1,45 @@
+﻿@{ 
+	ViewBag.Title = "Gastos";
+}
+<div class="container mt-0 mt-md-2">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded">
+        <h3>
+            @ViewBag.Title
+            <button class="btn btn-sm btn-primary float-end" type="button" data-bs-toggle="offcanvas" data-bs-target="#offTrips" aria-controls="offTrips">Trips Pendientes</button>
+        </h3>
+    </div>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-lista-tab" data-bs-toggle="tab" href="#nav-lista" role="tab" aria-controls="nav-lista" aria-selected="true">Vuelo</a>
+            <a class="nav-item nav-link disabled" id="nav-sincom-tab" data-bs-toggle="tab" href="#nav-sincom" role="tab" aria-controls="nav-sincom" aria-selected="false">Sin Comprobante</a>
+            <a class="nav-item nav-link disabled" id="nav-operacion-tab" data-bs-toggle="tab" href="#nav-operacion" role="tab" aria-controls="nav-operacion" aria-selected="false">Operacion</a>
+            <a class="nav-item nav-link disabled" id="nav-concom-tab" data-bs-toggle="tab" href="#nav-concom" role="tab" aria-controls="nav-concom" aria-selected="false">Con Comprobante</a>
+            <a class="nav-item nav-link disabled" id="nav-combustible-tab" data-bs-toggle="tab" href="#nav-combustible" role="tab" aria-controls="nav-combustible" aria-selected="false">Combustible</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active pt-3 sz-font-75" id="nav-lista" role="tabpanel" aria-labelledby="nav-lista-tab">
+            @RenderPage("List.cshtml")
+        </div>
+        <div class="tab-pane fade" id="nav-sincom" role="tabpanel" aria-labelledby="nav-sincom-tab">
+            @RenderPage("sincom.cshtml")
+        </div>
+        <div class="tab-pane fade" id="nav-operacion" role="tabpanel" aria-labelledby="nav-operacion-tab">
+            @RenderPage("operacion.cshtml")
+        </div>
+        <div class="tab-pane fade" id="nav-concom" role="tabpanel" aria-labelledby="nav-concom-tab">
+            @RenderPage("concom.cshtml")
+        </div>
+        <div class="tab-pane fade" id="nav-combustible" role="tabpanel" aria-labelledby="nav-combustible-tab">
+            @RenderPage("combustible.cshtml")
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Vuelo.js")
+    @Scripts.Render("~/Areas/Cuentas/cjs/Account.js")
+    @Scripts.Render("~/Areas/Gastos/cjs/Comprobacion.js")
+    @Scripts.Render("~/Areas/Gastos/cjs/Gasto.js")
+    @Scripts.Render("~/Areas/Gastos/Views/Captura/Piloto/piloto.js")
+}

@@ -1,0 +1,24 @@
+﻿<div class="row justify-content-around">
+	<div class="w-100 text-center">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+				<b class="leyenda">Cuenta</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("Nombre",true,100)
+	</div>
+</div>
+<hr />
+<div class="row justify-content-around">
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		@Campos.BtnCle()
+	</div>
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		@Campos.BtnReg("reg","cAccount")
+	</div>
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		@Campos.BtnDel("del","dAccount")
+	</div>
+</div>

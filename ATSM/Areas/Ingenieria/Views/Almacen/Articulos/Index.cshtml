@@ -1,0 +1,44 @@
+﻿@{ 
+	ViewBag.Title = "Artículos";
+}
+<div class="container">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-light rounded"><h1>@ViewBag.Title</h1></div>
+	<div class="row justify-content-around">
+        @if (Funciones.VRoles("mIngAlmArtArticulos").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Almacen/Registro" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Artículos</h5>
+						    <img src="~/img/trolley-items.svg" alt="Artículos" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngAlmArtCategoria").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Almacen/Categoria" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Categoría</h5>
+						    <img src="~/img/tag-label.svg" alt="Categoría" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngAlmArtUme").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="~/Ingenieria/Almacen/Ume" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Unidad de Medida</h5>
+						    <img src="~/img/measure-ruler.svg" alt="Unidad de Medida" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+	</div>
+</div>

@@ -1,0 +1,161 @@
+﻿body {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+/*PERSONALIZADO*/
+.sz-font-6 {
+    font-size: .6em !important;
+}
+
+.sz-font-625 {
+    font-size: .625em !important;
+}
+
+.sz-font-65 {
+    font-size: .65em !important;
+}
+
+.sz-font-675 {
+    font-size: .675em !important;
+}
+
+.sz-font-7 {
+    font-size: .7em !important;
+}
+
+.sz-font-725 {
+    font-size: .725em !important;
+}
+
+.sz-font-75 {
+    font-size: .75em !important;
+}
+
+.sz-font-775 {
+    font-size: .775em !important;
+}
+
+.sz-font-8 {
+    font-size: .8em !important;
+}
+
+.sz-font-825 {
+    font-size: .825em !important;
+}
+
+.sz-font-85 {
+    font-size: .85em !important;
+}
+
+.sz-font-875 {
+    font-size: .875em !important;
+}
+
+.sz-font-9 {
+    font-size: .9em !important;
+}
+
+.sz-font-925 {
+    font-size: .925em !important;
+}
+
+.sz-font-95 {
+    font-size: .95em !important;
+}
+
+.sz-font-975 {
+    font-size: .975em !important;
+}
+
+.bgc-cadetblue {
+    background-color: cadetblue !important;
+}
+.bgc-sandybrown {
+    background-color: sandybrown !important;
+}
+
+.bg-blue-brag {
+    background-color: #b9ccdfd4 !important;
+}
+.thead-blue {
+    background-color: #137dac !important;
+    color: ivory;
+}
+
+.lineal {
+    margin: 15px 2% 15px 2%;
+    width: 29%;
+    border-top: 1px solid #999;
+    position: relative;
+    top: 10px;
+    float: left;
+}
+.linear {
+    margin: 15px 2% 15px 2%;
+    width: 29%;
+    border-top: 1px solid #999;
+    position: relative;
+    top: 10px;
+    float: right;
+}
+.leyenda {
+    margin: 15px 2% 15px 2%;
+    width: 30%;
+    font-weight: bold;
+    float: left;
+}
+.thumbNail:hover {
+    position: relative;
+    top: -25px;
+    left: -35px;
+    width: 500px;
+    height: auto;
+    display: block;
+    z-index: 999;
+}
+
+.img-ico-64{
+    max-height: 64px;
+    max-width: 64px;
+    height: 64px;
+    width: 64px;
+}
+.img-ico-32{
+    max-height: 32px;
+    max-width: 32px;
+    height: 32px;
+    width: 32px;
+}
+.img-ico-24{
+    max-height: 24px;
+    max-width: 24px;
+    height: 24px;
+    width: 24px;
+}
+.img-ico-16{
+    max-height: 16px;
+    max-width: 16px;
+    height: 16px;
+    width: 16px;
+}

@@ -1,0 +1,92 @@
+﻿@{
+	//if(!User.Identity.IsAuthenticated) { Response.Redirect("~/"); }
+	string user = User.Identity.Name;
+	Usuario usuario = new Usuario(WebSecurity.CurrentUserId);
+	string area = "Seguimiento";
+	string rin = HttpContext.Current.Request.Url.AbsolutePath == $"/{area}/" ? "" : $"{area}/";
+	string rim = HttpContext.Current.Request.Url.AbsolutePath == $"/{area}/" ? "icons/icon-72x72.png" : $"logoSeguimiento.png";
+}
+@Scripts.Render("~/bundles/bootnavbar")
+<nav class="navbar navbar-dark bg-inverse navbar-toggleable-sm fixed-top navbar-expand-lg d-print-none" id="main_navbar">
+	<div class="container">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fas fa-bars"></i>
+			@*<span class="navbar-toggler-icon"></span>*@
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<a class="navbar-brand text-primary d-none d-lg-block" href="~/@rin">
+				<img src="~/img/@rim" alt="Alternate Text" style="height=22px;width:22px;"/>
+			</a>
+
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown">
+					<a class="@Funciones.menuRole("mCatalogosSeg")" href="#" id="navbarDropdownAlmacen" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Catalogos
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownAlmacen">
+						<li><a class="@Funciones.itemRole("Aeropuerto")" href="~/@area/@Funciones.linkRole("Aeropuerto","Catalogo/Aeropuerto")">Aeropuertos</a></li>
+						<li><a class="@Funciones.itemRole("Demora")" href="~/@area/@Funciones.linkRole("Demora","Catalogo/Demora")">Demoras</a></li>
+						<li><a class="@Funciones.itemRole("Ruta")" href="~/@area/@Funciones.linkRole("Ruta","Catalogo/Ruta")">Rutas</a></li>
+						<li><a class="@Funciones.itemRole("TipoVuelo")" href="~/@area/@Funciones.linkRole("TipoVuelo","Catalogo/TipoVuelo")">Tipo de Vuelo</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="@Funciones.menuRole("mVuelosSeg")" href="#" id="navbarDropdownAlmacen" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Vuelos
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownAlmacen">
+						<li><a class="@Funciones.itemRole("Vuelo")" href="~/@area/@Funciones.linkRole("Vuelo","Vuelo/Vuelo/")">Vuelo</a></li>
+						<li><a class="dropdown-item" href="~/@area/Vuelo/General/">General</a></li>
+						<li><a class="dropdown-item" href="~/@area/Vuelo/TimeLine/">Time Line</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="@Funciones.menuRole("mReportesSeg")" href="#" id="navbarDropdownAlmacen" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Reportes
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownAlmacen">
+						<li><a class="@Funciones.itemRole("Operaciones")" href="~/@area/@Funciones.linkRole("Operaciones","Reportes/Operaciones/")">Operaciones</a></li>
+						<li><a class="@Funciones.itemRole("Emisioines")" href="~/@area/@Funciones.linkRole("Emisioines","Reportes/Emisiones/")">Emisiones</a></li>
+						<li><a class="@Funciones.itemRole("PosicioFlota")" href="~/@area/@Funciones.linkRole("PosicioFlota","Reportes/PosFlota/")">Posicionamiento de Flota</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="@Funciones.menuRole("mEstadisticosSeg")" href="#" id="navbarDropdownAlmacen" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Estadisticos
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownAlmacen">
+						<li><a class="dropdown-item" href="~/@area/Estadistico/">Graficos</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<!--        Menu Derecho        -->
+			<div class="d-flex flex-row-reverse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle text-white" href="#" id="navAdmin" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-user"></i> @usuario.Nombre<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navAdmin">
+							<li><a class="dropdown-item" href="~/Config">Configuracion</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="@Funciones.menuRole("mAdministradorSeg")" href="#" id="navAdmin" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-cog"></i><span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right " aria-labelledby="navAdmin">
+							<li><a class="@Funciones.itemRole("SegAdmPerfil")" href="~/@area/@Funciones.linkRole("SegAdmPerfil","Admin/Perfil")">Perfiles</a></li>
+							<li><a class="@Funciones.itemRole("SegAdmUsuario")" href="~/@area/@Funciones.linkRole("SegAdmUsuario","Admin/Usuario")">Usuarios</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a id="logout" class="nav-link text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Salir">
+							<i class="fas fa-sign-out-alt"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,31 @@
+﻿@{
+    
+}
+<div class="alert alert-dark" role="alert">List of Image Reference for the task</div>
+<div class="row justify-content-around mt-0 mt-md-3">
+	<div class="col-12 col-md-4">
+		@Campos.GetInput("Titulo", true, 200, "", "", "text", "", true, true, "Titulo")
+	</div>
+	<div class="col-12 col-md-2">
+		<button class="btn btn-sm btn-block btn-outline-dark" id="btnImg"><i class="far fa-image"></i> Imagen</button>
+		<input type="file" class="d-none" id="imageTU" name="imageTU" accept="image/*" />
+	</div>
+	<div class="col-12 col-md-3">
+		<img id="preview" src="" alt="" class="img-thumbnail d-none" style="max-height: 200px;">
+	</div>
+	<div class="col-12 col-md-2">
+		<button id="addIMG" class="btn btn-sm btn-block btn-outline-dark"><i class="fas fa-plus-circle"></i> Add</button>
+	</div>
+</div>
+<hr />
+<table id="tab5" class="table table-sm compact table-responsive-md table-bordered rounded w-100">
+	<thead class="thead-dark">
+		<tr>
+			<th>No</th>
+			<th>Titulo</th>
+			<th>Imagen</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody id="refList"></tbody>
+</table>

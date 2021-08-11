@@ -1,0 +1,15 @@
+﻿@{
+	ViewBag.Title = "Position Identification Code";
+}
+
+<div class="container mt-0 mt-md-2">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>@ViewBag.Title</h3></div>
+
+    @RenderPage("~/Areas/Ingenieria/Views/ComponenteMenor/PIC/Alta.cshtml")
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/PIC.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMenor.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/ComponenteMenor/PIC/appr.js")
+}

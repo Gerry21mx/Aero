@@ -1,0 +1,151 @@
+﻿@using ATSM.Cuentas;
+@{ 
+	var saldos = Saldo.GetSaldos();
+	var divisas = Moneda.GetMonedas();
+}
+<div class="card mt-0 mt-md-2" id="cardVueloS">
+	<div class="card-body bg-light">
+		<div class="card-text" id="flgInfo">
+			<div class="row justify-content-around gx-0">
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="row gx-0">
+						<div class="col-6 col-sm-4">
+							<b>Trip</b> <span id="txtTrip" class="text-primary"></span>
+						</div>
+						<div class="col-6 col-sm-4">
+							<b>Matricula</b> <span id="txtMatricula" class="text-primary"></span>
+						</div>
+						<div class="col-6 col-sm-4">
+							<b>Fecha</b> <span id="txtFecha" class="text-primary"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-2">
+					<b>Ruta</b> <span id="txtRuta" class="text-primary"></span>
+				</div>
+				<div class="col-12 col-md-6 col-lg-3">
+					<b>Capitan</b> <span id="txtCapitan" class="text-primary text-capitalize"></span>
+				</div>
+				<div class="col-12 col-md-6 col-lg-3">
+					<b>Copiloto</b> <span id="txtCopiloto" class="text-primary text-capitalize"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<hr />
+<div class="row justify-content-around">
+	<div class="col-12 col-md-6 mt-1 mt-md-2 table-responsive">
+		<table id="tGtos" class="table table-sm table-striped table-bordered w-100">
+            <thead class="thead table-success text-center">
+                <tr>
+                    <th rowspan="2" class="align-middle">Gastos</th>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						<th colspan="@divisas.Count">@sal.Nombre</th>
+					}
+                </tr>
+                <tr>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<th>@mon.Codigo</th>
+						}
+					}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Sin Comprobante</th>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<td id="s1_@(sal.Id)_@(mon.Id)" class="text-end"></td>
+						}
+					}
+                </tr>
+                <tr>
+                    <th>Operacion de Vuelo</th>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<td id="s2_@(sal.Id)_@(mon.Id)" class="text-end"></td>
+						}
+					}
+                </tr>
+                <tr>
+                    <th>Viaticos</th>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<td id="s3_@(sal.Id)_@(mon.Id)" class="text-end"></td>
+						}
+					}
+                </tr>
+            </tbody>
+            <tfoot class="bg-dark text-white">
+                <tr>
+                    <th rowspan="2">TOTALES</th>
+					@foreach(var sal in saldos) {
+						if (sal.Combustible ?? false) { continue; }
+						foreach(var mon in divisas) {
+							<th id="t_@(sal.Id)_@(mon.Id)" class="text-end"></th>
+						}
+					}
+                </tr>
+            </tfoot>
+        </table>
+	</div>
+	<div class="col-12 col-md-6 mt-1 mt-md-2 table-responsive">
+		<table id="tComb" class="table table-sm table-striped table-bordered w-100">
+            <thead class="thead table-danger text-center">
+                <tr>
+					<th>Combustible</th>
+					<th>Litros</th>
+					@foreach(var mon in divisas) {
+						<th>@mon.Codigo</th>
+					}
+                </tr>
+            </thead>
+            <tbody>
+				@foreach(var sal in saldos) {
+					if (sal.Combustible != true) { continue; }
+					<tr>
+						<th>@sal.Nombre</th>
+						<td id="l_@(sal.Id)" class="text-end"></td>
+						@foreach(var mon in divisas) {
+							<td id="s4_@(sal.Id)_@(mon.Id)" class="text-end"></td>
+						}
+					</tr>
+				}
+            </tbody>
+            <tfoot class="bg-dark text-white">
+                <tr>
+                    <th rowspan="2">TOTALES</th>
+					<td id="t_l" class="text-end"></td>
+					@foreach(var mon in divisas) {
+							<th id="t_@(mon.Id)" class="text-end"></th>
+						}
+                </tr>
+            </tfoot>
+        </table>
+	</div>
+</div>
+<div class="row justify-content-around align-items-end mb-3">
+	<div class="col-12 col-md-6 mt-1 mt-md-2">
+		<textarea id="Observaciones" rows="4" class="form-control form-control-sm w-100" placeholder="Observaciones" style="resize:none;"></textarea>
+	</div>
+	<div class="col-12 col-md-6">
+		<div class="row align-items-end">
+			<div class="col-6 col-md-4 d-grid">
+				@Campos.BtnCle("cle")
+			</div>
+			<div class="col-6 col-md-4 d-grid">
+				@Campos.BtnDel("del","dGastos")
+			</div>
+			<div class="col-6 col-md-4 d-grid">
+				@Campos.BtnReg("reg","cGastos")
+			</div>
+		</div>
+	</div>
+</div>

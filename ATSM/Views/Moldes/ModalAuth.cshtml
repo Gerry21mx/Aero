@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModalTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title bg-dark w-100 pl-3 rounded text-white font-weight-bold" id="LoginModalTitle">
+					Iniciar Sesion
+				</h5>
+			</div>
+			<div class="modal-body" id="LoginModalBody">
+				<div class="card-body">
+					<p>
+						Por tiempo de Inactividad la sesion ha caducado, por favor <b>Inicie Sesion</b> nuevamente
+					</p>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Usuario" id="usuVe" name="usuVe">
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" class="form-control" placeholder="Contraseña" id="pswVe" name="pswVe" onkeypress="keyP(this)">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer" id="LoginModalFooter">
+				<div class="col-4">
+					<button type="button" class="btn btn-sm btn-block btn-success" onclick="loginMod()">Iniciar</button>
+				</div>
+				<div class="col-4">
+					<button type="button" class="btn btn-sm btn-block btn-danger" onclick="location.href = location.origin;" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

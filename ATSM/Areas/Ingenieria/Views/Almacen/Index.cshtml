@@ -1,0 +1,56 @@
+﻿@{ 
+	ViewBag.Title = "Almacén";
+}
+<div class="container">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-light rounded"><h1>@ViewBag.Title</h1></div>
+	<div class="row justify-content-around">
+        @if (Funciones.VRoles("mIngAlmArticulos").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="Articulos" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Artículos</h5>
+						    <img src="~/img/trolley-items.svg" alt="Artículos" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngAlmAlternos").Status) {
+		    <div class="col-6 col-md-3 mt-2">
+			    <a href="Alternos" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Alternos</h5>
+						    <img src="~/img/change.svg" alt="Alternos" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngAlmItems").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="Items" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Items Stock</h5>
+						    <img src="~/img/stock.svg" alt="Items Stock" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+        @if (Funciones.VRoles("mIngAlmIncoming").Status) {
+            <div class="col-6 col-md-3 mt-2">
+			    <a href="Incoming" class="text-decoration-none">
+			        <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-body">Carga Incoming</h5>
+						    <img src="~/img/scanner.svg" alt="Carga Incoming" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+                        </div>
+                    </div>
+                </a>
+            </div>
+		}
+	</div>
+</div>

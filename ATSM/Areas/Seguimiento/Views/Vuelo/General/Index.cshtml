@@ -1,0 +1,93 @@
+﻿@{ 
+    ViewBag.Title = "General de Vuelos";
+}
+
+<div class="container">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>Reporte General</h3></div>
+	<div class="row justify-content-around">
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.GetInput("Trip",true,20,"Trip","text-end")
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectAircraft(true,"IdAeronave","num")
+		</div>
+		<div class="col-6 col-md-3 mt-1 mt-md-2">
+			@Campos.GetInput("Desde",true,10,"Desde","fec text-center","date",DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd"))
+		</div>
+		<div class="col-6 col-md-3 mt-1 mt-md-2">
+			@Campos.GetInput("Hasta",true,10,"Hasta","fec text-center","date",DateTime.Now.ToString("yyyy-MM-dd"))
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.SelectTipoVuelo(true,"IdTipoVuelo","num","Tipo")
+		</div>
+	<div class="w-100 mt-0 mt-md-2 mt-1 mt-md-2"></div>	
+		<div class="col-6 col-md-3 mt-1 mt-md-2">
+			@Campos.SelectAeropuerto(true, "IdOrigen", "text-center", "Origen", true)
+		</div>
+		<div class="col-6 col-md-3 mt-1 mt-md-2">
+			@Campos.SelectAeropuerto(true, "IdDestino", "text-center", "Destino", true)	
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			<div class="input-group input-group-sm">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="Estado">Estado</label>
+				</div>
+				<select class="custom-select custom-select-sm" id="Estado">
+					<option selected value="">...</option>
+					<option value="0">Abiertos</option>
+					<option value="1">Cerrados</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			@Campos.Switch("TipoReporte","Desglose","Resumen")
+		</div>
+	<div class="w-100 mt-0 mt-md-2"></div>
+		<div class="col-12 col-md-4 mt-1 mt-md-2">
+			<div class="input-group input-group-sm">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="IdCapitan">Capitan</label>
+				</div>
+				<select class="custom-select custom-select-sm" id="IdCapitan">
+					<option selected value="0">...</option>
+					@foreach(var tri in ViewBag.crews) {
+						<option value="@tri.IdCrew">@tri.Nombre</option>
+					}
+				</select>
+			</div>
+		</div>
+		<div class="col-12 col-md-4 mt-1 mt-md-2">
+			<div class="input-group input-group-sm">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="IdCopiloto">Copiloto</label>
+				</div>
+				<select class="custom-select custom-select-sm" id="IdCopiloto">
+					<option selected value="0">...</option>
+					@foreach(var tri in ViewBag.crews) {
+						<option value="@tri.IdCrew">@tri.Nombre</option>
+					}
+				</select>
+			</div>
+		</div>
+		<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+			<button id="con" class="btn btn-sm btn-outline-primary btn-block">Consultar</button>
+		</div>
+	</div>
+</div>
+<div class="row justify-content-around">
+	<div class="col-12 col-md-11">
+		<hr />
+		@RenderPage("~/Areas/Seguimiento/Views/Vuelo/List.cshtml")
+	</div>
+</div>
+
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Aeropuerto.js")
+    @Scripts.Render("~/cjs/mtto/Aeronave.js")
+    @Scripts.Render("~/cjs/crw/Crew.js")
+    @Scripts.Render("~/cjs/crw/Capacidad.js")
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Ruta.js")
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Vuelo.js")
+    @Scripts.Render("~/Areas/Seguimiento/Views/Vuelo/General/general.js")
+}

@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Grafica de Vuelos</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/plugins")
+    @Scripts.Render("~/bundles/base")
+	@Scripts.Render("https://www.gstatic.com/charts/loader.js")
+	@Scripts.Render("~/Areas/Seguimiento/cjs/Vuelo.js")
+
+</head>
+<body>
+<script type="text/javascript">
+	$(() =>{
+		google.charts.load('current', { 'packages': ['corechart'] });
+		google.charts.setOnLoadCallback(gVuelos);
+		$('#hMes').height($(window).height() - 75);
+	});
+	function gVuelos() {
+		var filtro = {
+			idaeronave: @ViewBag.idaeronave,
+			desde: '@ViewBag.desde',
+			hasta: '@ViewBag.hasta',
+			idcapacidad: @ViewBag.idcapacidad,
+			tipo_reporte: false,
+		}
+		Vuelo.reporte(filtro).then((data) => {
+			var hm = [['Mes', 'Horas', { role: 'style' }, { role: 'annotation' }]];
+			data.Data.forEach((vlo, idx) => {
+				let fec = moment(vlo.Salida);
+				let m = fec.format('MMMM');
+				let mv = moment(vlo.fdAterrizaje).diff(moment(vlo.fdDespegue), 'minutes');
+				let ind = hm.findIndex(e => e[0] === m);
+				if (ind > -1) {
+					hm[ind][1] += mv / 60;
+					hm[ind][3] = `${accounting.formatNumber(hm[ind][1], 1, ',', '.')}`;
+				} else {
+					hm.push([m, (mv / 60), `color: ${gColor()}`, `${accounting.formatNumber((mv / 60), 1, ',', '.')}`]);
+				}
+
+			});
+			var data = google.visualization.arrayToDataTable(hm);
+			var view = new google.visualization.DataView(data);
+			view.setColumns([0, 1,
+				{
+					calc: "stringify",
+					sourceColumn: 1,
+					type: "string",
+					role: "annotation"
+				},
+				2]);
+			var options = {
+				title: 'Horas Por Mes',
+				is3D: true,
+				bar: { groupWidth: "85%" },
+				legend: { position: "none" }
+			};
+			chartHoras = new google.visualization.ColumnChart(document.getElementById('hMes'));
+			chartHoras.draw(view, options);
+		});
+	}
+	function gColor() {
+		var simbolos, color;
+		simbolos = "0123456789ABCDEF";
+		color = "#";
+		for (var i = 0; i < 6; i++) {
+			color = color + simbolos[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+</script>
+
+<div id="hMes" style="width:100%; height:100%;"></div>
+</body>
+</html>

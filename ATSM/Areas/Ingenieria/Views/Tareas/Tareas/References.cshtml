@@ -1,0 +1,28 @@
+﻿@{
+    
+}
+<div class="alert alert-dark" role="alert">List of Reference for the task</div>
+<div class="row justify-content-around mt-0 mt-md-3">
+	<div class="col-12 col-md-4">
+		@Campos.GetInput("Reference", true, 100, "", "", "text", "", true, true, "Reference")
+	</div>
+	<div class="col-12 col-md-4">
+		@Campos.GetInput("Designation", true, 200, "", "", "text", "", true, true, "Designation")
+	</div>
+	<div class="col-12 col-md-2">
+	</div>
+	<div class="col-12 col-md-2">
+		<button id="addR" class="btn btn-sm btn-block btn-outline-dark"><i class="fas fa-plus-circle"></i> Add</button>
+	</div>
+</div>
+<hr />
+<table id="tab4" class="table table-sm compact table-responsive-md table-bordered rounded w-100">
+	<thead class="thead-dark">
+		<tr>
+			<th>Reference</th>
+			<th>Designation</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody id="refList"></tbody>
+</table>

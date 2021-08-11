@@ -1,0 +1,67 @@
+﻿@{
+	ViewBag.Title = "Biweekly";
+}
+
+<div class="container mt-0 mt-md-2">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>@ViewBag.Title</h3></div>
+
+	<div class="row justify-conten-between">
+		<div class="col-12 col-md-7">
+			<div class="row justify-content-between g-1">
+				<div class="col-6">
+					@Campos.GetInput("Codigo", true, 10, "Biweekly", "text-center", "text", "", true, true, "Biweekly")
+				</div>
+				<div class="col-6">
+					@Campos.GetInput("Fecha", true, 10, "", "fec text-center", "date", DateTime.Now.ToString("yyyy-MM-dd"),false)	
+				</div>
+			</div>
+			<div class="row justify-content-between g-1 mt-1 mt-md-2">
+				<div class="col-4">
+					@Campos.BtnCle()
+				</div>
+				<div class="col-4">
+					@Campos.BtnDel()
+				</div>
+				<div class="col-4">
+					@Campos.BtnReg()
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-md-5 sz-font-75">
+			<table id="tabla" class="table table-sm table-striped table-hover compact table-responsive">
+				<thead class="table-dark">
+					<tr>
+						<th>Id</th>
+						<th>Biweekly</th>
+						<th>Fecha</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+		<hr />
+	<div class="row justify-conten-between">
+		<div class="col-12 col-6 sz-font-75">
+			<table id="tFaa" class="table table-sm table-striped table-hover compact table-responsive">
+				<thead class="table-dark">
+					<tr>
+						<th>Tipo</th>
+						<th>Biweekly</th>
+						<th>Desde</th>
+						<th>Hasta</th>
+						<th>Documento</th>
+						<th>PDF</th>
+						<th>Excel</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Biweekly.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/Catalogos/Biweekly/appr.js")
+}

@@ -1,0 +1,71 @@
+﻿@{
+	ViewBag.Title = "Vuelos";
+	ViewBag.menu = "Seguimiento";
+	var aviones = Aircraft.GetAircrafts();
+	var aptos = Aeropuerto.GetAeropuertos(true);
+}
+<div>
+	<datalist id="listAircraft">
+		@foreach(var avi in aviones) {
+			if (avi.Estado) {
+				avi.SetModelo();
+				if (avi.Modelo.IdCapacidad > 0) {
+					<option value="@avi.Matricula" data-id="@avi.Id" data-jumpseat="@avi.JumpSeat" data-pasajeros="@avi.Pasajeros" data-idmodelo="@avi.Modelo.Id" data-modelo="@avi.Modelo.Nombre" data-idcapacidad="@avi.Modelo.IdCapacidad"></option>
+				}
+			}
+		}
+	</datalist>
+	<datalist id="listApto">
+		@foreach(var apto in aptos) {
+			<option value="@apto.IATA" data-id="@apto.IdAeropuerto" data-abre="@apto.Abre" data-cierra="@apto.Cierra" data-pais="@apto.Pais" data-estado="@apto.Estado"></option>
+		}
+	</datalist>
+</div>
+
+<div class="container mt-0 mt-md-2">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>Vuelo</h3></div>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-tab01-tab" data-bs-toggle="tab" href="#nav-tab01" role="tab" aria-controls="nav-tab01" aria-selected="true">
+                <div class="spinner-grow spinner-grow-sm text-primary d-none" role="status" id="loadVuelos"><span class="sr-only">Loading...</span></div>
+				Transito
+            </a>
+            <a class="nav-item nav-link" id="nav-tab02-tab" data-bs-toggle="tab" href="#nav-tab02" role="tab" aria-controls="nav-tab02" aria-selected="false">
+                <i class="fas fa-plane"></i> <span class="d-none d-md-inline">Vuelo</span>
+                <div class="spinner-grow spinner-grow-sm text-primary d-none" role="status" id="loadTramos"><span class="sr-only">Loading...</span></div>
+            </a>
+            <a class="nav-item nav-link disabled" id="nav-tab03-tab" data-bs-toggle="tab" href="#nav-tab03" role="tab" aria-controls="nav-tab03" aria-selected="false">
+                <i class="fas fa-plane-departure"></i> <span class="d-none d-md-inline">Salida</span>
+            </a>
+            <a class="nav-item nav-link disabled" id="nav-tab04-tab" data-bs-toggle="tab" href="#nav-tab04" role="tab" aria-controls="nav-tab04" aria-selected="false">
+                <i class="fas fa-plane-arrival"></i> <span class="d-none d-md-inline">Llegada</span>
+            </a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-tab01" role="tabpanel" aria-labelledby="nav-tab01-tab">
+            @RenderPage("~/Areas/Seguimiento/Views/Vuelo/List.cshtml")
+        </div>
+        <div class="tab-pane fade" id="nav-tab02" role="tabpanel" aria-labelledby="nav-tab02-tab">
+            @RenderPage("~/Areas/Seguimiento/Views/Vuelo/Vuelo/Vuelo.cshtml")
+        </div>
+        <div class="tab-pane fade" id="nav-tab03" role="tabpanel" aria-labelledby="nav-tab03-tab">
+            @RenderPage("~/Areas/Seguimiento/Views/Vuelo/Vuelo/Salida.cshtml")
+        </div>
+        <div class="tab-pane fade" id="nav-tab04" role="tabpanel" aria-labelledby="nav-tab04-tab">
+            @RenderPage("~/Areas/Seguimiento/Views/Vuelo/Vuelo/Llegada.cshtml")
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Aeropuerto.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Aircraft.js")
+    @Scripts.Render("~/cjs/crw/Crew.js")
+    @Scripts.Render("~/cjs/crw/Capacidad.js")
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Ruta.js")
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Vuelo.js")
+    @Scripts.Render("~/Areas/Seguimiento/Views/Vuelo/Vuelo/vuelo.js")
+}

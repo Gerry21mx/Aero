@@ -1,0 +1,24 @@
+﻿@{ 
+	ViewBag.Title = "Componentes Mayores";
+}
+<div class="container">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-light rounded"><h1>@ViewBag.Title</h1></div>
+	<div class="row justify-content-around">
+		@if (Funciones.VRoles("mIngMayores").Status) {
+			var componentes = ComponenteMayor.GetComponentesMayores();
+			foreach(var componente in componentes) {
+				<div class="col-6 col-md-3 mt-2">
+					<a href="Mayores?idc=@componente.Id" class="text-decoration-none">
+						<div class="card bg-light">
+							<div class="card-body text-center">
+								<h5 class="card-title text-body">@componente.Descripcion</h5>
+								<img src="~/img/logo-web-component.svg" alt="Crew" class="img-fluid img-thumbnail p-2 rounded" style="height:80px;"/>
+							</div>
+						</div>
+					</a>
+				</div>
+			}
+		}
+	</div>
+</div>
+

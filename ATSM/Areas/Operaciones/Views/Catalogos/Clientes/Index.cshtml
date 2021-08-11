@@ -1,0 +1,30 @@
+﻿
+@{ 
+	ViewBag.Title = "Clientes";
+}
+<div class="container">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3 id="tit">@ViewBag.Title</h3></div>
+
+    <ul class="nav nav-tabs" id="Clientes" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="Lista-tab" data-bs-toggle="tab" data-bs-target="#Lista" type="button" role="tab" aria-controls="Lista" aria-selected="true">Clientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="Alta-tab" data-bs-toggle="tab" data-bs-target="#Alta" type="button" role="tab" aria-controls="Alta" aria-selected="false">Alta</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="Lista" role="tabpanel" aria-labelledby="Lista-tab">
+            @RenderPage("~/Areas/Operaciones/Views/Catalogos/Clientes/Lista.cshtml")
+        </div>
+        <div class="tab-pane fade @*show active*@" id="Alta" role="tabpanel" aria-labelledby="Alta-tab">
+            @RenderPage("~/Areas/Operaciones/Views/Catalogos/Clientes/Alta.cshtml")
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/Areas/Operaciones/cjs/ClienteActividad.js")
+    @Scripts.Render("~/Areas/Operaciones/cjs/ClienteContacto.js")
+    @Scripts.Render("~/Areas/Operaciones/cjs/Cliente.js")
+    @Scripts.Render("~/Areas/Operaciones/Views/Catalogos/Clientes/appr.js")
+}

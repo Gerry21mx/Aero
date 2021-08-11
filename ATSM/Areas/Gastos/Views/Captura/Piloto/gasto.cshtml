@@ -1,0 +1,111 @@
+﻿<div class="row justify-content-around gx-1">
+	<div class="col-12 mt-1 mt-md-2 text-center">
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="radio" name="IdTipoGasto" id="IdTipoGasto1" value="1" checked>
+			<label class="form-check-label" for="IdTipoGasto1">Sin Comprobante</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="radio" name="IdTipoGasto" id="IdTipoGasto2" value="2">
+			<label class="form-check-label" for="IdTipoGasto2">Operacion</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="radio" name="IdTipoGasto" id="IdTipoGasto3" value="3">
+			<label class="form-check-label" for="IdTipoGasto3">Con Comprobante</label>
+		</div>
+		<div class="form-check form-check-inline">
+			<input class="form-check-input" type="radio" name="IdTipoGasto" id="IdTipoGasto4" value="4">
+			<label class="form-check-label" for="IdTipoGasto4">Combustibles</label>
+		</div>
+	</div>
+
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-none" data-ocul="true">
+		<div class="input-group input-group-sm w-100">
+			<label class="input-group-text" for="IdAeropuerto">Aeropuerto</label>
+			<select class="form-select num" id="IdAeropuerto"></select>
+		</div>
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-none" data-ocul="true">
+		@Campos.GetInput("Factura",true,30)
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 mt-1 mt-md-2">
+		@Campos.GetInput("Concepto",true,200)
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.SelectMonedas(true,"IdMoneda","num")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.SelectSaldos(true,"IdSaldo","num",null)
+	</div>
+
+	
+	@*MONTOS*@
+	<div class="w-100 text-center">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+				<b class="leyenda">Montos</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-none" data-ocul="true">
+		@Campos.GetInput("Subtotal",true,12,"","mon text-end", "number","0",true,false,"Subtotal","0")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mt-md-2 d-none" data-ocul="true">
+		@Campos.GetInput("ImpHospedaje",true,12,"","mon text-end","number","0",true,false,"Impuesto Hospedaje","0")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-none" data-ocul="true">
+		@Campos.GetInput("P_IVA",true,5,"","dec text-end", "number","0",true,false,"% IVA","0")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-none" data-ocul="true">
+		@Campos.GetInput("IVA",true,12,"","mon text-end", "number", "0", false,false,"IVA","0")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Total",true,12,"","mon text-end", "number", "0",true,false,"Total","0")
+	</div>
+	
+	@*COMBUSTIBLE*@
+	<div class="w-100 text-center d-none" id="divCom">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+				<b class="leyenda">Combustible</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+	
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-none" data-ocul="true">
+		@Campos.GetInput("LTS_Combustible",true,18,"Lts","dec text-end","","",true,false,"Litros")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-none" data-ocul="true">
+		@Campos.GetInput("Galones",true,18,"Gal","dec text-end", "number")
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-none" data-ocul="true">
+		@Campos.GetInput("PPL",true,18,"","mon text-end","number","",false,false,"<i class='fas fa-dollar-sign'></i>&nbsp;Litro")
+	</div>
+	
+	@*DOCUMENTOS*@
+	<div class="w-100 text-center d-none" id="divDoc">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+				<b class="leyenda">Documentos</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+
+	<div class="col-12 col-sm-6 col-md-4 d-none" data-ocul="true">
+		<div class="input-group input-group-sm">
+			<input id="fileFactura" class="form-control" type="file" accept="application/pdf">
+			<span class="input-group-text" id="fileFacturaSpn">Factura/Recibo</span>
+		</div>
+	</div>
+	<div class="col-12 col-sm-6 col-md-4 mt-1 mt-md-2 d-none" data-ocul="true">
+		<div class="input-group input-group-sm">
+			<input id="fileXml" class="form-control" type="file" accept="text/xml">
+			<span class="input-group-text" id="fileXmlSpn">XML</span>
+		</div>
+	</div>
+
+	<div class="col-12"><hr /></div>
+	<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-1 mt-md-2 d-grid">
+		<button name="addg" data-tg="1" class="btn btn-sm btn-success btn-block">Agregar</button>
+	</div>
+</div>

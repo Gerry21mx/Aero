@@ -1,0 +1,51 @@
+﻿@{
+    
+}
+
+<div class="row justifi-content-around">
+	<div class="col-12 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("Nombre",true,100,"Nombre")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("ICAO",true,4,"ICAO")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("IATA",true,3,"IATA")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Pais",true,50,"Pais")
+	</div>
+	<div class="col-6 col-md-3 mt-1 mt-md-2">
+		@Campos.GetInput("Estado",true,50,"Estado")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Abre",true,5,"Abre","text-center","time")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Cierra",true,5,"Cierra","text-center","time")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Latitud",true,50,"Latitud")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Longitud",true,50,"Longitud")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 mt-1 mt-md-2">
+		@Campos.GetInput("Elevacion",true,6,"Elevacion","num text-end")
+	</div>
+	<div class="col-6 col-md-4 col-lg-2 align-self-center">
+		@Campos.Switch()
+	</div>
+</div>
+<hr />
+<div class="row justify-content-around mt-2 mt-md-2">
+	<div class="col col-md-2">
+		@Campos.BtnCle()
+	</div>
+	<div class="col col-md-2">
+		@Campos.BtnDel("del","dAeropuerto")
+	</div>
+	<div class="col col-md-2">
+		@Campos.BtnReg("reg","cAeropuerto")
+	</div>
+</div>

@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row justify-content-around pt-1 pt-md-2 g-1">
+    <div class="col-12 col-md-6">
+        @Campos.GetInput("Nombre", true, 50)
+    </div>
+    <div class="col-12 col-md-6">
+        @Campos.GetInput("Puesto", true, 50)
+    </div>
+</div>
+<div class="row justify-content-around pt-1 pt-md-2 g-1">
+    <div class="col-12 col-md-6">
+        @Campos.GetInput("Telefono", true, 20, "Telefono", "text-center", "tel", "", true, false, "<i class='fas fa-phone'></i>")
+    </div>
+    <div class="col-12 col-md-6">
+        @Campos.GetInput("Extension", true, 10, "Ext.", "", "","", true, false, "Ext.")
+    </div>
+</div>
+<div class="row justify-content-around pt-1 pt-md-2 g-1">
+    <div class="col-12 col-md-6">
+        @Campos.GetInput("Celular", true, 20, "Celular", "text-center", "tel", "", true, false, "<i class='fas fa-mobile-alt'></i>")
+    </div>
+    <div class="col-12 col-md-6">
+        @Campos.GetInput("Otro", true, 20, "Otro", "text-center", "tel", "", true, false, "<i class='fas fa-address-book'></i>")
+    </div>
+</div>
+<div class="row justify-content-around pt-1 pt-md-2 g-1">
+    <div class="col-12 col-md-6">
+        @Campos.GetInput("Correo", true, 50, "Correo", "text-center", "email", "", true, false, "<i class='fas fa-at'></i>")
+    </div>
+    <div class="col-12 col-md-6">
+		<textarea id="Observaciones" maxlength="500" cols="6" rows="2" class="form-control form-control-sm w-100" placeholder="Observaciones"></textarea>
+    </div>
+</div>
+<div class="row justify-content-around pt-2 pt-md-3">
+    <div class="col-4">
+        @Campos.BtnCle("cleCon")
+    </div>
+    <div class="col-4">
+        @Campos.BtnDel("delCon", "dContactCli", false)
+    </div>
+    <div class="col-4">
+        @Campos.BtnReg("regCon", "cContactCli", false)
+    </div>
+</div>
+<hr />
+<div class="pt-2 pt-md-3 sz-font-725">
+	<table id="tContactos" class="table table-sm table-condensed compact table-hover table-striped w-100 table-responsive">
+		<thead class="table-dark">
+			<tr>
+				<th>Nombre</th>
+				<th>Puesto</th>
+				<th>Contacto</th>   
+			</tr>
+        </thead>
+    </table>
+</div>

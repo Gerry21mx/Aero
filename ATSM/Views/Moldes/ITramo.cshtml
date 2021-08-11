@@ -1,0 +1,87 @@
+﻿@{
+	Layout = null;
+	string salida = ViewBag.Tramo.Salida.ToString("dd/MM/yyyy");
+	string llegada = ViewBag.Tramo.Llegada == null ? salida : ViewBag.Tramo.Llegada.ToString("dd/MM/yyyy");
+}
+
+<div class="modal" tabindex="-1" role="dialog" id="InfoTramo">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title align-items-center">
+			Trip <span class="text-primary">@ViewBag.Vuelo.Trip</span>
+			Pierna <span class="text-primary">@ViewBag.Tramo.Pierna</span>
+        </h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <b>Origen: </b> <span class="text-primary">@ViewBag.Tramo.Origen.IATA - @ViewBag.Tramo.Origen.Nombre</span>
+              </div>
+			  <div class="col-6">
+				  <b>Destino: </b> <span class="text-primary">@ViewBag.Tramo.Destino.IATA - @ViewBag.Tramo.Destino.Nombre</span>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <div class="shadow-sm p-1 mb-2 bg-light rounded font-weight-bold text-center"><b>Itinerario </b></div>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <b>Despegue: </b> <span class="text-primary">@(ViewBag.Tramo.ItinerarioDespegue==null?"":salida + " " + ViewBag.Tramo.ItinerarioDespegue.ToString(@"hh\:mm"))</span>
+              </div>
+			  <div class="col-6">
+				  <b>Aterrizaje: </b> <span class="text-primary">@(ViewBag.Tramo.ItinerarioAterrizaje==null?"":llegada + " " + ViewBag.Tramo.ItinerarioAterrizaje.ToString(@"hh\:mm"))</span>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <div class="shadow-sm p-1 mb-2 bg-light rounded font-weight-bold text-center"><b>Plataforma </b></div>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <b>Salida: </b> <span class="text-primary">@(ViewBag.Tramo.SalidaPlataforma==null?"":salida + " " + ViewBag.Tramo.SalidaPlataforma.ToString(@"hh\:mm"))</span>
+              </div>
+			  <div class="col-6">
+				  <b>Llegada: </b> <span class="text-primary">@(ViewBag.Tramo.LlegadaPlataforma==null?"":llegada + " " + ViewBag.Tramo.LlegadaPlataforma.ToString(@"hh\:mm"))</span>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <div class="shadow-sm p-1 mb-2 bg-light rounded font-weight-bold text-center"><b>Vuelo </b></div>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <b>Despegue: </b> <span class="text-primary">@(ViewBag.Tramo.Despegue==null?"":salida + " " + ViewBag.Tramo.Despegue.ToString(@"hh\:mm"))</span>
+              </div>
+			  <div class="col-6">
+				  <b>Aterrizaje: </b> <span class="text-primary">@(ViewBag.Tramo.Aterrizaje==null?"":llegada + " " + ViewBag.Tramo.Aterrizaje.ToString(@"hh\:mm"))</span>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <div class="shadow-sm p-1 mb-2 bg-light rounded font-weight-bold text-center"><b>Tripulacion </b></div>
+              </div>
+          </div>
+		  <div class="row justify-content-around">
+			  <div class="col-6">
+				  <b>@ViewBag.Tramo.Capitan.Nombre</b>
+              </div>
+			  <div class="col-6">
+				  <b>@ViewBag.Tramo.Copiloto.Nombre</b>
+              </div>
+          </div>
+      </div>
+	  <div class="modal-footer">
+		  <a href="~/Seguimiento/Vuelo/Vuelo?id=@(ViewBag.Vuelo.IdVuelo)&p=@(ViewBag.Tramo.Pierna)" target="_blank" class="btn btn-sm btn-success" id="modTra">Modificar</a>
+		  <button class="btn btn-sm btn-danger" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+	  </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,326 @@
+﻿@using System.Data.SqlClient;
+@{ 
+	ViewBag.Title = "Bitacora de Vuelos";
+	var aviones = Aircraft.GetAircrafts();
+	var tripulaciones = Crew.GetCrews(true);
+	var aptos = Aeropuerto.GetAeropuertos(true);
+
+	//			NO BORRAR MODULO PARA ACTUALIZACION DE NUMEROS CONSECUTIVOS DE RVSM - RCCA
+	//SqlCommand comando = new SqlCommand("SELECT DISTINCT IdBitacora, COUNT(*) AS NT FROM BitacoraRCCA GROUP BY IdBitacora", DataBase.Conexion());
+	//var res = DataBase.Query(comando);
+	//foreach(var rg in res.Rows) {
+	//	for(var i = 1; i <= rg.NT; i++) {
+	//		comando = new SqlCommand("UPDATE BitacoraRCCA SET No = @no WHERE Id = (SELECT TOP 1 Id FROM BitacoraRCCA WHERE IdBitacora = @idb AND No = 0 ORDER BY Id)", DataBase.Conexion());
+	//		comando.Parameters.AddWithValue("@no", i);
+	//		comando.Parameters.AddWithValue("@idb", rg.IdBitacora);
+	//		res = DataBase.Execute(comando);
+	//		var x = 0;
+	//	}
+
+	//}
+
+
+}
+<div>
+	<datalist id="listAircraft">
+		@foreach(var avi in aviones) {
+			if (avi.Estado) {
+				avi.SetModelo();
+				if (avi.Modelo.IdCapacidad > 0) {
+					<option value="@avi.Matricula" data-id="@avi.Id" data-jumpseat="@avi.JumpSeat" data-pasajeros="@avi.Pasajeros" data-idmodelo="@avi.Modelo.Id" data-modelo="@avi.Modelo.Nombre" data-idcapacidad="@avi.Modelo.IdCapacidad"></option>
+				}
+			}
+		}
+	</datalist>
+	<datalist id="listApto">
+		@foreach(var apto in aptos) {
+			<option value="@apto.IATA" data-id="@apto.IdAeropuerto" data-abre="@apto.Abre" data-cierra="@apto.Cierra" data-pais="@apto.Pais" data-estado="@apto.Estado"></option>
+		}
+	</datalist>
+</div>
+<div class="container-md">
+    <div class="shadow-lg p-3 mt-2 mb-4 text-center bg-light rounded"><h1>@ViewBag.Title</h1></div>
+	<div class="row justify-content-around g-1 mt-1 mt-md-2">
+		<div class="col-6 col-md-3 col-xl-2">
+			@Campos.GetInput("Folio",true,6,"","num text-end","number","",true,false)
+		</div>
+		<div class="col-6 col-md-3 col-xl-2">
+			@Campos.GetInput("Aircraft",true,6,"","text-center","text","Matricula",true,true,"Avion")
+		</div>
+		<div class="col-6 col-md-3 col-xl-2">
+			@Campos.GetInput("Fecha",true,10,"","fec text-center","date")
+		</div>
+		<div class="col-6 col-md-3 col-xl-2">
+			<div class="input-group input-group-sm">
+				<label class="input-group-text" for="Cancelada">Cancelada</label>
+				<select class="form-select form-select-sm num" id="Cancelada">
+					<option value="0">No</option>
+					<option value="1">Mantenimiento</option>
+					<option value="2">Tripulacion</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row justify-content-around g-1 mt-1 mt-md-2">
+		<div class="col-6 col-md-4 col-xl-3">
+			<div class="input-group input-group-sm">
+				<label class="input-group-text" for="IdComandante">Comandante</label>
+				<select class="form-select form-select-sm num" id="IdComandante">
+					<option value="0" class="d-none" selected>...</option>
+					@foreach(var crew in tripulaciones) {
+						if (crew.Nivel_1 == 1 || crew.Nivel_2 == 1 || crew.Nivel_3 == 1) {
+							<option value="@crew.IdCrew" data-cap1="@crew.IdCapacidad_1" data-cap2="@crew.IdCapacidad_2" data-cap3="@crew.IdCapacidad_3" data-nivel1="@crew.Nivel_1" data-nivel2="@crew.Nivel_2" data-nivel3="@crew.Nivel_3" class="d-none">@crew.Nombre</option>
+						}
+					}
+				</select>
+			</div>
+		</div>
+		<div class="col-6 col-md-4 col-xl-3">
+			<div class="input-group input-group-sm">
+				<label class="input-group-text" for="IdPrimerOficial">Primer Oficial</label>
+				<select class="form-select form-select-sm num" id="IdPrimerOficial">
+					<option value="0" class="d-none" selected>...</option>
+					@foreach(var crew in tripulaciones) {
+						<option value="@crew.IdCrew" data-cap1="@crew.IdCapacidad_1" data-cap2="@crew.IdCapacidad_2" data-cap3="@crew.IdCapacidad_3" data-nivel1="@crew.Nivel_1" data-nivel2="@crew.Nivel_2" data-nivel3="@crew.Nivel_3" class="d-none">@crew.Nombre</option>
+					}
+				</select>
+			</div>
+		</div>
+		<div class="col-6 col-md-3 col-xl-2">
+			@Campos.GetInput("Extra",true,100)
+		</div>
+		<div class="col-6 col-md-3">
+			<textarea id="Observaciones" maxlength="500" rows="3" class="form-control form-control-sm w-100" placeholder="Observaciones"></textarea>
+		</div>
+	</div>
+
+	<div class="row justify-content-around g-1 mt-1 mt-md-2 sz-font-725">
+		<table id="tTramosD" class="table table-sm table-striped w-100">
+			<thead class="table-dark">
+				<tr class="text-center">
+					<th colspan="2">Tramo</th>
+					<th>Fecha</th>
+					<th colspan="3">Plataforma</th>
+					<th colspan="3">Vuelo</th>
+					<th colspan="3"></th>
+					<th colspan="2">Combustible</th>
+					<th>Peso</th>
+					<th colspan="2"></th>
+				</tr>
+				<tr class="text-center">
+					<th>Origen</th>
+					<th>Destino</th>
+					<th>Salida</th>
+					<th>Salida</th>
+					<th>Llegada</th>
+					<th>Calzo</th>
+					<th>Despegue</th>
+					<th>Aterrizaje</th>
+					<th>Tiempo</th>
+					<th>Demora</th>
+					<th>Velocidad</th>
+					<th>Altitud</th>
+					<th>Salida</th>
+					<th>Llegada</th>
+					<th>KG</th>
+					<th>PAX</th>
+					<th></th>
+				</tr>
+				<tr>
+					<td class="p-0 m-0">
+						<input type="text" id="aOrigen" maxlength="3" list="listApto" class="form-control form-control-sm text-center"/>
+					</td>
+					<td class="p-0 m-0">
+						<input type="text" id="aDestino" maxlength="3" list="listApto" class="form-control form-control-sm text-center"/>
+					</td>
+					<td class="p-0 m-0"><input type="date" id="FechaSalida" maxlength="10" class="form-control form-control-sm fec text-center"/></td>
+					<td class="p-0 m-0"><input type="time" id="SalidaPlataforma" maxlength="3" class="form-control form-control-sm text-center"/></td>
+					<td class="p-0 m-0"><input type="time" id="LlegadaPlataforma" maxlength="3" class="form-control form-control-sm text-center"/></td>
+					<td class="p-0 m-0"><input type="time" id="Calzo" disabled="true" maxlength="3" class="form-control form-control-sm text-center"/></td>
+					<td class="p-0 m-0"><input type="time" id="Despegue" maxlength="3" class="form-control form-control-sm text-center"/></td>
+					<td class="p-0 m-0"><input type="time" id="Aterrizaje" maxlength="3" class="form-control form-control-sm text-center"/></td>
+					<td class="p-0 m-0"><input type="time" id="Tiempo" disabled="true" maxlength="3" class="form-control form-control-sm text-center"/></td>
+					<td class="p-0 m-0">
+						<select class="form-select form-select-sm" id="Demora">
+							<option value="">...</option>
+							<option value="FAA">FAA (AUTORIDADES)</option>
+							<option value="NOO">NOO (COMBUSTIBLES)</option>
+							<option value="WXA">WXA (MAL TIEMPO)</option>
+							<option value="REE">REE (ESPERA EQUIPO)</option>
+							<option value="MAA">MAA (MANTENIMIENTO)</option>
+							<option value="OAA">OAA (OPERACIONES)</option>
+							<option value="QJA">QJA (TRIPULACION)</option>
+							<option value="TAA">TAA (TRAFICO)</option>
+						</select>
+					</td>
+					<td class="p-0 m-0"><input type="number" id="Velocidad" maxlength="3" class="form-control form-control-sm num text-end"/></td>
+					<td class="p-0 m-0"><input type="number" id="Altitud" maxlength="3" class="form-control form-control-sm num text-end"/></td>
+					<td class="p-0 m-0"><input type="number" id="CombustibleSalida" maxlength="3" class="form-control form-control-sm num text-end"/></td>
+					<td class="p-0 m-0"><input type="number" id="CombustibleLlegada" maxlength="3" class="form-control form-control-sm num text-end"/></td>
+					<td class="p-0 m-0"><input type="number" id="Peso" maxlength="3" class="form-control form-control-sm num text-end"/></td>
+					<td class="p-0 m-0"><input type="number" id="Pasajeros" maxlength="3" class="form-control form-control-sm num text-end"/></td>
+					<td class="p-0 m-0">
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button id="addTr" type="button" class="btn btn-sm btn-success"><i class="fas fa-plus-circle"></i></button>
+							@*<button id="lnkTr" type="button" class="btn btn-sm btn-primary"><i class="fas fa-link"></i></button>*@
+						</div>
+					</td>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="row justify-content-around g-1 mt-1 mt-md-2 sz-font-725">
+		<table id="tTramos" class="table table-sm table-striped table-bordered w-100">
+			<thead class="table-primary">
+				<tr class="text-center">
+					<th></th>
+					<th>No</th>
+					<th>Origen</th>
+					<th>Destino</th>
+					<th>Salida</th>
+					<th>Salida</th>
+					<th>Llegada</th>
+					<th>Calzo</th>
+					<th>Despegue</th>
+					<th>Aterrizaje</th>
+					<th>Tiempo</th>
+					<th>Demora</th>
+					<th>Velocidad</th>
+					<th>Altitud</th>
+					<th>Salida</th>
+					<th>Llegada</th>
+					<th>KG</th>
+					<th>PAX</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+	
+	<div class="row justify-content-around g-1 mt-1 mt-md-2 sz-font-725">
+		<div class="col-12 table-responsive">
+			<table id="tParMot" class="table table-sm table-striped table-bordered w-100">
+				<thead class="table-dark">
+					<tr class="text-center">
+						<th colspan="14">Parametros de Motor</th>
+						<th class="bg-white"></th>
+						<th colspan="2">Recarga de Aceite</th>
+					</tr>
+					<tr class="text-center">
+						<th>Motor</th>
+						<th>ALT</th>
+						<th>EPR</th>
+						<th>N1</th>
+						<th>EGT</th>
+						<th>N2</th>
+						<th>Fuel Flow</th>
+						<th>Oil Temp.</th>
+						<th>Oil Press.</th>
+						<th>Bleed</th>
+						<th>OAT<br>TAT</th>
+						<th>% TRQ</th>
+						<th>% RPM</th>
+						<th>VIB</th>
+						<th class="bg-white"></th>
+						<th>ENG</th>
+						@*<th>PGU</th>*@
+						<th>APU</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="align-middle text-center">1</td>
+						<td class="p-0 m-0"><input type="number" id="ALT1" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="EPR1" maxlength="9" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="N11" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="EGT1" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="N21" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="FF1" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="OT1" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="OP1" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="pt-0 mt-0 align-middle">
+							@Campos.Switch("Bleed1","On","Off")
+						</td>
+						<td class="p-0 m-0"><input type="number" id="OAT1" maxlength="3" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="TRQ1" maxlength="3" min="0" max="200" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="RPM1" maxlength="3" min="0" max="200" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="VIB1" maxlength="3" min="0" max="9" step="1" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0">@*<input type="number" id="PGU1" maxlength="1" min="0" max="9" step="0.5" class="form-control form-control-sm num text-end"/>*@</td>
+						<td class="p-0 m-0"><input type="number" id="ENG1" maxlength="1" min="0" max="9" step="0.5" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="APU1" maxlength="1" min="0" max="9" step="0.5" class="form-control form-control-sm num text-end"/></td>
+					</tr>
+					<tr>
+						<td class="align-middle text-center">2</td>
+						<td class="p-0 m-0"><input type="number" id="ALT2" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="EPR2" maxlength="9" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="N12" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="EGT2" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="N22" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="FF2" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="OT2" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="OP2" maxlength="6" class="form-control form-control-sm text-end"/></td>
+						<td class="pt-0 mt-0 align-middle">
+							@Campos.Switch("Bleed2","On","Off")
+						</td>
+						<td class="p-0 m-0"><input type="number" id="OT2" maxlength="3" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="TRQ2" maxlength="3" min="0" max="200" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="RPM2" maxlength="3" min="0" max="200" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="VIB2" maxlength="3" min="0" max="9" step="1" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0">@*<input type="number" id="PGU2" maxlength="1" min="0" max="9" step="0.5" class="form-control form-control-sm num text-end"/>*@</td>
+						<td class="p-0 m-0"><input type="number" id="ENG2" maxlength="1" min="0" max="9" step="0.5" class="form-control form-control-sm num text-end"/></td>
+						<td class="p-0 m-0"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="row justify-content-around g-1 mt-1 mt-md-2 sz-font-725">
+		<div class="col-12 col-md-6">
+			<table id="tRCCA" class="table table-sm table-striped w-100">
+				<thead class="table-dark">
+					<tr>
+						<th colspan="7" class="text-center">Registro de Comparacion Cruzada de Altimetros</th>
+					</tr>
+					<tr class="text-center">
+						<th>Despacho RVSM</th>
+						<th>No Vuelo</th>
+						<th>Desviacion</th>
+						<th>Altitud</th>
+						<th colspan="2">Dif Altimetros</th>
+						<th></th>
+					</tr>
+					<tr class="text-center">
+						<td class="p-0 m-0"></td>
+						<td class="p-0 m-0"><input type="text" id="NoVuelo" maxlength="10" class="form-control form-control-sm"/></td>
+						<td class="py-0 my-0">@Campos.Switch("Desviacion","Si","No")</td>
+						<td class="p-0 m-0"><input type="number" id="Altitud" maxlength="3" min="0" max="400" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="DIF1" maxlength="4" class="form-control form-control-sm text-end"/></td>
+						<td class="p-0 m-0"><input type="number" id="DIF2" maxlength="4" class="form-control form-control-sm text-end"/></td>
+						<th class="p-0 m-0"><button type="button" class="btn btn-sm btn-success" id="addRvsm"><i class="fas fa-plus-circle"></i></button></th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+	
+	<div class="row justify-content-around g-1 mt-1 mt-md-2">
+		<div class="col-4 col-md-2">
+			@Campos.BtnCle()
+		</div>
+		<div class="col-4 col-md-2">
+			@Campos.BtnDel("del","dBitacora")
+		</div>
+		<div class="col-4 col-md-2">
+			@Campos.BtnReg("reg","cBitacora")
+		</div>
+	</div>
+</div>
+@section Scripts{ 
+	@Scripts.Render("~/Areas/Seguimiento/cjs/Aeropuerto.js")
+	@*@Scripts.Render("~/cjs/crw/Crew.js")*@
+	@Scripts.Render("~/Areas/Ingenieria/cjs/Aircraft.js")
+	@Scripts.Render("~/Areas/Ingenieria/cjs/Bitacora.js")
+	@Scripts.Render("~/Areas/Ingenieria/Views/Operaciones/BitacoraVuelo/appr.js")
+}

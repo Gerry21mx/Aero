@@ -1,0 +1,30 @@
+﻿@using System.Data.SqlClient
+@{
+    
+}
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-12 col-md-8 mt-1 mt-md-2">
+		@Campos.GetInput("Codigo",true,50,"Codigo")
+	</div>
+	<div class="col-12 col-md-4 align-self-center">
+		@Campos.Switch()
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2">
+	<div class="col-12 mt-1 mt-md-2">
+		@Campos.GetInput("Definicion",true,100,"Definicion")
+	</div>
+</div>
+<hr />
+<div class="row justify-content-center mt-0 mt-md-2">
+	<div class="col-4">
+		@Campos.BtnCle()
+	</div>
+	<div class="col-4">
+		@Campos.BtnDel("del","dFamilia")
+	</div>
+	<div class="col-4">
+		@Campos.BtnReg("reg","cFamilia")
+	</div>
+</div>
+<hr />

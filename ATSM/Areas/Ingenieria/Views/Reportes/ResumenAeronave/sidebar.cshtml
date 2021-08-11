@@ -1,0 +1,121 @@
+﻿@{ 
+
+}
+<!-- Nav Item - Dashboard -->
+<li class="nav-item active">
+    <a class="nav-link" href="~/Ingenieria/Reportes/ResumenAeronave">
+        <i class="fas fa-fighter-jet"></i>
+        <span>Resumen Aeronave</span></a>
+</li>
+
+<!-- Divider -->
+<hr class="sidebar-divider">
+<li class="nav-item active">
+	<div class="row justify-content-around">
+		<div class="col-11">
+            @Campos.SelectAircraft()
+        </div>
+    </div>
+</li>
+
+<!-- Heading -->
+<div class="sidebar-heading">
+    Componentes Mayores
+</div>
+
+
+@foreach(var cMayor in ViewBag.mayores) {
+    <!-- @cMayor.Codigo - @cMayor.Descripcion -->
+    <li class="nav-item d-none" data-idmayor="@cMayor.Id" data-tipo="mMay" data-descripcion="@cMayor.Descripcion">
+        <a class="nav-link collapsed dropdown-toggle disabled" href="#" data-bs-toggle="collapse" data-bs-target="#collapse@(cMayor.Codigo)" aria-expanded="true" aria-controls="collapse@(cMayor.Codigo)">
+            <i class="far fa-paper-plane"></i>
+            <span>@cMayor.Descripcion</span>
+        </a>
+        <div id="collapse@(cMayor.Codigo)" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded sz-font-75" id="fams@(cMayor.Codigo)">
+                <a class="nav-link text-dark collapsed dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#collapseComponentes@(cMayor.Codigo)" aria-expanded="true" aria-controls="collapseComponentes@(cMayor.Codigo)" data-selector="tipomenores" data-idtipo="1">
+                    <i class="fas fa-car-battery"></i>
+                    <span>Componentes</span>
+                </a>
+				<div id="collapseComponentes@(cMayor.Codigo)" class="collapse" class="collapse" data-parent="#collapse@(cMayor.Codigo)">
+					<div class="bg-light py-2 collapse-inner rounded">
+						<div id="fam_1@(cMayor.Codigo)" class="sz-font-7">
+                            @foreach(var fam in ViewBag.familias) {
+								if (fam.TM01 ?? false) {
+                                    <a class="collapse-item" style="white-space: normal" href="#" data-idfamilia="@fam.Id" data-idmayor="@cMayor.Id" data-tipo="report" data-selector="familias">@fam.Nombre</a>
+								}
+							}
+                        </div>
+                    </div>
+                </div>
+                <a class="nav-link text-dark collapsed dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDirectivas@(cMayor.Codigo)" aria-expanded="true" aria-controls="collapseDirectivas@(cMayor.Codigo)" data-selector="tipomenores" data-idtipo="2">
+                    <i class="fas fa-check-double"></i>
+                    <span>AD's / SB's</span>
+                </a>
+				<div id="collapseDirectivas@(cMayor.Codigo)" class="collapse" class="collapse" data-parent="#collapse@(cMayor.Codigo)">
+					<div class="bg-light py-2 collapse-inner rounded">
+						<div id="fam_2@(cMayor.Codigo)" class="sz-font-7">
+                            @foreach(var fam in ViewBag.familias) {
+								if (fam.TM02 ?? false) {
+                                    <a class="collapse-item" style="white-space: normal" href="#" data-idfamilia="@fam.Id" data-idmayor="@cMayor.Id" data-tipo="report" data-selector="familias">@fam.Nombre</a>
+								}
+							}
+                        </div>
+                    </div>
+                </div>
+                <a class="nav-link text-dark collapsed dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#collapseServicios@(cMayor.Codigo)" aria-expanded="true" aria-controls="collapseServicios@(cMayor.Codigo)" data-selector="tipomenores" data-idtipo="3">
+                    <i class="fas fa-list-alt"></i>
+                    <span>Servicios</span>
+                </a>
+				<div id="collapseServicios@(cMayor.Codigo)" class="collapse" class="collapse" data-parent="#collapse@(cMayor.Codigo)">
+					<div class="bg-light py-2 collapse-inner rounded">
+						<div id="fam_3@(cMayor.Codigo)" class="sz-font-7">
+                            @foreach(var fam in ViewBag.familias) {
+								if (fam.TM03 ?? false) {
+                                    <a class="collapse-item" style="white-space: normal" href="#" data-idfamilia="@fam.Id" data-idmayor="@cMayor.Id" data-tipo="report" data-selector="familias">@fam.Nombre</a>
+								}
+							}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+}
+
+<!-- Divider -->
+<hr class="sidebar-divider">
+
+<!-- Heading -->
+<div class="sidebar-heading">
+    Operacion
+</div>
+
+<!-- Nav Item - Vuelos -->
+<li class="nav-item" id="vuelos">
+    <a class="nav-link" href="#">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Vuelos</span>
+    </a>
+</li>
+
+<!-- Nav Item - Pronostico -->
+<li class="nav-item">
+    <a class="nav-link" href="tables.html">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Vencimientos</span></a>
+</li>
+
+<!-- Divider -->
+<hr class="sidebar-divider d-none d-md-block">
+
+<!-- Sidebar Toggler (Sidebar) -->
+<div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+</div>
+
+<!-- Sidebar Message -->
+<div class="sidebar-card d-none d-lg-flex">
+    <i class="fas fa-plane-arrival"></i>
+    <strong>Posicion</strong>
+</div>

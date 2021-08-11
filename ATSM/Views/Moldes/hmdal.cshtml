@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal fade" id="@(ViewBag.idMod)" tabindex="-1" role="dialog" aria-labelledby="@(ViewBag.idMod)Title" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered @ViewBag.size" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title @ViewBag.cssHead" id="@(ViewBag.idMod)Title">
+					@MvcHtmlString.Create(ViewBag.title)
+				</h5>
+				@if(ViewBag.closeBtn) {
+					<button type="button" class="close btn-outline-dark" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				}
+			</div>
+			<div class="modal-body" id="@(ViewBag.idMod)Body">
+				@MvcHtmlString.Create(ViewBag.body)
+			</div>
+			<div class="modal-footer" id="@(ViewBag.idMod)Footer">
+				<div>
+					@MvcHtmlString.Create(ViewBag.footer)
+				</div>
+				@foreach(var btn in ViewBag.buttons) {
+					<div class="@((btn.width!=null && btn.width>0)?$"col-{btn.width}":"col")">
+						<button id="@btn.id" class="@btn.clas" @(btn.closeModal?$"data-dismiss=modal":"")>@btn.nombre</button>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>

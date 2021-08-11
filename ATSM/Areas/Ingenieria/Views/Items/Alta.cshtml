@@ -1,0 +1,143 @@
+﻿@{ 
+	
+}
+<div class="row justify-content-around">
+	<div class="col-6 col-md-3">
+		@Campos.GetInput("Id",true,0,"Tracking Number","num text-end","number","",true,false,"Tracking Number")
+	</div>
+	<div class="col-6 col-md-4">
+		@Campos.SelectComponentesMayores(true,"IdMayor","","Categoria",false,false,true)
+	</div>
+	<div class="col-6 col-md-4">
+		@Campos.SelectModelo(true)
+	</div>
+</div>
+<div class="row justify-content-around g-2">
+	@*Generales*@
+	<div class="w-100 text-center sz-font-75">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+			<b class="leyenda">Generales</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+	<div class="col-6 col-md-4 col-xl-3">
+		<div class="input-group input-group-sm">
+			<span class="input-group-text">Item Mayor</span>
+			<select class="form-select form-select-sm num" id="IdItemMayor"></select>
+			<span class="input-group-text btn btn-sm btn-primary" data-tipo="informacion" id="iIdItemMayor"><i class="fas fa-info-circle"></i></span>
+		</div>
+	</div>
+	<div class="col-6 col-md-4 col-xl-3">
+		@Campos.GetInput("NP",true,0,"Componente Menor","","","",true,false,"NP",null,null,true)
+		<datalist id="listNP"></datalist>
+	</div>
+	<div class="col-6 col-md-4 col-xl-3@(ViewBag.Tipo==1?"":" d-none")">
+		<div class="input-group input-group-sm">
+			<span class="input-group-text">PIC</span>
+			<select class="form-select form-select-sm num" id="IdPIC" data-bs-toggle="tooltip" data-bs-placement="top" title="Position Identification Code"></select>
+		</div>
+	</div>
+	<div class="col-6 col-md-4 col-xl-3@(ViewBag.Tipo==1?"":" d-none")">
+		@Campos.GetInput("Serie",true,50)
+	</div>
+	<div class="col-6 col-md-4 col-xl-3@(ViewBag.Tipo==2?"":" d-none")">
+		<div class="input-group input-group-sm">
+			<span class="input-group-text">Status</span>
+			<select class="form-select form-select-sm num" id="IdStatus" data-bs-toggle="tooltip" data-bs-placement="top" title="Position Identification Code">
+				<option value="0">...</option>
+				<option value="1">Open</option>
+				<option value="2">Once</option>
+				<option value="3">Term</option>
+				<option value="4">Repetitive</option>
+				<option value="5">Superceded</option>
+			</select>
+		</div>
+	</div>
+	<div class="col-6 col-md-4 col-xl-3@(ViewBag.Tipo!=1?"":" d-none")">
+		@Campos.Switch("Controlado","Controlado","No Aplica",null, true)
+	</div>
+	<div class="col-12 col-md-4@(ViewBag.Tipo==2?"":" d-none")">
+		<label for="Metodo_Cumplimiento" class="form-label">Metodo de Cumplimiento</label>
+		<textarea class="form-control" maxlength="500" id="Metodo_Cumplimiento" rows="2"></textarea>
+	</div>
+</div>
+
+<div class="row justify-content-around @(ViewBag.Tipo == 1?"":" d-none") gx-5" id="cTimes">
+	<div class="col-12">
+		@*Generales*@
+		<div class="w-100 text-center sz-font-75">
+			<div style="margin:auto; align-content: center;" class="w-100">
+				<span class="lineal">&nbsp;</span>
+				<b class="leyenda">Tiempos del Elemento</b>
+				<span class="linear">&nbsp;</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-3">
+		<div class="row">
+			<div class="col-12">
+				<h5 class="text-center py-0 my-0">TSN Instalacion</h5>
+			</div>
+		</div>
+		<div class="row g-1">
+			<div class="col-6">
+				@Campos.GetInput("TSN_Componente_Instalacion", true, 6, "Horas", "dec text-end", "number", "0", true, false, "Horas")
+			</div>
+			<div class="col-6">
+				@Campos.GetInput("CSN_Componente_Instalacion", true, 6, "Ciclos", "num text-end", "number", "0", true, false, "Ciclos")
+			</div>
+			@*<div class="col-4 sz-7">
+				@Campos.GetInput("Fecha_Componente_Instalacion", true, 10, "Fecha", "text-center", "date", "", true, false, "Fechas")
+			</div>*@
+		</div>
+	</div>
+	<div class="col-12 col-md-6">
+		<div class="row">
+			<div class="col-12">
+				<h5 class="text-center py-0 my-0">TAT/TET Instalacion</h5>
+			</div>
+		</div>
+		<div class="row g-1">
+			<div class="col-4">
+				@Campos.GetInput("TSN_Airframe_Instalacion", true, 6, "Horas", "dec text-end", "number", "0", true, false, "Horas")
+			</div>
+			<div class="col-4">
+				@Campos.GetInput("CSN_Airframe_Instalacion", true, 6, "Ciclos", "num text-end", "number", "0", true, false, "Ciclos")
+			</div>
+			<div class="col-4">
+				@Campos.GetInput("Fecha_Airframe_Instalacion", true, 10, "Fecha", "text-center", "date", "", true, false, "Fecha")
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-3">
+		<div class="row">
+			<div class="col-12">
+				<h5 class="text-center py-0 my-0">TSN</h5>
+			</div>
+		</div>
+		<div class="row g-1">
+			<div class="col-6">
+				@Campos.GetInput("TSN", true, 6, "Horas", "dec text-end", "number", "0", false, false, "Horas")@*<i class='far fa-clock'></i>*@
+			</div>
+			<div class="col-6">
+				@Campos.GetInput("CSN", true, 6, "Ciclos", "num text-end", "number", "0", false, false, "Ciclos")@*<i class='fas fa-sync-alt'></i>*@
+			</div>
+			<!--<div class="col-4">
+				@Campos.GetInput("Dias", true, 6, "Dias", "num text-end", "number", "0", false, false, "Dias")-->@*<i class='fas fa-calendar-alt'></i>*@
+			<!--</div>-->
+		</div>
+	</div>
+</div>
+
+<div class="row justify-content-around mt-0 mt-md-2 g-2">
+	@*Limites*@
+	<div class="w-100 text-center sz-font-75">
+		<div style="margin:auto; align-content: center;" class="w-100">
+			<span class="lineal">&nbsp;</span>
+			<b class="leyenda">Tiempos de Limites</b>
+			<span class="linear">&nbsp;</span>
+		</div>
+	</div>
+</div>
+<div class="row justify-content-around mt-0 mt-md-2 g-2" id="tielim"></div>

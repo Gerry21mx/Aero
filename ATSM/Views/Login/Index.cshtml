@@ -1,0 +1,60 @@
+﻿@{
+	if (WebSecurity.IsAuthenticated) {
+		Response.Redirect("~/Home");
+	}
+    ViewBag.Title = "Iniciar Sesion";
+}
+<div class="junbotron pl-5 pr-5 bg-secondary fixed-top">
+	<div class="row justify-content-center align-items-end mt-5 mb-3">
+		<div class="col-12 col-md-3 mt-2">
+			<img src="~/img/icons/icon-384x384.png" class="align-self-center" alt="Seguimiento de Vuelo" style="height:100px"/>
+		</div>
+		<div class="col-12 col-md-6">
+			<h2 class="text-white">Aeronaves TSM</h2>
+		</div>
+	</div>
+</div>
+<div class="container mt-5 pt-5">
+	<div class="row justify-content-center mt-5 pt-5">
+		<div class="col-12 col-md-6 col-xl-4 bg-blue-brag rounded border-primary pb-4">
+			<div class="row justify-content-center mt-5">
+				<div class="col-12">
+					<div class="row">
+						<div class="col-12 mt-2 mb-3	">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="ban1">Usuario</span>
+								</div>
+								<input id="Nickname" type="text" class="form-control" placeholder="Usuario" aria-label="NickName" aria-describedby="ban1">
+							</div>
+						</div>
+						<div class="col-12 mt-2 mb-3">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="ban2">Contraseña</span>
+								</div>
+								<input id="Password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="ban2">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w-100 mt-3"></div>
+				<div class="col-12">
+					<div class="row justify-content-arround">
+						<div class="col col-md-6 mt-2">
+							<button id="login" class="btn btn-sm w-100 btn-outline-primary">Iniciar</button>
+						</div>
+						<div class="col col-md-6 mt-2">
+							<button id="recovery" class="btn btn-sm w-100 btn-outline-primary">Recuperar Contraseña</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Views/Login/index.js")
+}

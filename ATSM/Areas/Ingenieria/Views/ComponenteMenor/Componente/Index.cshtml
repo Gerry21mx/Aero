@@ -1,0 +1,26 @@
+﻿@{ 
+	ViewBag.Title = "Componentes";
+	ViewBag.Tipo = 1;
+}
+<div class="container">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3 id="tit">Alta del @ViewBag.Title</h3></div>
+	
+	@RenderPage("~/Areas/Ingenieria/Views/ComponenteMenor/Alta.cshtml")
+
+	
+	<div class="row justify-content-around">
+		<hr />
+		<div class="col-4 col-md-2">@Campos.BtnCle()</div>
+		<div class="col-4 col-md-2">@Campos.BtnDel("del","dComponenteMenor")</div>
+		<div class="col-4 col-md-2">@Campos.BtnReg("reg","cComponenteMenor")</div>
+	</div>
+</div>
+<script>const TCOM = @ViewBag.Tipo;</script>
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Capacidad.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Modelo.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMayor.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/ComponenteMenor.js")
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Limite.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/ComponenteMenor/appr.js")
+}

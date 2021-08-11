@@ -1,0 +1,22 @@
+﻿@{
+	ViewBag.Title = "Cotización";
+}
+
+<div class="container mt-0 mt-md-2">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>@ViewBag.Title</h3></div>
+
+    <div class="row justify-content-around">
+	    <div class="col-12 col-md-6">
+            @RenderPage("~/Areas/Operaciones/Views/Movimientos/Cotizacion/Alta.cshtml")
+        </div>
+	    <div class="col-12 col-md-6 sz-font-75">
+            @RenderPage("~/Areas/Operaciones/Views/Movimientos/Cotizacion/List.cshtml")
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Capacidad.js")
+    @Scripts.Render("~/Areas/Operaciones/Views/Movimientos/Cotizacion/appr.js")
+}

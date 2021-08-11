@@ -1,0 +1,57 @@
+﻿@{ 
+	ViewBag.Title = "Unidad de Medida";
+	var tipos = UnidadMedidaTipo.GetUnidadMedidaTipos();
+}
+<div class="container">
+    <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3 id="tit">@ViewBag.Title</h3></div>
+	<div class="row justify-content-around">
+		<div class="col-12 col-md-10 col-xl-6">
+            <div class="row justify-content-around g-1">
+				<div class="col-12 col-md-6">
+					@Campos.GetInput("Codigo",true,10)
+				</div>
+				<div class="col-12 col-md-6">
+					@Campos.GetInput("Descripcion",true,200)
+				</div>
+				<div class="col-12 col-md-6">
+					<div class="input-group input-group-sm mb-3">
+						<label class="input-group-text" for="IdTipo">Tipo</label>
+						<select class="form-select form-select-sm num" id="IdTipo">
+							<option selected>...</option>
+							@foreach(var tipo in tipos) {
+								<option value="@tipo.Id">@tipo.Codigo - @tipo.Nombre</option>
+							}
+						</select>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					@Campos.Switch()
+				</div>
+			</div>
+			<div class="row mt-1 mt-md-2"></div>
+            <div class="row justify-content-around g-0">
+				<div class="col-4 col-md-2">@Campos.BtnCle()</div>
+				<div class="col-4 col-md-2">@Campos.BtnDel("del","dUme")</div>
+				<div class="col-4 col-md-2">@Campos.BtnReg("reg","cUme")</div>
+			</div>
+		</div>
+		<div class="col-12 col-md-10 col-xl-6 table-responsive-lg sz-font-7">
+			<table id="tabReg" class="table table-sm table-bordered table-hover table-striped w-100">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Codigo</th>
+                        <th>Descripcion</th>
+                        <th>Estado</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+		</div>
+	</div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/cjs/Almacen/UnidadMedida.js")
+    @Scripts.Render("~/Areas/Ingenieria/Views/Almacen/Articulos/Ume/appr.js")
+}

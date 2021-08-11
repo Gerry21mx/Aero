@@ -1,0 +1,19 @@
+﻿@{
+	ViewBag.Title = "Vuelos";
+}
+
+<div id="vuelos"></div>
+
+
+@section Scripts{
+    
+    @Scripts.Render("~/bundles/timeline")
+    @Styles.Render("~/Content/timeline")
+
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Aeropuerto.js")
+    @Scripts.Render("~/cjs/mtto/Aeronave.js")
+    @Scripts.Render("~/cjs/crw/Crew.js")
+    @Scripts.Render("~/cjs/crw/Capacidad.js")
+    @Scripts.Render("~/Areas/Seguimiento/cjs/Vuelo.js")
+    @Scripts.Render("~/Areas/Seguimiento/Views/Vuelo/Timeline/timeline.js")
+}
