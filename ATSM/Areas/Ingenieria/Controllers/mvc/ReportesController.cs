@@ -41,6 +41,11 @@ namespace ATSM.Areas.Ingenieria.Controllers
             return View("ResumenAeronave/Index");
         }
 
+        // GET: Ingenieria/Arbol
+        public ActionResult Arbol() {
+            return View("Arbol/Index");
+        }
+
         // GET: Ingenieria/PDF_AFAC
         public ActionResult PDF_AFAC() {
             var usuario = new Usuario(WebSecurity.CurrentUserId);

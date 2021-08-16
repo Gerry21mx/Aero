@@ -1,5 +1,6 @@
-﻿var itemMayor, titulo, tabla;
+﻿var itemMayor, titulo, tabla, oTime;
 document.addEventListener('DOMContentLoaded', () => {
+	oTime = new Tiempos();
 	titulo = document.getElementById('tit').innerText;
 	$('#Arbol').jstree({
 		core: {
@@ -32,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		modelo.Limites.forEach(lim => {
 			if (lim.Activo)
 				document.querySelector(`div[data-idlimite="${lim.IdLimite}"]`).classList.remove('d-none')
-			else
-				document.querySelector(`div[data-idlimite="${lim.IdLimite}"]`).classList.add('d-none')
+			//else
+			//	document.querySelector(`div[data-idlimite="${lim.IdLimite}"]`).classList.add('d-none')
 		})
 	})
 	if (COMAY !== 1) {
@@ -165,9 +166,9 @@ const registrar = () => {
 		itemMayor.IdPosicion = 1;		//	Posicion Unica
 	}
 	document.querySelectorAll('div[data-tipo="Tiempos"]').forEach(tl => {
+		if (tl.classList.contains('d-none')) return
 		let idlimite = parseInt(tl.dataset.idlimite) || 0;
-		let oTime = new Tiempos();
-		oTime.clear();
+		oTime.clear()
 		oTime.IdLimite = idlimite;
 		oTime.IdItemMayor = itemMayor.Id;
 		oTime.Limite_Individual_Horas = tl.querySelector(`#HrsInd_${idlimite}`) ? (parseInt(tl.querySelector(`#HrsInd_${idlimite}`).value) || 0) : null;
@@ -189,7 +190,7 @@ const registrar = () => {
 		oTime.Ciclos_Remain = tl.querySelector(`#CicRem_${idlimite}`) ? parseInt(tl.querySelector(`#CicRem_${idlimite}`).value) || 0 : null;
 		oTime.Dias_Remain = parseInt(tl.querySelector(`#DiaRem_${idlimite}`).value) || 0;
 		itemMayor.Tiempos = itemMayor.Tiempos === null ? [] : itemMayor.Tiempos;
-		let idt = itemMayor.Tiempos.findIndex(idl => { return idl.IdLimite === oTime.IdLimite; });
+		let idt = itemMayor.Tiempos.findIndex(idl => { return idl.Limite.IdLimite === oTime.IdLimite; });
 		if (idt > -1)
 			itemMayor.Tiempos[idt] = clonObject(oTime);
 		else
@@ -212,42 +213,6 @@ const clear = () => {
 		let e = new Event('change');
 		i.dispatchEvent(e);
 	})
-}
-const tablas = () => {
-	tabla = $('#tabla').DataTable({
-		processing: true,
-		language: { url: `${window.location.origin}/Scripts/DataTables/Spanish.json` },
-		dom: "<'row'<'col-4'l><'col-8'f>><'row'<'col'tr>><'row'<'col-12'p>>",
-		data: [],
-		columns: [
-			{ data: 'Id' },
-			{ data: 'Estado.Nombre' },
-			{ data: 'Modelo.Nombre' },
-			{ data: 'Serie' },
-			{ data: 'Aircraft.Matricula' },
-			{ data: 'Posicion.Codigo' },
-			{ data: 'Capacity' },
-			{ data: 'TSN' },
-			{ data: 'CSN' },
-			{
-				data: null,
-				orderable: false,
-				defaultContent: `<button data-type="edit" type="button" class="btn btn-primary btn-primary py-0"><i class="fas fa-pencil-alt"></i></button>`
-			}
-		],
-		columnDefs: [
-			{ targets: [7, 8], className: 'text-end' },
-			{ targets: '_all', className: 'text-center' }
-		],
-		drawCallback: function (settings) {
-			$(`#${settings.sTableId} button[data-type="edit"]`).click((e) => {
-				let data = tabla.rows(e.target.closest('tr')).data()[0];
-				itemMayor.clear();
-				itemMayor.setValores(data);
-				setItem(itemMayor);
-			});
-		}
-	});
 }
 const setItem = (item) => {
 	item.write();
@@ -300,4 +265,100 @@ const setItem = (item) => {
 			document.getElementById(`LimInd_${t.IdLimite}`).dispatchEvent(new Event('change'));
 		}
 	})
+}
+const tablas = () => {
+	tabla = $('#tabla').DataTable({
+		processing: true,
+		language: { url: `${window.location.origin}/Scripts/DataTables/Spanish.json` },
+		dom: "<'row'<'col-4'l><'col-8'f>><'row'<'col'tr>><'row'<'col-12'p>>",
+		data: [],
+		columns: [
+			{ data: 'Id' },
+			{ data: 'Estado.Nombre' },
+			{ data: 'Modelo.Nombre' },
+			{ data: 'Serie' },
+			{ data: 'Aircraft.Matricula' },
+			{ data: 'Posicion.Codigo' },
+			{ data: 'Capacity' },
+			{ data: 'TSN' },
+			{ data: 'CSN' },
+			{
+				data: null,
+				orderable: false,
+				defaultContent: `<button data-type="edit" type="button" class="btn btn-primary btn-primary py-0"><i class="fas fa-pencil-alt"></i></button>`
+			}
+		],
+		columnDefs: [
+			{ targets: [7, 8], className: 'text-end' },
+			{ targets: '_all', className: 'text-center' }
+		],
+		drawCallback: function (settings) {
+			$(`#${settings.sTableId} button[data-type="edit"]`).click(async (e) => {
+				procc()
+				let data = tabla.rows(e.target.closest('tr')).data()[0];
+				let modelo = new Modelo(data.IdModelo);
+				document.querySelectorAll(`div[data-tipo="Tiempos"]`).forEach(d => { d.classList.add('d-none') })
+				modelo.Limites.forEach(lim => {
+					if (lim.Activo)
+						document.querySelector(`div[data-idlimite="${lim.IdLimite}"]`).classList.remove('d-none')
+				})
+				itemMayor.clear();
+				itemMayor.setValores(data);
+				Tiempos.getTiempos(data.Id, 1).then(tiempos => {
+					itemMayor.Tiempos = clonObject( tiempos.Data)
+					itemMayor.write()
+					document.querySelectorAll('div[data-tipo="Tiempos"] input').forEach(i => { i.value = '' })
+					itemMayor.Tiempos.forEach(t => {
+						if (document.querySelector(`#HrsInd_${t.Limite.IdLimite}`))
+							document.querySelector(`#HrsInd_${t.Limite.IdLimite}`).value = t.Limite_Individual_Horas;
+						if (document.querySelector(`#CicInd_${t.Limite.IdLimite}`))
+							document.querySelector(`#CicInd_${t.Limite.IdLimite}`).value = t.Limite_Individual_Ciclos;
+						if (document.querySelector(`#DiaInd_${t.Limite.IdLimite}`))
+							document.querySelector(`#DiaInd_${t.Limite.IdLimite}`).value = t.Limite_Individual_Dias;
+
+						if (document.querySelector(`#HrsLst_${t.Limite.IdLimite}`))
+							document.querySelector(`#HrsLst_${t.Limite.IdLimite}`).value = t.Horas_Last;
+						if (document.querySelector(`#CicLst_${t.Limite.IdLimite}`))
+							document.querySelector(`#CicLst_${t.Limite.IdLimite}`).value = t.Ciclos_Last;
+						if (document.querySelector(`#DiaLst_${t.Limite.IdLimite}`))
+							document.querySelector(`#DiaLst_${t.Limite.IdLimite}`).value = moment(t.Fecha_Last).format('YYYY-MM-DD');
+
+						if (document.querySelector(`#HrsTso_${t.Limite.IdLimite}`))
+							document.querySelector(`#HrsTso_${t.Limite.IdLimite}`).value = t.Horas_TSO_Instalacion;
+						if (document.querySelector(`#CicTso_${t.Limite.IdLimite}`))
+							document.querySelector(`#CicTso_${t.Limite.IdLimite}`).value = t.Ciclos_TSO_Instalacion;
+						if (document.querySelector(`#DiaTso_${t.Limite.IdLimite}`))
+							document.querySelector(`#DiaTso_${t.Limite.IdLimite}`).value = t.Dias_TSO_Instalacion;
+
+						if (document.querySelector(`#HrsElp_${t.Limite.IdLimite}`))
+							document.querySelector(`#HrsElp_${t.Limite.IdLimite}`).value = t.Horas_Elapsed;
+						if (document.querySelector(`#CicElp_${t.Limite.IdLimite}`))
+							document.querySelector(`#CicElp_${t.Limite.IdLimite}`).value = t.Ciclos_Elapsed;
+						if (document.querySelector(`#DiaElp_${t.Limite.IdLimite}`))
+							document.querySelector(`#DiaElp_${t.Limite.IdLimite}`).value = t.Dias_Elapsed;
+
+						if (document.querySelector(`#HrsNxt_${t.Limite.IdLimite}`))
+							document.querySelector(`#HrsNxt_${t.Limite.IdLimite}`).value = t.Horas_Next;
+						if (document.querySelector(`#CicNxt_${t.Limite.IdLimite}`))
+							document.querySelector(`#CicNxt_${t.Limite.IdLimite}`).value = t.Ciclos_Next;
+						if (document.querySelector(`#DiaNxt_${t.Limite.IdLimite}`))
+							document.querySelector(`#DiaNxt_${t.Limite.IdLimite}`).value = moment(t.Fecha_Next).format('YYYY-MM-DD');
+
+						if (document.querySelector(`#HrsRem_${t.Limite.IdLimite}`))
+							document.querySelector(`#HrsRem_${t.Limite.IdLimite}`).value = t.Horas_Remain;
+						if (document.querySelector(`#CicRem_${t.Limite.IdLimite}`))
+							document.querySelector(`#CicRem_${t.Limite.IdLimite}`).value = t.Ciclos_Remain;
+						if (document.querySelector(`#DiaRem_${t.Limite.IdLimite}`))
+							document.querySelector(`#DiaRem_${t.Limite.IdLimite}`).value = t.Dias_Remain;
+
+						if ((t.Limite_Individual_Horas + t.Limite_Individual_Ciclos + t.Limite_Individual_Dias) > 0) {
+							document.getElementById(`LimInd_${t.Limite.IdLimite}`).checked = true;
+							document.getElementById(`LimInd_${t.Limite.IdLimite}`).dispatchEvent(new Event('change'));
+						}
+					})
+					endPro()
+				})
+			});
+		}
+	});
 }

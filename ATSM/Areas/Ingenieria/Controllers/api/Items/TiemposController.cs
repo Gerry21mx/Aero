@@ -22,7 +22,11 @@ namespace ATSM.Areas.Ingenieria.Controllers.api
 
         // GET api/<controller>
         public Answer Get(int idItem,int tipo) {
-            answer.Data = Tiempos.GetTiempos(idItem,tipo);
+            var tmps = Tiempos.GetTiempos(idItem,tipo);
+            foreach(var t in tmps) {
+                t.SetLimite();
+			}
+            answer.Data = tmps;
             return answer;
         }
 

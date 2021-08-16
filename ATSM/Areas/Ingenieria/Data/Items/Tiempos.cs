@@ -86,8 +86,11 @@ namespace ATSM.Ingenieria {
             Respuesta res = new Respuesta($"No se Guardaron los Datos.Faltan Informacion. (CS.{ this.GetType().Name}-Save.Err.00)");
             if (IdLimite > 0 && (IdItemMayor > 0 || IdItemMenor > 0) && WebSecurity.IsAuthenticated) {
                 res.Error = "";
-                SqlCommand Cmnd = new SqlCommand($"SELECT Id FROM Tiempos WHERE Id = @id", Conexion);
+                SqlCommand Cmnd = new SqlCommand($"SELECT Id FROM Tiempos WHERE Id = @id OR (IdItemMayor = @idmayor AND IdLimite = @idlimite AND IdItemMenor = @idmenor)", Conexion);
                 Cmnd.Parameters.Add(new SqlParameter("@id", Id));
+                Cmnd.Parameters.Add(new SqlParameter("@idmayor", IdItemMayor ?? SqlInt32.Null));
+                Cmnd.Parameters.Add(new SqlParameter("@idlimite", IdLimite));
+                Cmnd.Parameters.Add(new SqlParameter("@idmenor", IdItemMenor ?? SqlInt32.Null));
                 var existe = DataBase.Query(Cmnd);
                 res.Mensaje = "Tiempos ";
                 string SqlStr = "";

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -120,11 +121,17 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="FSharp.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\FSharp.Core.5.0.2\lib\netstandard2.0\FSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.34.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.34\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.36.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.36\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
@@ -141,14 +148,14 @@
     <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNetCore.Authorization, Version=5.0.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.5.0.8\lib\net461\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=5.0.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.5.0.9\lib\net461\Microsoft.AspNetCore.Authorization.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Authorization.Policy.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNetCore.Connections.Abstractions, Version=5.0.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.Connections.Abstractions.5.0.8\lib\net461\Microsoft.AspNetCore.Connections.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.Connections.Abstractions, Version=5.0.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Connections.Abstractions.5.0.9\lib\net461\Microsoft.AspNetCore.Connections.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
@@ -165,17 +172,17 @@
     <Reference Include="Microsoft.AspNetCore.Http.Connections, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Http.Connections.1.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Connections.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNetCore.Http.Connections.Common, Version=5.0.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.Http.Connections.Common.5.0.8\lib\net461\Microsoft.AspNetCore.Http.Connections.Common.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.Http.Connections.Common, Version=5.0.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Connections.Common.5.0.9\lib\net461\Microsoft.AspNetCore.Http.Connections.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=5.0.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.5.0.8\lib\net461\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=5.0.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.5.0.9\lib\net461\Microsoft.AspNetCore.Http.Features.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNetCore.Metadata, Version=5.0.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.Metadata.5.0.8\lib\net461\Microsoft.AspNetCore.Metadata.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.Metadata, Version=5.0.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Metadata.5.0.9\lib\net461\Microsoft.AspNetCore.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Routing, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Routing.2.2.2\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
@@ -186,14 +193,14 @@
     <Reference Include="Microsoft.AspNetCore.SignalR, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.SignalR.1.1.0\lib\netstandard2.0\Microsoft.AspNetCore.SignalR.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNetCore.SignalR.Common, Version=5.0.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.SignalR.Common.5.0.8\lib\net461\Microsoft.AspNetCore.SignalR.Common.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.SignalR.Common, Version=5.0.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.SignalR.Common.5.0.9\lib\net461\Microsoft.AspNetCore.SignalR.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.SignalR.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.SignalR.Core.1.1.0\lib\netstandard2.0\Microsoft.AspNetCore.SignalR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNetCore.SignalR.Protocols.Json, Version=5.0.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.SignalR.Protocols.Json.5.0.8\lib\net461\Microsoft.AspNetCore.SignalR.Protocols.Json.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.SignalR.Protocols.Json, Version=5.0.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.SignalR.Protocols.Json.5.0.9\lib\net461\Microsoft.AspNetCore.SignalR.Protocols.Json.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.WebSockets, Version=2.2.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.WebSockets.2.2.1\lib\netstandard2.0\Microsoft.AspNetCore.WebSockets.dll</HintPath>
@@ -223,8 +230,8 @@
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.ObjectPool, Version=5.0.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.5.0.8\lib\net461\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=5.0.9.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.5.0.9\lib\net461\Microsoft.Extensions.ObjectPool.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Options, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Options.5.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
@@ -411,6 +418,7 @@
     <Compile Include="Areas\Gastos\GastosAreaRegistration.cs" />
     <Compile Include="Areas\Gastos\Controllers\api\GastoController.cs" />
     <Compile Include="Areas\Gastos\Controllers\api\ComprobacionController.cs" />
+    <Compile Include="Areas\Ingenieria\Controllers\api\StructTreeController.cs" />
     <Compile Include="Areas\Ingenieria\Controllers\mvc\AlmacenController.cs" />
     <Compile Include="Areas\Ingenieria\Controllers\api\Almacen\Articulos\AlternoController.cs" />
     <Compile Include="Areas\Ingenieria\Controllers\api\Almacen\Articulos\ArticuloController.cs" />
@@ -525,6 +533,7 @@
     <Compile Include="Areas\Operaciones\Controllers\MovimientosController.cs" />
     <Compile Include="Areas\Operaciones\Controllers\PruebaController.cs" />
     <Compile Include="Areas\Operaciones\Models\ClienteActividad.cs" />
+    <Compile Include="Areas\Operaciones\Models\Cotizacion.cs" />
     <Compile Include="Areas\Operaciones\Models\TipoCliente.cs" />
     <Compile Include="Areas\Operaciones\Models\ClienteContacto.cs" />
     <Compile Include="Areas\Operaciones\Models\Cliente.cs" />
@@ -552,7 +561,6 @@
     <Compile Include="Models\DataBase.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Generales.cs" />
-    <Compile Include="Models\Nodo.cs" />
     <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -644,6 +652,7 @@
     <Content Include="Areas\Ingenieria\Views\Items\appr.js" />
     <Content Include="Areas\Ingenieria\Views\Operaciones\BitacoraVuelo\appr.js" />
     <Content Include="Areas\Ingenieria\Views\Planeacion\Programacion\appr.js" />
+    <Content Include="Areas\Ingenieria\Views\Reportes\Arbol\app.js" />
     <Content Include="Areas\Ingenieria\Views\Reportes\ComponentesMenores\appr.js" />
     <Content Include="Areas\Ingenieria\Views\Reportes\ItemsMayores\appr.js" />
     <Content Include="Areas\Ingenieria\Views\Reportes\ResumenAeronave\appr.js" />
@@ -3116,6 +3125,8 @@
     <Content Include="Areas\Operaciones\Views\Movimientos\Activacion\Index.cshtml" />
     <Content Include="Areas\Operaciones\Views\Catalogos\Clientes\Contactos.cshtml" />
     <Content Include="Areas\Operaciones\Views\Catalogos\Clientes\Actividad.cshtml" />
+    <Content Include="Areas\Operaciones\Views\Prueba\prueba.vue" />
+    <Content Include="Areas\Ingenieria\Views\Reportes\Arbol\Index.cshtml" />
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -3132,9 +3143,12 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Areas\Operaciones\Views\Prueba\prueba.vue" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Properties\PublishProfiles\Produccion.pubxml" />
+    <Content Include="Scripts\d3\README.md" />
+    <Content Include="Scripts\d3\LICENSE" />
+    <Content Include="Scripts\d3\CHANGES.md" />
+    <Content Include="Scripts\d3\API.md" />
     <Content Include="Scripts\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Scripts\ckeditor\README.md" />
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
@@ -3162,10 +3176,7 @@
     <Content Include="Scripts\ckeditor\package.json" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
-    <Content Include="Scripts\d3\README.md" />
-    <Content Include="Scripts\d3\LICENSE" />
-    <Content Include="Scripts\d3\CHANGES.md" />
-    <Content Include="Scripts\d3\API.md" />
+    <Content Include="Scripts\ckeditor\bender-runner.config.json" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.esm.min.js.map" />
@@ -3411,7 +3422,10 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -145,6 +145,7 @@ namespace ATSM.Ingenieria {
                 using(TransactionScope scope=new TransactionScope()) {
                     RespuestaQuery rInUp = DataBase.Insert(Command);
                     if (rInUp.Valid) {
+                        var limi = Limite.GetLimites(IdComponente, IdModelo, 1);
                         if (Insr) {
                             if (rInUp.IdRegistro == 0) {
                                 res.Error = $"No se pudo obtener el Id Insertado(CS.{this.GetType().Name}-Save.Err.03)<br>Error: {rInUp.Error}";
@@ -157,16 +158,27 @@ namespace ATSM.Ingenieria {
                             if (Tiempos != null && Tiempos.Count > 0) {
                                 var tmps = ATSM.Ingenieria.Tiempos.GetTiempos(Id, 1);
                                 foreach (var tiempo in tmps) {
+                                    tiempo.SetLimite();
+                                    var idy = limi.FindIndex(l => { return l.Id == tiempo.Limite.IdLimite; });
                                     var idx = this.Tiempos.FindIndex(t => { return t.Id == tiempo.Id; });
-                                    if (idx == -1)
+                                    if (idy==-1 || idx == -1)
                                         tiempo.Delete();
                                 }
                             }
                         }
                         if (this.Tiempos != null) {
                             foreach (var tiempo in this.Tiempos) {
-                                tiempo.IdItemMayor = Id;
-                                tiempo.IdItemMenor = null;
+                                var idy = limi.FindIndex(l => { return l.IdLimite == tiempo.IdLimite; });
+                                if (idy == -1)
+                                    continue;
+								else {
+                                    if (limi[idy].Activo == true)
+                                        tiempo.IdLimite = limi[idy].Id;
+                                    else
+                                        continue;
+								}
+								tiempo.IdItemMayor = Id;
+								tiempo.IdItemMenor = null;
                                 var rST = tiempo.Save();
                                 if (!rST.Valid || !string.IsNullOrEmpty(rST.Error)) {
                                     res.Error = $"Error al Registrar los Tiempos: (CS.{this.GetType().Name}-Save.Err.04)<br>Error: {rST.Error}";
@@ -290,13 +302,34 @@ namespace ATSM.Ingenieria {
             Posicion = new Position(IdPosicion);
         }
         public void SetLimites() {
-            Limites = Limite.GetLimites(IdComponente, IdModelo, 1);
-            foreach(var lim in Limites) { lim.SetLimit(); }
-		}
+            if (Limites == null)
+                Limites = new List<Limite>();
+            Limites.Clear();
+            if (Id > 0 && IdComponente > 0 && IdModelo > 0) {
+                var limt = Limite.GetLimites(IdComponente, IdModelo, 1);
+                foreach (var lim in limt) {
+                    if (lim.Activo == true) {
+                        lim.SetLimit();
+                        Limites.Add(lim);
+                    }
+                }
+            }
+        }
         public void SetTiempos() {
-            Tiempos = ATSM.Ingenieria.Tiempos.GetTiempos(Id, 1);
+            if (Tiempos == null)
+                Tiempos = new List<Tiempos>();
+            if (Id > 0) {
+                var tie = ATSM.Ingenieria.Tiempos.GetTiempos(Id, 1);
+			    if (Limites != null || Limites.Count == 0)
+                    SetLimites();
+                foreach(var tiempo in tie) {
+                    int idx = Limites.FindIndex(l => { return l.Id == tiempo.IdLimite; });
+                    if (idx > -1) {
+                        Tiempos.Add(tiempo);
+                    }
+			    }
+			}
 		}
-
         public static List<ItemMayor> GetItemMayors(int idComponente) {
             List<ItemMayor> itemmayors = new List<ItemMayor>();
             SqlCommand comando = new SqlCommand("SELECT * FROM ItemMayor WHERE IdComponente = @idComponente", Conexion);

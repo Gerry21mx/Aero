@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace jsTree3.Models
+namespace ATSM
 {
     public class JsTree3Node
     {
@@ -12,6 +12,8 @@ namespace jsTree3.Models
         public string icon;
         public State state;
         public List<JsTree3Node> children;
+        public dynamic li_attr;
+        public dynamic a_attr;
 
         public static JsTree3Node NewNode(string id)
         {

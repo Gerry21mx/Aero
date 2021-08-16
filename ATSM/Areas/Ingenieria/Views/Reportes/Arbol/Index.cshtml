@@ -1,0 +1,58 @@
+﻿@{ 
+	ViewBag.Title = "Estructura";
+	var modelos = Modelo.GetModelos();
+	var qItemsMayor = DataBase.Query("SELECT * FROM V_Items_Mayores ORDER BY IdAircraft, IdComponente, IdModelo, IdPosicion");
+}
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<h4>Estructuras <small class="text-muted">Definicion de Estructuras de Flota</small></h4>
+		</div>
+	</div>
+	<div class="row justify-content-around">
+		<div class="col-6 col-md-3">
+			@Campos.SelectComponentesMayores(true)
+		</div>
+		<div class="col-6 col-md-3">
+			<div class="input-group input-group-sm">
+				<label class="input-group-text" for="IdModelo">Modelo</label>
+				<select class="form-select form-select-sm" id="IdModelo">
+					<option selected value="0">...</option>
+					@foreach(var mod in modelos) {
+						if (!mod.Activo) {
+							continue;
+						}
+						<option value="@mod.Id" data-idcapacidad="@mod.IdCapacidad" data-idmayor="@mod.IdComponenteMayor">@mod.Nombre</option>
+					}
+				</select>
+			</div>
+		</div>
+		<div class="col-6 col-md-3">
+			<div class="input-group input-group-sm">
+				<label class="input-group-text" for="IdItemMayor">Item Mayor</label>
+				<select class="form-select form-select-sm" id="IdItemMayor">
+					<option selected value="0">...</option>
+					@foreach(var im in qItemsMayor.Rows) {
+						<option value="@im.Id" data-idcomponente="@im.IdComponente" data-idaircraft="@im.IdAircraft" data-idmodelo="@im.IdModelo" data-idposition="@im.IdPosicion">
+							@im.Matricula | @im.Codigo | @im.Nombre | @im.Serie | @im.CodigoPosition
+					</option>
+					}
+				</select>
+			</div>
+		</div>
+		<div class="col-6 col-md-3 d-grid">
+			<button class="btn btn-sm btn-success" id="pro"><i class="fas fa-play-circle"></i></button>
+		</div>
+	</div>
+	<div class="row justify-content-center mt-2 mt-md-3">
+		<div class="col-12 col-md-8">
+			<div id="arbol"></div>
+		</div>
+		<div class="col-12 col-md-4">
+			<div id="information" class="position-fixed"></div>
+		</div>
+	</div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/Areas/Ingenieria/Views/Reportes/Arbol/app.js")
+}
