@@ -64,6 +64,7 @@ function getHijos(id = '#') {
 	hijos.forEach(nodo => {
 		var at = getHijos(nodo.id);
 		at.forEach(item => { hijos.push(item); });
+		
 	})
 	return hijos;
 }

@@ -47,6 +47,14 @@
 		@Campos.GetInput("Descripcion",true,200,"Descripcion")
 	</div>
 </div>
+<div class="row justify-content-around mt-1 mt-md-2">
+    <div class="col-6">
+        @Campos.GetInput("Fecha Aprobacion", true, 10, "", "fec text-center", "date")
+    </div>
+    <div class="col-6">
+        @Campos.GetInput("Fecha Rechazo", true, 10, "", "fec text-center", "date")
+    </div>
+</div>
 <hr />
 <div class="row justify-content-center mt-1 mt-md-2">
 	<div class="col-4">
@@ -56,7 +64,7 @@
 		@Campos.BtnDel("del","dCotizacion")
 	</div>
 	<div class="col-4">
-		@Campos.BtnReg("reg","cCotizacion")
+        @Campos.BtnReg("reg","cCotizacion")
 	</div>
 </div>
 <hr />
