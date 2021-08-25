@@ -1,23 +1,25 @@
 ﻿@{
-	ViewBag.Title = "Cotización";
+    ViewBag.Title = "Cotización";
 }
 
 <div class="container mt-0 mt-md-2">
     <div class="shadow-sm p-2 mb-2 bg-light rounded"><h3>@ViewBag.Title</h3></div>
 
-    <div class="row justify-content-around">
-	    <div class="col-12 col-md-6">
+    <div class="row justify-content-around" id="app">
+        <div v-bind:class="[{ 'col-12': true, 'col-md-12': !showTable, 'col-md-6': showTable }]">
             @RenderPage("~/Areas/Operaciones/Views/Movimientos/Cotizacion/Alta.cshtml")
         </div>
-	    <div class="col-12 col-md-6 sz-font-75">
+        <div v-bind:class="[{ 'sz-font-75': true, 'col-12': true, 'col-md-12': !showTable, 'col-md-6': showTable }]" v-if="showTable">
             @RenderPage("~/Areas/Operaciones/Views/Movimientos/Cotizacion/List.cshtml")
         </div>
     </div>
 </div>
 
 @section Scripts{
-    
+    @Scripts.Render("~/Areas/Operaciones/Views/Movimientos/Cotizacion/axios.js")
+    @Scripts.Render("~/Areas/Operaciones/Views/Movimientos/Cotizacion/vue.js")
+    @Scripts.Render("~/Areas/Operaciones/Views/Movimientos/Cotizacion/Cotizacion.js")
+    @Scripts.Render("~/Areas/Operaciones/Views/Movimientos/Cotizacion/app.js")
     @Scripts.Render("~/Areas/Ingenieria/cjs/Capacidad.js")
-    @Scripts.Render("~/Areas/Operaciones/Views/Movimientos/Cotizacion/appr.js")
     @Scripts.Render("~/Areas/Operaciones/cjs/Cotizacion.js")
 }

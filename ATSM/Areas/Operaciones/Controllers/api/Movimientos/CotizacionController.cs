@@ -35,15 +35,10 @@ namespace ATSM.Areas.Operaciones.Controllers.api.Vuelos
         //}
 
         // POST api/<controller>
-        public Respuesta Post(Cotizacion iClase)
+        public Cotizacion Post(Cotizacion iClase)
         {
             answer = Funciones.VRoles("cCotizacion");
-            if (answer.Status)
-            {
-                return iClase.Save();
-            }
-            respuesta.Error = answer.Message;
-            return respuesta;
+            return iClase;
         }
 
         // DELETE api/<controller>/5
